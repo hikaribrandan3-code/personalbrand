@@ -219,7 +219,7 @@ export const projectData = {
     status: "Live product",
     title: "The customer was already taking the photo.",
     intro:
-      "I turned that existing behavior into a branded camera experience for restaurants: scan a QR code or tap NFC, open the browser camera, capture and share.",
+      "FoodSpot’s post-purchase camera idea became a focused product: tap or scan, open a branded browser camera, take a photo and share.",
     demoUrl:
       "https://www.ugccamera.com/camera-demo?name=UGC%20Camera&type=business",
     mobileRecommended: true,
@@ -227,35 +227,37 @@ export const projectData = {
       {
         title: "Problem",
         paragraphs: [
-          "Customers were already photographing their food. The opportunity was to make a restaurant’s identity part of that moment without asking someone to install another app.",
+          "Customers already photograph food, products and experiences. Businesses want to participate in that moment, but extra steps make people less likely to use it.",
         ],
       },
       {
-        title: "Decisions",
-        items: [
-          "Use QR and NFC as the entry point to a browser camera.",
-          "Keep the location treatment attached to the photo experience, like a native tag in the top-left corner.",
-          "Make the capture and share journey the focus, supported by restaurant branding.",
+        title: "What I built",
+        paragraphs: [
+          "TAP & SNAP uses a physical NFC tabletop camera. SCAN & SNAP uses QR entry for delivery, takeout, packaging and e-commerce. Both open the branded browser camera.",
+        ],
+      },
+      {
+        title: "Key decision",
+        paragraphs: [
+          "No required account, app installation, email or phone number. Familiar camera controls make the next action obvious; reducing friction is part of the product.",
         ],
       },
       {
         title: "What I learned",
         paragraphs: [
-          "A behavior that already exists is a useful place to start. The product question was how to remove friction and make that moment valuable to both the customer and the restaurant.",
+          "Instead of maximizing data collection before delivering value, I optimized for the probability that someone would actually use the camera.",
         ],
       },
       {
-        title: "Limitations",
+        title: "What survived",
         paragraphs: [
-          "Browser camera use depends on device support, permission and camera availability. The demo is best experienced on a phone.",
-          "The implementation is private. I share the product experience and builder-supplied stack details here; no public source repository is linked.",
+          "The post-delivery photo prompt from FoodSpot became the seed for a smaller, more differentiated product. The implementation is private; the live experience is linked here.",
         ],
       },
     ],
     stack: [
       "Supabase",
-      "Authentication",
-      "Database / backend services",
+      "Business authentication / backend",
       "Vercel",
       "QR / NFC entry",
       "Browser camera",
@@ -266,7 +268,10 @@ export const projectData = {
         href: "https://www.ugccamera.com/camera-demo?name=UGC%20Camera&type=business",
         kind: "demo",
       },
-      { label: "Visit UGC Camera", href: "https://www.ugccamera.com/" },
+      {
+        label: "Visit UGC Camera",
+        href: "https://www.ugccamera.com/",
+      },
     ],
   },
   menutap: {
@@ -274,35 +279,38 @@ export const projectData = {
     status: "Physical + digital product",
     title: "One small object. A more useful table.",
     intro:
-      "MenuTap connects a physical NFC object with a restaurant’s mobile experience: menu, Wi-Fi, Google reviews, games and social actions in one place.",
+      "The NFC interaction behind Tap & Snap suggested another opportunity: bring useful restaurant actions together behind one tap.",
     demoUrl: "https://www.foodspotmobile.com/t/foodspot-demo/menu",
     mobileRecommended: true,
     sections: [
       {
         title: "Problem",
         paragraphs: [
-          "A restaurant table can be the starting point for more than ordering. Menus, connectivity, reviews and social links are often scattered across different signs and conversations.",
+          "Menus, Wi-Fi, reviews and social actions are often scattered across signs and conversations. A restaurant table could offer a simpler entry point.",
         ],
       },
       {
-        title: "Decisions",
-        items: [
-          "Make the physical tap point recognizable and easy to understand.",
-          "Give each restaurant a branded mobile destination with clear, task-based actions.",
-          "Include games as an optional part of the experience while keeping the menu and restaurant actions central.",
+        title: "What I built",
+        paragraphs: [
+          "MenuTap connects an NFC object to a branded restaurant experience: menu, Wi-Fi, Google reviews, games and socials in one place.",
+        ],
+      },
+      {
+        title: "Key decision",
+        paragraphs: [
+          "Reuse the restaurant functionality and product knowledge from FoodSpot, then simplify how people access it. The physical object makes the first action understandable.",
         ],
       },
       {
         title: "What I learned",
         paragraphs: [
-          "Physical and digital design have to meet at the same moment. The NFC object explains what to do; the experience it opens has to make the next action obvious.",
+          "Earlier experiments become more valuable when their useful parts are repackaged behind a simpler interaction. One tap can do more than open a camera.",
         ],
       },
       {
-        title: "Limitations",
+        title: "What survived",
         paragraphs: [
-          "The current demo runs on foodspotmobile.com. That shared host does not make MenuTap the FoodSpot marketplace.",
-          "NFC behavior depends on the device. Try the linked restaurant menu on your phone for the clearest view of the current demo.",
+          "Menus, games and restaurant UX from FoodSpot; the physical NFC entry from Tap & Snap. The tiny snack game here is an interactive portfolio demo; the linked menu is the live product.",
         ],
       },
     ],
@@ -320,37 +328,44 @@ export const projectData = {
     status: "Earlier exploration",
     title: "The project that led to the next two.",
     intro:
-      "An exploration of local food discovery and commerce. It did not become the business, but it helped shape the product thinking behind UGC Camera and MenuTap.",
+      "My longest, broadest MVP explored a Shopify-like digital commerce experience for local food businesses, beyond a static menu.",
     sections: [
       {
         title: "Problem",
         paragraphs: [
-          "I wanted to explore how people discover nearby food and how restaurants connect with customers around that experience.",
+          "I wanted local food businesses to have a fuller commerce experience, connecting the menu, ordering and what happens after a purchase.",
         ],
       },
       {
-        title: "Decisions",
-        items: [
-          "Explore food discovery through a mobile interface.",
-          "Consider the restaurant relationship beyond the initial purchase.",
-          "Carry the useful questions forward into more focused restaurant products.",
+        title: "What I built",
+        paragraphs: [
+          "Interactive menus, ordering and menu management; food tags and calories; local events; Mercado Pago and cash flows; POS concepts; inventory and expense functionality; and post-purchase experiences.",
+        ],
+      },
+      {
+        title: "Key decision",
+        paragraphs: [
+          "Restaurant software is crowded, and replacing an operational stack creates adoption friction. I isolated the most differentiated behaviors instead of making the MVP larger.",
         ],
       },
       {
         title: "What I learned",
         paragraphs: [
-          "The outcome of an early project can be a better problem definition. UGC Camera and MenuTap focus on specific restaurant moments instead of trying to rebuild the entire marketplace.",
+          "A larger product isn’t always a better product. The most valuable outcome was recognizing which ideas deserved to survive outside the original MVP.",
         ],
       },
       {
-        title: "Limitations",
+        title: "What survived",
         paragraphs: [
-          "FoodSpot is presented as an earlier product exploration. I am not claiming marketplace traction, revenue or a successful launch.",
-          "The current foodspotmobile.com demo represents MenuTap. It is not presented here as a surviving FoodSpot marketplace demo.",
+          "A food character prompting a post-delivery photo became UGC Camera’s seed. Menus, games and restaurant knowledge became useful again behind MenuTap’s simpler entry point.",
         ],
       },
     ],
-    stack: ["Mobile product design", "Food discovery / commerce exploration"],
+    stack: [
+      "Product design",
+      "Restaurant commerce",
+      "Mercado Pago / cash flows",
+    ],
     links: [],
   },
   mac: {

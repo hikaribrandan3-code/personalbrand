@@ -253,7 +253,7 @@ export default function ProjectDrawer({ project, onClose }) {
     >
       <div className="pd-shell">
         <div className="pd-toolbar">
-          <span>DAISKE / THE WORK BEHIND THE WORK</span>
+          <span>HIKARI / THE WORK BEHIND THE WORK</span>
           <button
             ref={closeRef}
             type="button"
@@ -313,7 +313,7 @@ export default function ProjectDrawer({ project, onClose }) {
           ))}
           <section className="pd-section pd-section-stack">
             <div className="pd-section-label">
-              <span>05</span>
+              <span>{String(details.sections.length + 1).padStart(2, "0")}</span>
               <h3>{project === "engineering" ? "Workflow tools" : "Stack"}</h3>
             </div>
             <div className="pd-section-copy">

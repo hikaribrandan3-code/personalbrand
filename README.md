@@ -1,4 +1,4 @@
-# Daiske Brandan — product developer portfolio
+# Hikari Brandan — product developer portfolio
 
 Live at [personalbrand-murex.vercel.app](https://personalbrand-murex.vercel.app). A desktop portfolio built with React, Vite and Motion. It follows the supplied black, white and yellow art direction, with a real portrait, project stories, handwritten details, interactive device previews and an animated Mac app collection.
 
@@ -25,13 +25,13 @@ The retained Vercel project is `personalbrand`; the temporary duplicate was dele
 
 ## Content boundaries
 
-- UGC Camera and MenuTap demos recommend a phone. Their homepage devices are interactive/reconstructed previews; the linked products are the live experiences.
+- UGC Camera links to the live browser demo and offers an optional phone QR handoff. MenuTap includes a playable 20-second snack game alongside its live menu link.
 - UGC Camera source is private. No public repository is invented for it or MenuTap.
 - FoodSpot is an earlier exploration, with no claim of marketplace traction.
 - The five Mac applications have different maturity levels. Screen Bridge is experimental; several current binaries remain staged. Only the verified iVoz v1.1.0 release download is linked.
 - AI workflow tools are separated from product runtime dependencies. iBrain explicitly distinguishes local Ollama from optional cloud providers.
-- The supplied résumé retains older iVoice naming. Email is the primary contact route because no scheduling URL was supplied.
-- This pass targets desktop. A separate approved mobile UI remains pending.
+- The supplied résumé retains its original name and older iVoice naming. Contact messages become reviewable email or WhatsApp drafts; the portfolio does not claim to deliver them itself.
+- This polish pass targets desktop and preserves the independent mobile closing layout. Mac previews are clearly labeled simulations.
 
 ## Manual regression checklist
 
@@ -40,7 +40,7 @@ The retained Vercel project is `personalbrand`; the temporary duplicate was dele
 - [ ] Trigger the UGC shutter preview repeatedly; confirm feedback and the real camera-demo link.
 - [ ] Open every project/engineering dialog; use Tab, Shift+Tab and Escape, then check focus returns to its opener.
 - [ ] Test MenuTap’s live-menu CTA, all external product/source links, iVoz ZIP, résumé, email and telephone links.
-- [ ] Switch between the two real Auto Barber reviews and verify their attribution links.
+- [ ] Inspect the two sourced Auto Barber review excerpts, their attribution links and motion pause behavior.
 - [ ] Enable reduced motion; confirm the complete story stays readable and controls remain usable.
 - [ ] Inspect browser console/runtime errors and keyboard-visible focus states.
 

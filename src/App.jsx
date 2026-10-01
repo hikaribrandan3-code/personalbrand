@@ -50,7 +50,19 @@ import {
   Signal,
   Battery,
   Sparkles,
+  UsersRound,
 } from "lucide-react";
+import ContactExperience, {
+  LanguageFlags,
+  WhatsAppIcon,
+} from "./ContactExperience";
+import { Joystick, MenuTapDemo } from "./Arcade";
+import MacDemo from "./MacDemos";
+import ProductDNA from "./ProductDNA";
+import CameraHandoff from "./CameraHandoff";
+import ReviewWall from "./ReviewWall";
+import { barberReviews } from "./reviewData";
+import "./polish.css";
 const ProjectDrawer = lazy(() => import("./ProjectDrawer"));
 const A = "/assets/";
 const links = {
@@ -321,7 +333,7 @@ function Hero() {
           <div className="hero-facts">
             <span>
               <BriefcaseBusiness />
-              25 years old
+              Product builder
             </span>
             <span>
               <MapPin />
@@ -350,7 +362,7 @@ function Hero() {
           <img
             className="portrait"
             src={`${A}portrait.png`}
-            alt="Daiske Brandan wearing his FoodSpot Mobile shirt"
+            alt="Hikari Brandan wearing his FoodSpot Mobile shirt"
             width="960"
             height="960"
             fetchPriority="high"
@@ -423,7 +435,8 @@ function Hero() {
 function UGC({ onOpen }) {
   const ref = useRef(null),
     reduce = useMotionPreference(),
-    [captured, setCaptured] = useState(0);
+    [captured, setCaptured] = useState(0),
+    [handoff, setHandoff] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -475,10 +488,21 @@ function UGC({ onOpen }) {
               View project
             </CTA>
           </div>
-          <span className="mobile-hint">
-            <Smartphone size={14} />
-            Best experienced on your phone
-          </span>
+          <button
+            className="phone-handoff-link"
+            onClick={() => setHandoff(true)}
+          >
+            <Smartphone size={14} /> Open on your phone{" "}
+            <ArrowUpRight size={12} />
+          </button>
+          <div className="ugc-entry-modes">
+            <span>
+              TAP & SNAP <small>NFC tabletop</small>
+            </span>
+            <span>
+              SCAN & SNAP <small>QR / delivery & packaging</small>
+            </span>
+          </div>
         </Reveal>
         <div className="device-stage camera-stage">
           <motion.div className="phone-motion" style={{ y, rotate }}>
@@ -511,7 +535,7 @@ function UGC({ onOpen }) {
                   {captured && (
                     <motion.div
                       key={captured}
-                    className="capture-flash"
+                      className="capture-flash"
                       initial={{ opacity: 1 }}
                       animate={{ opacity: 0 }}
                       exit={{ opacity: 0 }}
@@ -579,6 +603,9 @@ function UGC({ onOpen }) {
           onOpen={() => onOpen("ugc")}
         />
       </div>
+      {handoff && (
+        <CameraHandoff onClose={() => setHandoff(false)} url={links.ugc} />
+      )}
     </section>
   );
 }
@@ -599,13 +626,8 @@ function MenuTap({ onOpen }) {
     [0, 1],
     [reduce ? 0 : 50, reduce ? 0 : -30],
   );
-  const actions = [
-    [Utensils, "View Our Menu", "Food, drinks & more", "#ff8c36"],
-    [Wifi, "Connect to Wi-Fi", "Stay connected", "#159dff"],
-    [Star, "Review us on Google", "A little love goes a long way", "#f7bf19"],
-    [Gamepad2, "Play a Game", "While you wait", "#994cff"],
-    [Instagram, "Follow Us", "Keep in touch", "#ec4b82"],
-  ];
+  const [playing, setPlaying] = useState(false);
+  const phoneRef = useRef(null);
   return (
     <section className="project-section light menutap-section" ref={ref}>
       <div className="wrap project-grid">
@@ -659,39 +681,40 @@ function MenuTap({ onOpen }) {
             <span />
             <ArrowRight />
           </div>
-          <motion.div className="tap-phone-motion" style={{ y: phoneY }}>
+          <motion.div
+            ref={phoneRef}
+            className="tap-phone-motion"
+            style={{ y: phoneY }}
+          >
             <Phone
               className="menu-phone"
               label="MenuTap restaurant experience preview"
             >
-              <div className="restaurant-brand">
-                <MapPin size={21} />
-                <strong>
-                  FOOD<span>SPOT</span>
-                </strong>
-                <small>RESTAURANTE & BAR</small>
-              </div>
-              <div className="menu-welcome">Make yourself at home.</div>
-              <div className="menu-actions">
-                {actions.map(([Icon, title, sub, color]) => (
-                  <div key={title} className="menu-action">
-                    <span
-                      className="menu-action-icon"
-                      style={{ color, background: `${color}14` }}
-                    >
-                      <Icon size={22} />
-                    </span>
-                    <span>
-                      <strong>{title}</strong>
-                      <small>{sub}</small>
-                    </span>
-                    <ChevronRight size={14} />
-                  </div>
-                ))}
-              </div>
-              <span className="powered-by">a little tap. a better table.</span>
+              <MenuTapDemo
+                playing={playing}
+                onPlay={() => setPlaying(true)}
+                onBack={() => {
+                  setPlaying(false);
+                  requestAnimationFrame(() =>
+                    phoneRef.current?.querySelector(".game-entry")?.focus(),
+                  );
+                }}
+                menuUrl={links.menutap}
+              />
             </Phone>
           </motion.div>
+          <Joystick active={playing} onPlay={() => setPlaying(true)} />
+          <div className="arcade-doodle annotation">
+            yes, it actually works.
+            <svg viewBox="0 0 150 185" fill="none" aria-hidden="true">
+              <path
+                d="M10 6C7 98 119 46 135 167m-14-10 14 10 1-18"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
           <div className="annotation tap-note">
             one physical tap.
             <br />a whole digital world.
@@ -732,8 +755,8 @@ function FoodSpot({ onOpen }) {
             COMMERCE COULD WORK.
           </h2>
           <p>
-            It didn’t become the business, but it taught me enough to build the
-            next two.
+            My broadest MVP became a source of product knowledge for the next
+            two.
           </p>
           <div className="project-actions">
             <CTA onClick={() => onOpen("foodspot")}>
@@ -819,9 +842,10 @@ function FoodSpot({ onOpen }) {
             Rethink.
           </h3>
           <p>
-            A marketplace idea became the starting point for two more focused
-            restaurant products.
+            A larger product isn’t always a better one. Its most useful ideas
+            became two more focused restaurant products.
           </p>
+          <ProductDNA onOpen={onOpen} />
           <button className="notes-link" onClick={() => onOpen("foodspot")}>
             What I learned <ArrowUpRight size={15} />
           </button>
@@ -926,27 +950,7 @@ function MacApps({ onOpen }) {
                           <span>{app.name}</span>
                           <span />
                         </div>
-                        {app.image ? (
-                          <img
-                            src={`${A}${app.image}`}
-                            alt={`Actual ${app.name} application screenshot${active === 0 ? "" : " (detail view)"}`}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="brain-preview">
-                            <img
-                              src={`${A}ibrain-icon.png`}
-                              alt="iBrain app icon"
-                            />
-                            <h3>
-                              Your ideas.
-                              <br />
-                              Your models.
-                            </h3>
-                            <span>LOCAL OLLAMA · OPTIONAL CLOUD</span>
-                            <small>Product overview</small>
-                          </div>
-                        )}
+                        <MacDemo active={active} />
                       </motion.div>
                     </AnimatePresence>
                     <div className="mac-dock">
@@ -1158,19 +1162,7 @@ function Process({ onOpen }) {
 }
 function AutoBarber({ onOpen }) {
   const [review, setReview] = useState(0);
-  const reviews = [
-    {
-      name: "Jeff Smith",
-      quote:
-        "Couldn’t have been happier with the service and quality with the Auto Barber.",
-      href: "https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s113475545431419062931!2s0x5490ffe6d92d4c6b:0xd406f05816bbc715",
-    },
-    {
-      name: "Lay Ybañez",
-      quote: "Very kind, easy going and very knowledgable.",
-      href: "https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s100438662356796766727!2s0x5490ffe6d92d4c6b:0xd406f05816bbc715",
-    },
-  ];
+  const reviews = barberReviews;
   return (
     <section className="business-section dark" id="about">
       <div className="business-backdrop" />
@@ -1243,6 +1235,7 @@ function AutoBarber({ onOpen }) {
             Read the real Google reviews <ArrowUpRight size={15} />
           </External>
         </Reveal>
+        <ReviewWall />
       </div>
     </section>
   );
@@ -1259,11 +1252,11 @@ const tools = [
   { label: "BACKEND / DATA", items: ["Supabase", "PostgreSQL", "Local APIs"] },
   {
     label: "AI WORKFLOW",
-    items: ["ChatGPT / Codex", "Claude", "Gemini", "Perplexity"],
+    items: ["ChatGPT / Codex", "Claude", "Kimi K3", "Gemini", "Perplexity"],
   },
   {
     label: "BUILD / SHIP",
-    items: ["Git / GitHub", "Vercel", "VS Code", "Swift Package Manager"],
+    items: ["Git / GitHub", "Vercel", "Swift Package Manager"],
   },
 ];
 function Stack() {
@@ -1277,10 +1270,29 @@ function Stack() {
             <br />
             <span>to build, ship and learn.</span>
           </h3>
+          <div className="tool-cubes" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </div>
         </div>
         <div className="tool-groups">
           {tools.map((t) => (
             <div className="tool-group" key={t.label}>
+              <div
+                className={`tool-icon tool-icon-${tools.indexOf(t)}`}
+                aria-hidden="true"
+              >
+                {
+                  [
+                    <Globe2 />,
+                    <Command />,
+                    <Database />,
+                    <Sparkles />,
+                    <Github />,
+                  ][tools.indexOf(t)]
+                }
+              </div>
               <span>{t.label}</span>
               {t.items.map((item) => (
                 <p key={item}>{item}</p>
@@ -1293,8 +1305,22 @@ function Stack() {
   );
 }
 function MotionToggle() {
-  const {disabled,toggle,systemReduced}=useMotionControls();
-  return <button className="motion-toggle" onClick={toggle} aria-pressed={disabled} title={systemReduced ? 'Your device requests reduced motion' : 'Toggle website motion'}>Motion {disabled || systemReduced ? 'off' : 'on'} <span aria-hidden="true">{disabled || systemReduced ? '○' : '●'}</span></button>;
+  const { disabled, toggle, systemReduced } = useMotionControls();
+  return (
+    <button
+      className="motion-toggle"
+      onClick={toggle}
+      aria-pressed={disabled || systemReduced}
+      title={
+        systemReduced
+          ? "Your device requests reduced motion"
+          : "Toggle website motion"
+      }
+    >
+      Motion {disabled || systemReduced ? "off" : "on"}{" "}
+      <span aria-hidden="true">{disabled || systemReduced ? "○" : "●"}</span>
+    </button>
+  );
 }
 
 function Contact() {
@@ -1313,6 +1339,22 @@ function Contact() {
             </h2>
           </div>
           <div className="opportunity-copy">
+            <div className="ideas-bulb" aria-hidden="true">
+              <span className="annotation">
+                IDEAS
+                <br />
+                IN PROGRESS.
+                <Doodle />
+              </span>
+              <span className="bulb-glow" />
+              <img
+                src="/assets/ideas-bulb.webp"
+                alt=""
+                width="433"
+                height="650"
+                loading="lazy"
+              />
+            </div>
             <h3>
               Product-minded. Customer-tested.
               <br />
@@ -1324,89 +1366,113 @@ function Contact() {
               engineers, and take ownership of real problems.
             </p>
             <div className="role-tags">
-              <span>Product development</span>
-              <span>Junior full-stack</span>
-              <span>AI implementation</span>
-              <span>Technical product support</span>
+              <span>
+                <Database size={15} /> Product development
+              </span>
+              <span>
+                <UsersRound size={15} /> Junior full-stack
+              </span>
+              <span>
+                <Sparkles size={15} /> AI implementation
+              </span>
+              <span>
+                <Wrench size={15} /> Technical product support
+              </span>
             </div>
             <div className="opportunity-facts">
               <span>
                 <Globe2 />
-                Fully remote
+                <span>
+                  Fully remote<small>Worldwide</small>
+                </span>
               </span>
               <span>
                 <Volume2 />
-                Native English & Spanish
+                <span>
+                  Native English & Spanish<small>Communication</small>
+                </span>
               </span>
               <span>
                 <Lightbulb />
-                Open to learn & grow
+                <span>
+                  Open to learn & grow<small>New challenges</small>
+                </span>
               </span>
             </div>
           </div>
         </div>
       </section>
-      <section className="contact-section" id="contact">
-        <div className="contact-orbit" aria-hidden="true" />
-        <div className="wrap contact-inner">
-          <div className="contact-intro">
-            <Label n="09">LET’S TALK</Label>
-            <div className="annotation">you’ve seen the receipts.</div>
-            <h2>
-              LET’S BUILD
-              <br />
-              <span>SOMETHING.</span>
-              <ArrowUpRight />
-            </h2>
-            <p>
-              I don’t need to be the smartest engineer in the room.
-              <br />I want to be in a room where I keep becoming a better one.
-            </p>
-          </div>
-          <div className="contact-links">
-            <External href={links.email} className="contact-primary">
-              <Mail />
-              <span>
-                Let’s start a conversation
-                <small>hikaristudioai@gmail.com</small>
-              </span>
-              <ArrowUpRight />
-            </External>
-            <div className="contact-social">
-              <External href={links.linkedin}>
-                <Linkedin />
-                LinkedIn
+      <div id="contact">
+        <ContactExperience motionToggle={<MotionToggle />} />
+        <section className="contact-section mobile-closing">
+          <div className="contact-orbit" aria-hidden="true" />
+          <div className="wrap contact-inner">
+            <div className="contact-intro">
+              <Label n="09">LET’S TALK</Label>
+              <div className="annotation">you’ve seen the receipts.</div>
+              <h2>
+                LET’S BUILD
+                <br />
+                <span>SOMETHING.</span>
                 <ArrowUpRight />
-              </External>
-              <External href={links.github}>
-                <Github />
-                GitHub
-                <ArrowUpRight />
-              </External>
-              <External href="/Daiske-Brandan-Resume.pdf">
-                <FileText />
-                Résumé
-                <ArrowUpRight />
-              </External>
+              </h2>
+              <p>
+                I don’t need to be the smartest engineer in the room.
+                <br />I want to be in a room where I keep becoming a better one.
+              </p>
             </div>
-            <a className="phone-link" href="tel:+543513668122">
-              +54 351 366 8122 <ArrowUpRight size={13} />
-            </a>
+            <div className="contact-links">
+              <External href={links.email} className="contact-primary">
+                <Mail />
+                <span>
+                  Let’s start a conversation
+                  <small>hikaristudioai@gmail.com</small>
+                </span>
+                <ArrowUpRight />
+              </External>
+              <div className="contact-social">
+                <External href={links.linkedin}>
+                  <Linkedin />
+                  LinkedIn
+                  <ArrowUpRight />
+                </External>
+                <External href={links.github}>
+                  <Github />
+                  GitHub
+                  <ArrowUpRight />
+                </External>
+                <External href="/Daiske-Brandan-Resume.pdf">
+                  <FileText />
+                  Résumé
+                  <ArrowUpRight />
+                </External>
+              </div>
+              <External
+                href="https://wa.me/543513668122"
+                className="mobile-whatsapp"
+              >
+                <WhatsAppIcon size={18} /> WhatsApp <ArrowUpRight size={13} />
+              </External>
+              <LanguageFlags />
+              <a className="phone-link" href="tel:+543513668122">
+                +54 351 366 8122 <ArrowUpRight size={13} />
+              </a>
+            </div>
           </div>
-        </div>
-        <footer className="wrap">
+          <footer className="wrap">
             <MotionToggle />
-          <a href="#home" className="brand footer-brand">
-            Daiske
-            <Crown />
-          </a>
-          <span>SEATTLE ROOTS. ARGENTINA BASE. WORLDWIDE MINDSET.</span>
-          <span>© {new Date().getFullYear()} DAISKE BRANDAN</span>
-          <a href="#home">
-            Back to top <ArrowUpRight size={14} />
-          </a>
-        </footer>
-      </section>
+            <a href="#home" className="brand footer-brand">
+              Hikari
+              <Crown />
+            </a>
+            <span>SEATTLE ROOTS. ARGENTINA BASE. WORLDWIDE MINDSET.</span>
+            <span>© {new Date().getFullYear()} HIKARI BRANDAN</span>
+            <a href="#home">
+              Back to top <ArrowUpRight size={14} />
+            </a>
+          </footer>
+        </section>
+      </div>
     </>
   );
 }
@@ -1438,8 +1504,8 @@ function App() {
       />
       <header className="site-header">
         <div className="wrap nav-inner">
-          <a className="brand" href="#home" aria-label="Daiske, back to home">
-            Daiske
+          <a className="brand" href="#home" aria-label="Hikari, back to home">
+            Hikari
             <Crown />
           </a>
           <nav aria-label="Main navigation">

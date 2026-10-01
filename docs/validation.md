@@ -25,4 +25,16 @@ The development server briefly logged a hot-reload error while CSS was being rew
 
 ## Sharing metadata and scope
 
-Canonical, Open Graph image/URL and Twitter card metadata are configured around the retained production URL `https://personalbrand-murex.vercel.app`. The independent mobile design pass is intentionally pending.
+Canonical, Open Graph image/URL and Twitter card metadata are configured around the retained production URL `https://personalbrand-murex.vercel.app`.
+
+## Final desktop polish pass
+
+- Production build, ESLint and `git diff --check` passed. No dependency changes.
+- Browser widths 1920, 1440, 1280, 1024, 900, 768, 390 and 375: no horizontal overflow. The independent mobile contact layout remains in use at 700px and below.
+- Arcade: keyboard scoring, pause, 20-second round completion, replay and back controls checked. Timers pause when the tab is hidden and clean up on unmount.
+- All five Mac simulations exercised: dictation sequence, folder review, sample connection, metric tabs and scripted assistant response.
+- All six project dialogs: keyboard focus remains inside, Escape closes and opener focus returns. QR dialog Escape and focus restoration checked.
+- Manual motion control stops cloud drift, review strip and flight animation. CSS system reduced-motion guards reviewed; OS preference was not changed.
+- Contact validation blocks empty and invalid inputs. Valid input produces correctly encoded email and WhatsApp draft links. No message is sent by the site. External email-app launch was blocked by browser policy during QA and was not retried.
+- Live UGC Camera demo reached Ready with enabled camera controls and no warning/error logs. Final portfolio production preview also reported no warning/error logs.
+- New Earth and glass-bulb assets were generated using the built-in image tool, then optimized to transparent WebP. Original portrait and screenshot assets remain intact.
