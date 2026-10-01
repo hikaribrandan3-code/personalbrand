@@ -298,7 +298,7 @@ function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            AI PRODUCT DEVELOPER <span>·</span> RAISED IN SEATTLE <span>·</span>{" "}
+            PRODUCT-FOCUSED FULL-STACK DEVELOPER <span>·</span> RAISED IN SEATTLE <span>·</span>{" "}
             BASED IN ARGENTINA
           </motion.div>
           <h1>
@@ -338,7 +338,7 @@ function Hero() {
           <div className="hero-facts">
             <span>
               <BriefcaseBusiness />
-              Product builder
+              Product-focused developer
             </span>
             <span>
               <MapPin />
