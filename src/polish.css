@@ -2318,11 +2318,11 @@ html[data-motion="off"] .ugc-capture-flash, html[data-motion="off"] .sent-aircra
   .thinker-note { left: 65%; top: 280px; }
   .polaroid-tap { top: 190px; }
   .portrait-note {
-    left: 62%;
-    top: 150px;
+    left: 54%;
+    top: 135px;
   }
   .portrait-note .doodle {
-    width: 280px;
+    width: 210px;
     height: 56px;
     margin-left: 0;
     transform: rotate(0deg);
@@ -2355,6 +2355,161 @@ html[data-motion="off"] .ugc-capture-flash, html[data-motion="off"] .sent-aircra
     opacity: .82;
     pointer-events: none;
   }
+}
+@media (min-width: 1001px) {
+  .debug-receipts {
+    display: grid;
+    grid-template-columns: minmax(0, .86fr) repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 34px;
+    padding: 14px;
+    border: 1px solid #eae9e2;
+    border-radius: 22px;
+    background: #f7f6f2;
+  }
+  .debug-intro {
+    padding: 9px 12px 7px 13px;
+    border-right: 1px solid #deddd5;
+  }
+  .debug-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #777872;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+  }
+  .debug-intro h3 {
+    font-family: Display, "Arial Narrow", sans-serif;
+    font-size: clamp(24px, 2.5vw, 38px);
+    line-height: .98;
+    letter-spacing: -.02em;
+    white-space: nowrap;
+  }
+  .debug-intro h3 span {
+    color: #111;
+    background: var(--yellow);
+    padding: 0 3px;
+    border-radius: 3px;
+  }
+  .debug-intro > p {
+    margin: 12px 10px 14px 0;
+    color: #686a6e;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .debug-tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px 7px;
+  }
+  .debug-tools > span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+    color: #46494d;
+    font-size: 8px;
+    line-height: 1.25;
+  }
+  .debug-tools svg { color: #6e777e; }
+  .debug-card {
+    min-width: 0;
+    padding: 12px 12px 13px;
+    border: 1px solid #e9e8e2;
+    border-radius: 18px;
+    background: #fffefa;
+    box-shadow: 0 2px 8px #22220c05;
+  }
+  .debug-card-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 9px;
+    color: #20201d;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .debug-card-label b {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    border-radius: 50%;
+    background: #fff0bd;
+    font-size: 10px;
+  }
+  .debug-card:nth-child(3) .debug-card-label b { background: #ffe4d8; }
+  .debug-card:nth-child(4) .debug-card-label b { background: #e4edff; }
+  .debug-card-visual,
+  .debug-flow {
+    height: 88px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f0efe9;
+  }
+  .debug-card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .debug-card:last-child .debug-card-visual img {
+    object-fit: cover;
+    object-position: center 18%;
+  }
+  .debug-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 5px;
+    padding: 8px;
+    background: linear-gradient(135deg, #f0f3f5, #e7ebee);
+  }
+  .debug-flow > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 7px;
+    border: 1px solid #d7dce0;
+    border-radius: 999px;
+    background: #fff;
+    color: #515961;
+    font-size: 8px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .debug-flow svg { color: #9aa2a8; }
+  .debug-card h4 {
+    margin-bottom: 6px;
+    color: #20201d;
+    font-size: 12px;
+    line-height: 1.32;
+  }
+  .debug-card > p {
+    color: #62646a;
+    font-size: 9px;
+    line-height: 1.48;
+  }
+}
+@media (min-width: 1001px) and (max-width: 1150px) {
+  .debug-receipts { gap: 8px; padding: 10px; }
+  .debug-intro { padding: 8px 8px 6px; }
+  .debug-intro h3 { font-size: 26px; }
+  .debug-intro > p { font-size: 10px; }
+  .debug-tools { grid-template-columns: 1fr; gap: 6px; }
+  .debug-card { padding: 9px; }
+  .debug-card-label { font-size: 10px; gap: 6px; }
+  .debug-card-visual, .debug-flow { height: 72px; }
+  .debug-card h4 { font-size: 10px; }
+  .debug-card > p { font-size: 8px; line-height: 1.42; }
+  .debug-flow > span { font-size: 7px; padding: 4px 5px; }
+}
+@media (max-width: 1000px) {
+  .debug-receipts { display: none; }
 }
 @media (min-width: 1001px) and (max-width: 1100px) {
   .thinker-note { left: 68%; top: 300px; }

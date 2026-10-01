@@ -303,13 +303,13 @@ function Hero() {
           </motion.div>
           <h1>
             {[
-              "I BUILD THINGS",
+              "I BUILD PRODUCTS",
+              "FROM PROBLEMS",
               "OTHER PEOPLE",
-              "WOULDN’T THINK",
-              "TO BUILD.",
+              "OVERLOOK.",
             ].map((line, i) => (
               <span
-                className={`headline-line ${i === 1 ? "yellow-line" : ""}`}
+                className={`headline-line ${i >= 2 ? "yellow-line" : ""}`}
                 key={line}
               >
                 <motion.span
@@ -418,7 +418,6 @@ function Hero() {
             <span>
               ✓ IDEAS
               <br />✓ PRODUCTS
-              <br />✓ REAL USERS
               <br />✓ BUSINESSES
               <br />
               <em>
@@ -1042,6 +1041,34 @@ const steps = [
     text: "Put it into people’s hands. Learn from what happens next.",
   },
 ];
+const debugTools = [
+  [Code2, "Chrome DevTools"],
+  [Globe2, "Safari Web Inspector"],
+  [Activity, "Vercel Logs"],
+  [Database, "Supabase Edge Function Logs"],
+];
+const debugExamples = [
+  {
+    product: "UGC Camera",
+    title: "Sticker touch targets were too small.",
+    copy: "Dragging and deleting worked, but resizing and rotating stickers felt too precise on mobile. I compared the interaction directly with Instagram’s sticker controls and realized our interactive touch area was smaller. The touch target was expanded without unnecessarily making the visible control larger, making the interaction easier to use on a phone.",
+    image: `${A}ugc-salad-spot.png`,
+    alt: "Salad Spot branded-camera photo from UGC Camera",
+  },
+  {
+    product: "Authentication",
+    title: "Login looked successful — then something downstream failed.",
+    copy: "When authentication appeared to complete but the app stalled or returned an error, I started with the callback URL and browser console. If the frontend didn’t explain enough, I traced the problem through Supabase Edge Function logs and database access. In some cases, RLS/data access was blocking the expected operation.",
+    flow: ["URL state", "Console", "Edge Function logs", "RLS/data access", "Retest"],
+  },
+  {
+    product: "iVoz (macOS)",
+    title: "Hotkeys and permissions weren’t behaving correctly.",
+    copy: "Some keyboard shortcuts weren’t being recognized consistently, and microphone permission could be requested again after relaunching the app. I tested different hotkeys and repeated launch/permission scenarios on macOS until the shortcut handling and permission flow behaved reliably.",
+    image: `${A}ivoz-window-real.png`,
+    alt: "Actual iVoz macOS application window",
+  },
+];
 function Process({ onOpen }) {
   const [active, setActive] = useState(0);
   return (
@@ -1118,6 +1145,34 @@ function Process({ onOpen }) {
           <CTA onClick={() => onOpen("engineering")}>
             My engineering notes <ArrowUpRight size={16} />
           </CTA>
+        </div>
+        <div className="debug-receipts" aria-label="Real examples of how I debug">
+          <div className="debug-intro">
+            <span className="debug-eyebrow">REAL EXAMPLES</span>
+            <h3>HOW I <span>DEBUG.</span></h3>
+            <p>I don’t guess where it broke.<br />I reproduce, inspect, trace,<br />find the cause and fix it.</p>
+            <div className="debug-tools" aria-label="Debugging tools">
+              {debugTools.map(([Icon, name]) => (
+                <span key={name}><Icon size={14} aria-hidden="true" />{name}</span>
+              ))}
+            </div>
+          </div>
+          {debugExamples.map((example, index) => (
+            <article className="debug-card" key={example.product}>
+              <div className="debug-card-label"><b>0{index + 1}</b><span>{example.product}</span></div>
+              {example.image ? (
+                <div className="debug-card-visual">
+                  <img src={example.image} alt={example.alt} loading="lazy" />
+                </div>
+              ) : (
+                <div className="debug-flow" aria-label="Callback URL, console, Edge Function logs, RLS or data access, retest">
+                  {example.flow.map((step, i) => <span key={step}>{step}{i < example.flow.length - 1 && <ArrowRight size={11} aria-hidden="true" />}</span>)}
+                </div>
+              )}
+              <h4>{example.title}</h4>
+              <p>{example.copy}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
