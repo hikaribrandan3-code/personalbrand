@@ -13,4 +13,16 @@
 - Supplied résumé serves successfully as `application/pdf`.
 - Original portrait and shipped portrait have matching SHA-256 hashes. The separate SVG mask changes the visible silhouette without rewriting the photo.
 
-The local development server briefly logged a hot-reload error while CSS was being rewritten. Final production-build browser logs are checked separately. No Lighthouse score is claimed. The independent mobile design pass is pending.
+## Live deployment verification
+
+- Retained production site: [personalbrand-murex.vercel.app](https://personalbrand-murex.vercel.app), Vercel project `personalbrand` in the `hikaristudioai-8443` account.
+- Live browser inspection reported no warning or error log entries during the checked flows.
+- All five Mac project-dialog tabs showed the corresponding headline and correct public source repository.
+- Escape closed the live dialog and restored focus to its opener.
+- Temporary duplicate project `personalbrand-dtxl` was deleted after explicit user confirmation. Vercel returned `projectDeleted=personalbrand-dtxl`; `personalbrand` was retained.
+
+The development server briefly logged a hot-reload error while CSS was being rewritten. The live runtime check above completed without warning/error logs.
+
+## Sharing metadata and scope
+
+Canonical, Open Graph image/URL and Twitter card metadata are configured around the retained production URL `https://personalbrand-murex.vercel.app`. The independent mobile design pass is intentionally pending.

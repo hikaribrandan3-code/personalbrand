@@ -1,6 +1,6 @@
 # Daiske Brandan — product developer portfolio
 
-A desktop portfolio built with React, Vite and Motion. It follows the supplied black, white and yellow art direction, with a real portrait, project stories, handwritten details, interactive device previews and an animated Mac app collection.
+Live at [personalbrand-murex.vercel.app](https://personalbrand-murex.vercel.app). A desktop portfolio built with React, Vite and Motion. It follows the supplied black, white and yellow art direction, with a real portrait, project stories, handwritten details, interactive device previews and an animated Mac app collection.
 
 The homepage introduces UGC Camera, MenuTap, FoodSpot, five Mac apps, the development workflow and The Auto Barber. Project dialogs provide deeper notes without leaving the story. Public source and downloads are linked only where established; provenance and limitations are documented in [docs/asset-sources.md](docs/asset-sources.md).
 
@@ -17,7 +17,11 @@ npm run check   # ESLint
 npm run preview
 ```
 
-Build and lint results should be recorded after running these commands; this README does not assert a completed QA run.
+## Verification
+
+`npm run build` and `npm run check` passed; the dependency audit reported zero vulnerabilities. Desktop checks at 1440, 1512, 1728 and 1920px found no horizontal overflow. App switching, shutter feedback, dialog keyboard/focus behavior, reduced-motion controls, links and résumé serving were checked. The live site produced no browser warning/error logs during inspected flows; all five Mac dialog tabs showed the correct headlines/repos, and Escape restored opener focus.
+
+The retained Vercel project is `personalbrand`; the temporary duplicate was deleted after explicit user confirmation. Canonical/Open Graph metadata uses the absolute production URL. See [docs/validation.md](docs/validation.md) for the recorded results and limits.
 
 ## Content boundaries
 
@@ -29,7 +33,7 @@ Build and lint results should be recorded after running these commands; this REA
 - The supplied résumé retains older iVoice naming. Email is the primary contact route because no scheduling URL was supplied.
 - This pass targets desktop. A separate approved mobile UI remains pending.
 
-## Manual desktop QA
+## Manual regression checklist
 
 - [ ] Inspect 1440, 1512, 1728 and 1920px widths for typography, device proportions, overlaps, image loading and horizontal overflow.
 - [ ] Select every Mac app from both selectors; confirm preview, caption and source link agree.
@@ -40,4 +44,4 @@ Build and lint results should be recorded after running these commands; this REA
 - [ ] Enable reduced motion; confirm the complete story stays readable and controls remain usable.
 - [ ] Inspect browser console/runtime errors and keyboard-visible focus states.
 
-The portfolio repository target is [hikaribrandan3-code/personalbrand](https://github.com/hikaribrandan3-code/personalbrand).
+The portfolio repository is [hikaribrandan3-code/personalbrand](https://github.com/hikaribrandan3-code/personalbrand).
