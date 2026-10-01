@@ -1963,6 +1963,7 @@ html[data-motion="off"] .sample-chart i {
 }
 
 /* Requested revision: product previews, Google cards, direct delivery and spacing. */
+.ugc-mobile-story { display: none; }
 .brand { white-space: nowrap; font-size: clamp(27px, 2.8vw, 41px); }
 .project-domain { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; text-transform: none; letter-spacing: 0; font-weight: 500; opacity: .85; }
 .section-label { flex-wrap: wrap; row-gap: 9px; }
@@ -1981,6 +1982,88 @@ html[data-motion="off"] .sample-chart i {
 .ugc-mode-tabs button[aria-pressed="true"] { color: #ffdf65; }
 .ugc-capture-flash { position: absolute; inset: 0; background: white; pointer-events: none; animation: capture-flash .5s both; z-index: 5; }
 @keyframes capture-flash { from { opacity: .8; } to { opacity: 0; } }
+@media (min-width: 1001px) {
+  .ugc-section .food-backdrop {
+    background:
+      linear-gradient(90deg, #100f0df2 0%, #100f0dd9 27%, #100f0d80 48%, #100f0d20 72%, #100f0d30 100%),
+      url("/assets/ugc-salad-spot.png") 58% 52% / cover;
+  }
+  .ugc-section .project-copy h2.ugc-desktop-story {
+    font-size: clamp(40px, 3.05vw, 54px);
+    letter-spacing: -.025em;
+    line-height: .99;
+    white-space: nowrap;
+  }
+  .ugc-section .project-copy p.ugc-desktop-story {
+    max-width: 480px;
+    font-size: clamp(12px, .95vw, 14px);
+    line-height: 1.55;
+    margin: 17px 0 20px;
+  }
+  .ugc-entry-modes { gap: 0; margin-top: 16px; width: 100%; }
+  .ugc-entry-modes > span {
+    flex: 1;
+    min-width: 0;
+    padding: 1px 10px 0 0;
+    line-height: 1.3;
+  }
+  .ugc-entry-modes > span + span {
+    border-left: 1px solid #ffffff50;
+    padding-left: 14px;
+  }
+  .ugc-entry-modes small { line-height: 1.4; }
+  .camera-stage .camera-note {
+    right: -4px;
+    top: 25px;
+    max-width: 145px;
+    font-size: clamp(17px, 1.5vw, 23px);
+    transform: rotate(-8deg);
+  }
+  .camera-stage .camera-note .doodle {
+    width: 86px;
+    height: 61px;
+    margin: 1px 0 0 -4px;
+    transform: scaleX(-1) rotate(10deg);
+  }
+  .ugc-photo-view .location-tag {
+    top: 70px;
+    left: 16px;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    max-width: calc(100% - 32px);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border: 1px solid #ffffff75;
+    border-radius: 999px;
+    background: #bfc4c466;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: .1px;
+    text-shadow: 0 1px 5px #0008;
+    box-shadow: inset 0 1px 0 #ffffff50, 0 2px 10px #0003;
+    backdrop-filter: blur(11px) saturate(125%);
+    -webkit-backdrop-filter: blur(11px) saturate(125%);
+    pointer-events: none;
+  }
+  .ugc-photo-view .location-tag svg {
+    position: static;
+    width: 12px;
+    height: 12px;
+    color: #fff;
+    transform: none;
+    filter: drop-shadow(0 1px 3px #0008);
+  }
+  .capture-feedback { font-size: 7px; color: #e5e5df; }
+}
+@media (max-width: 1000px) {
+  .ugc-mobile-story { display: block; }
+  .ugc-desktop-story { display: none !important; }
+  .ugc-shipped-proof { display: none; }
+}
 .mac-heading .mac-open-source { display: flex; gap: 7px; align-items: center; margin-top: 13px; color: #343a3f; font-size: 12px; font-weight: 700; }
 .mac-compatibility { display: block; font-size: 10px; line-height: 1.65; margin-top: 10px; max-width: 290px; color: #737779; }
 .mac-preview-transition { height: calc(100% - 20px); position: relative; overflow: hidden; }
@@ -2023,6 +2106,86 @@ html[data-motion="off"] .sample-chart i {
 .closing-signature { display: block; }
 .closing-signature small { display: block; margin-top: 8px; font-size: 6px; }
 .closing-copyright { grid-column: 3; text-align: right; padding: 0; border: none; }
+.mac-platform { display: none; }
+@media (min-width: 1101px) {
+  .closing-footer {
+    grid-template-columns: minmax(230px, 1fr) minmax(250px, 1.3fr) auto auto;
+    grid-template-areas: "signature quote actions copyright";
+    align-items: center;
+    column-gap: clamp(18px, 2.2vw, 36px);
+    row-gap: 0;
+    padding: 14px 24px 10px;
+  }
+  .closing-signature { grid-area: signature; }
+  .closing-footer .footer-quote { grid-area: quote; }
+  .closing-actions { grid-area: actions; }
+  .closing-copyright { grid-area: copyright; white-space: nowrap; }
+  .closing-bottom { padding: 0 24px 10px; }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .closing-footer {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) !important;
+    grid-template-areas: "signature quote" "actions copyright";
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 12px;
+    padding: 14px 22px 10px;
+  }
+  .closing-signature { grid-area: signature; }
+  .closing-footer .footer-quote { grid-area: quote; grid-column: 2 !important; grid-row: 1 !important; }
+  .closing-actions { grid-area: actions; }
+  .closing-copyright { grid-area: copyright; grid-column: 2 !important; grid-row: 2 !important; text-align: right; white-space: nowrap; }
+  .closing-bottom { padding: 0 22px 10px; }
+}
+@media (min-width: 701px) {
+  .site-header .brand > svg { display: none; }
+  .mac-platform { display: none; }
+  .project-domain {
+    min-height: 26px;
+    padding: 4px 8px;
+    border: 1px solid #6d788326;
+    border-radius: 999px;
+    background: #ffffff78;
+    color: inherit;
+    font-size: 11px;
+    font-weight: 650;
+    opacity: 1;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .project-domain:hover, .project-domain:focus-visible {
+    background: #fff;
+    border-color: #838b9660;
+    transform: translateY(-1px);
+  }
+  .project-domain:focus-visible { outline: 2px solid #eac400; outline-offset: 2px; }
+  .section-label { row-gap: 7px; }
+  .ugc-photo-view .location-tag {
+    top: 70px;
+    max-width: calc(100% - 30px);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: .35px;
+    box-shadow: 0 2px 10px #0003;
+    backdrop-filter: blur(8px);
+  }
+  .closing-actions > a:last-child { width: 42px; height: 42px; color: #287657; }
+  .mac-platform {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    padding: 3px 8px;
+    border: 1px solid #79869a30;
+    border-radius: 999px;
+    background: #fff9;
+    color: #4b5869;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .45px;
+    white-space: nowrap;
+  }
+}
 @media (min-width: 1001px) {
   .globe-journey { width: 120%; margin-left: -3%; }
 }
@@ -2059,3 +2222,145 @@ html[data-motion="off"] .sample-chart i {
 }
 html[data-motion="off"] .ugc-photo-view > img { transition: none; }
 html[data-motion="off"] .ugc-capture-flash, html[data-motion="off"] .sent-aircraft { animation: none; display: none; }
+
+/* Desktop QA follow-up: space the hero cards and point the notes at their targets. */
+@media (min-width: 1001px) {
+  .project-note {
+    position: absolute;
+    z-index: 8;
+    font-size: clamp(14px, 1.15vw, 21px);
+    line-height: 1.03;
+    pointer-events: none;
+    text-shadow: 0 1px 8px #0008;
+  }
+  .ivoz-note {
+    left: 76%;
+    top: 42px;
+    transform: rotate(-7deg);
+  }
+  .menutap-note {
+    left: 81%;
+    top: 205px;
+    transform: rotate(-5deg);
+  }
+  .project-note .doodle {
+    width: clamp(140px, 10vw, 190px);
+    height: 55px;
+    margin: 1px 0 0 8px;
+  }
+  .ivoz-note .doodle { transform: rotate(7deg); }
+  .menutap-note .doodle {
+    width: clamp(160px, 12vw, 240px);
+    height: 62px;
+    margin-left: 18px;
+    transform: rotate(-3deg);
+  }
+  .polaroid-mac { right: 120px; top: -10px; }
+  .polaroid-tap { right: -4px; top: 160px; }
+  .polaroid { padding-bottom: 31px; }
+  .polaroid span { bottom: 15px; }
+  .polaroid small {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+  }
+  .mac-kicker .annotation {
+    white-space: nowrap;
+    transform: rotate(8deg);
+  }
+  .ugc-photo-view .location-tag {
+    top: 70px;
+    right: auto;
+    bottom: auto;
+    left: 16px;
+    display: inline-flex;
+    width: auto;
+    max-width: calc(100% - 32px);
+    gap: 7px;
+    padding: 7px 12px;
+    border: 1px solid #ffffff78;
+    border-radius: 999px;
+    background: #abb2b884;
+    box-shadow: inset 0 1px 0 #ffffff55, 0 2px 8px #0002;
+    color: #fff;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: .15px;
+    text-shadow: 0 1px 4px #0006;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    pointer-events: none;
+  }
+  .ugc-photo-view .location-tag svg {
+    position: static;
+    width: 11px;
+    height: 11px;
+    color: #fff;
+    transform: none;
+    filter: drop-shadow(0 1px 3px #0008);
+  }
+}
+@media (min-width: 1700px) {
+  .polaroid-mac { right: 130px; top: -10px; }
+  .polaroid-tap { top: 220px; }
+}
+@media (min-width: 1001px) and (max-width: 1279px) {
+  .thinker-note { left: 64%; top: 280px; }
+}
+@media (min-width: 1001px) {
+  .thinker-note { left: 65%; top: 280px; }
+  .polaroid-tap { top: 190px; }
+  .portrait-note {
+    left: 62%;
+    top: 150px;
+  }
+  .portrait-note .doodle {
+    width: 280px;
+    height: 56px;
+    margin-left: 0;
+    transform: rotate(0deg);
+  }
+  .thinker-note .doodle {
+    width: clamp(200px, 22vw, 320px);
+    height: 62px;
+    margin-left: -12px;
+    transform: rotate(4deg);
+  }
+  .thinker-note { left: 75%; top: 300px; }
+  .scribble-card { top: 425px; }
+  .polaroid small {
+    text-transform: none;
+    letter-spacing: .1px;
+    font-family: inherit;
+    font-size: 7px;
+    white-space: nowrap;
+  }
+  .mac-main .mac-picker-arrow {
+    position: absolute;
+    z-index: 8;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    color: #625b53;
+    opacity: .82;
+    pointer-events: none;
+  }
+}
+@media (min-width: 1001px) and (max-width: 1100px) {
+  .thinker-note { left: 68%; top: 300px; }
+  .thinker-note .doodle { width: 220px; }
+}
+@media (min-width: 1700px) {
+  .thinker-note { left: 75%; top: 350px; }
+  .scribble-card { top: 455px; }
+}

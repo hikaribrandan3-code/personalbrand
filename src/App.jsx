@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ArrowDown,
   MapPin,
+  Apple,
   Globe2,
   BriefcaseBusiness,
   Crown,
@@ -395,7 +396,8 @@ function Hero() {
             whileHover={reduce ? {} : { rotate: 0, y: -5 }}
           >
             <img src={`${A}ivoz-window-real.png`} alt="Real iVoz app window" />
-            <span>small idea. real app.</span>
+            <span>VOICE → TEXT</span>
+            <small>iVoz · macOS speech-to-text</small>
           </motion.div>
           <motion.div
             className="polaroid polaroid-tap"
@@ -405,7 +407,8 @@ function Hero() {
               src={`${A}menutap-sticker.png`}
               alt="The physical MenuTap NFC sticker"
             />
-            <span>offline meets online ↗</span>
+            <span>TAP THE TABLE ↗</span>
+            <small>NFC tabletop · restaurants</small>
           </motion.div>
           <motion.div
             className="scribble-card"
@@ -466,7 +469,16 @@ function UGC({ onOpen }) {
           <Label n="01" badge="Live product" website="https://www.ugccamera.com/">
             UGC CAMERA
           </Label>
-          <h2>
+          <h2 className="ugc-desktop-story">
+            CUSTOMERS
+            <br />
+            TAKE THE PHOTO.
+            <br />
+            YOUR BRAND GETS
+            <br />
+            <span className="yellow">LEFT BEHIND.</span>
+          </h2>
+          <h2 className="ugc-mobile-story">
             I NOTICED CUSTOMERS
             <br />
             WERE ALREADY
@@ -475,7 +487,16 @@ function UGC({ onOpen }) {
             <br />
             <span className="yellow">THEIR FOOD.</span>
           </h2>
-          <p>
+          <p className="ugc-desktop-story">
+            Customers are already photographing their food.
+            <br />
+            So I built restaurants their own branded camera —
+            <br />
+            one NFC tap or QR scan opens the camera, adds
+            <br />
+            the business to the photo, and makes it ready to share.
+          </p>
+          <p className="ugc-mobile-story">
             So I gave restaurants their own branded camera — a simple QR or NFC
             tap that opens a beautiful browser camera to capture and share
             photos.
@@ -502,6 +523,9 @@ function UGC({ onOpen }) {
             <span>
               SCAN & SNAP <small>QR / delivery & packaging</small>
             </span>
+            <span className="ugc-shipped-proof">
+              SHIPPED <small>EN · ES · PT-BR</small>
+            </span>
           </div>
         </Reveal>
         <div className="device-stage camera-stage">
@@ -514,9 +538,8 @@ function UGC({ onOpen }) {
             </Phone>
           </motion.div>
           <div className="annotation camera-note">
-            native location tag.
-            <br />
-            part of the photo.
+            <span className="ugc-desktop-story">the location stays<br />with the photo.</span>
+            <span className="ugc-mobile-story">native location tag.<br />part of the photo.</span>
             <Doodle />
           </div>
           <span className="scene-counter">CAMERA, BUT MAKE IT YOURS.</span>
@@ -677,7 +700,7 @@ function FoodSpot({ onOpen }) {
       <div className="pizza-backdrop" />
       <div className="wrap project-grid">
         <Reveal className="project-copy">
-          <Label n="03" badge="Side project" subdued>
+          <Label n="03" badge="Past B2B SaaS" subdued>
             FOODSPOT MOBILE
           </Label>
           <h2>
@@ -819,16 +842,15 @@ function MacApps({ onOpen }) {
               MAC APPS / iSUITE
             </Label>
             <h2>
-              AND SOMETIMES
+              I DIDN’T WANT
               <br />
-              THE PROBLEM IS
+              ANOTHER SUBSCRIPTION.
               <br />
-              <span>JUST MINE.</span>
+              <span>SO I BUILT MY OWN.</span>
             </h2>
             <p>
-              Small but useful macOS apps
-              <br />
-              that solve real problems.
+              Small, native macOS productivity apps built to solve problems in
+              my own workflow.
               <span className="mac-open-source"><Github size={14} /> Open source. Built for Apple Silicon.</span>
               <small className="mac-compatibility">M2 or newer is a great fit. Check each app’s requirements. Independent builds aren’t Apple-notarized, so macOS may show a first-launch warning.</small>
             </p>
@@ -842,8 +864,13 @@ function MacApps({ onOpen }) {
                 <Command size={13} />
                 BUILT FOR THE WAY I WORK
               </span>
-              <span className="annotation">go on. pick an app ↘</span>
+              <span className="mac-platform"><Apple size={17} aria-hidden="true" /> macOS productivity apps</span>
+              <span className="annotation">go on. pick an app</span>
             </div>
+            <svg className="mac-picker-arrow" viewBox="0 0 1000 585" fill="none" aria-hidden="true">
+              <path d="M995 8C990 180 885 420 510 570" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              <path d="m570 531-61 39 51 13" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             <motion.div
               className="laptop-stage"
               style={{ rotateY: ry, rotateX: rx }}
@@ -1105,7 +1132,7 @@ function AutoBarber() {
       <div className="wrap business-grid">
         <Reveal>
           <Label n="06" badge="Past business" subdued>
-            AUTO BARBER
+            THE AUTO BARBER
           </Label>
           <h2>
             BEFORE I BUILT SOFTWARE,
