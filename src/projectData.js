@@ -415,7 +415,7 @@ export const projectData = {
     links: [
       {
         label: "Explore the iSuite website",
-        href: "https://isuitemacos-cyan.vercel.app/index.html#apps",
+        href: "https://isuitemacos-cyan.vercel.app/index.html",
       },
     ],
   },
@@ -464,7 +464,7 @@ export const projectData = {
     links: [
       {
         label: "View Google reviews",
-        href: "https://share.google/3Cf9TEYFuTnP7Z5TO",
+        href: "https://www.google.com/maps/place/The+Auto+Barber/@47.4915028,-122.2409531,17z/data=!4m8!3m7!1s0x5490ffe6d92d4c6b:0xd406f05816bbc715!8m2!3d47.4915028!4d-122.2409531!9m1!1b1!16s%2Fg%2F11kwr1m9l8",
       },
     ],
   },

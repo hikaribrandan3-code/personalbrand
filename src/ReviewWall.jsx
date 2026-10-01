@@ -1,13 +1,14 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { barberReviews } from "./reviewData";
+import GoogleMark from "./GoogleMark";
 
 export default function ReviewWall() {
   return (
     <div className="review-wall" aria-label="Sourced customer reviews">
       <div className="review-wall-caption">
         <span>REAL CUSTOMERS. REAL WORDS.</span>
-        <small>Two sourced excerpts · 165 reviews on the Google profile</small>
+        <small>Selected customer excerpts · 165 reviews on Google</small>
       </div>
       <div className="review-track">
         <div className="review-track-inner">
@@ -19,16 +20,21 @@ export default function ReviewWall() {
             >
               {barberReviews.map((r) => (
                 <article key={r.name}>
-                  <span className="tiny-label">GOOGLE REVIEW</span>
-                  <blockquote>“{r.quote}”</blockquote>
-                  <a
+                  <header className="google-review-header">
+                    <span className="review-avatar" aria-hidden="true">{r.name.split(" ").map((word) => word[0]).slice(0, 2).join("")}</span>
+                    <a
                     href={r.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={copy ? -1 : undefined}
                   >
-                    {r.name} <ArrowUpRight size={12} />
-                  </a>
+                    <strong>{r.name}</strong><small>Google review</small>
+                    </a>
+                    <GoogleMark size={20} />
+                  </header>
+                  {r.rating && <span className="google-review-stars" aria-label={`${r.rating} out of 5 stars`}>★★★★★</span>}
+                  <blockquote>“{r.quote}{r.excerpt ? "…" : ""}”</blockquote>
+                  <a className="google-review-read" href={r.href} target="_blank" rel="noopener noreferrer" tabIndex={copy ? -1 : undefined}>Read on Google <ArrowUpRight size={12} /></a>
                 </article>
               ))}
             </div>

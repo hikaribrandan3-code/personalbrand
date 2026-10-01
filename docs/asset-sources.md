@@ -8,7 +8,7 @@ Sources were inspected on 1 October 2026. This document records provenance and k
 | --- | --- | --- |
 | UGC Camera | [Camera demo](https://www.ugccamera.com/camera-demo?name=UGC%20Camera&type=business), [product website](https://www.ugccamera.com/) | Demo is the live website’s “Try it free” destination. Phone recommended. Private source; no invented GitHub link. Supabase/authentication/backend/Vercel facts come from the creator’s supplied product notes. |
 | MenuTap | [Restaurant menu demo](https://www.foodspotmobile.com/t/foodspot-demo/menu) | Live branded menu was observed. Phone recommended. Physical NFC/mobile web description is creator supplied; unverified backend/framework claims omitted. The shared FoodSpot domain is not evidence of a surviving marketplace. |
-| iSuite | [Mac app collection](https://isuitemacos-cyan.vercel.app/index.html#apps) | Published app identities, screenshots, public-source links and stacks. |
+| iSuite | [Mac app collection](https://isuitemacos-cyan.vercel.app/index.html) | Published app identities, screenshots, public-source links and stacks. |
 | The Auto Barber | [Google business profile/reviews](https://share.google/3Cf9TEYFuTnP7Z5TO), [business website](https://www.theautobarber.co/) | Google profile observed at 4.9 across 165 reviews. This does not mean every review is five-star. Revenue and operating history are creator supplied. |
 
 ## The five public Mac repositories
@@ -56,3 +56,11 @@ These Unsplash images establish the warm café/food setting. They are not person
 - `pizza.jpg`: [pizza scene](https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1400&q=85&auto=format&fit=crop).
 
 No scheduling URL was supplied, so contact uses the creator’s email. A separate mobile redesign is intentionally pending.
+
+## October refinement
+
+Six UGC preview photos were copied from the creator's UGC Camera repository product-mobile carousels: lifestyle_cupcake_cafe, lifestyle_nail_salon, lifestyle_restaurant_group, slap-snap-lifestyle-0, slap-snap-lifestyle-11 and slap-snap-lifestyle-8. Business tags match their carousel metadata. These are illustrative product scenes, not testimonials or a claim of customer adoption.
+
+Three additional five-star excerpts (Khoa Nguyen, Manu GP, Gerrit Maritz) were read on the primary Google Maps business profile on 1 October 2026. The direct reviews destination is [The Auto Barber on Google Maps](https://www.google.com/maps/place/The+Auto+Barber/@47.4915028,-122.2409531,17z/data=!4m8!3m7!1s0x5490ffe6d92d4c6b:0xd406f05816bbc715!8m2!3d47.4915028!4d-122.2409531!9m1!1b1!16s%2Fg%2F11kwr1m9l8). Excerpts retain ellipses where shortened. Original two records remain attributed without assigning an unverified individual rating.
+
+Footer verse: Philippians 4:13, KJV (public domain). [Text source](https://www.biblegateway.com/passage/?search=Philippians%204%3A13&version=KJV).

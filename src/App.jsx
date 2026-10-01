@@ -56,19 +56,20 @@ import ContactExperience, {
   LanguageFlags,
   WhatsAppIcon,
 } from "./ContactExperience";
-import { Joystick, MenuTapDemo } from "./Arcade";
 import MacDemo from "./MacDemos";
+import UgcCameraPreview from "./UgcCameraPreview";
+import { FooterQuote } from "./FooterQuote";
 import ProductDNA from "./ProductDNA";
 import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
-import { barberReviews } from "./reviewData";
-import "./polish.css";
+import GoogleMark from "./GoogleMark";
+import { barberReviews, googleReviewsUrl } from "./reviewData";
 const ProjectDrawer = lazy(() => import("./ProjectDrawer"));
 const A = "/assets/";
 const links = {
   ugc: "https://www.ugccamera.com/camera-demo?name=UGC%20Camera&type=business",
   menutap: "https://www.foodspotmobile.com/t/foodspot-demo/menu",
-  suite: "https://isuitemacos-cyan.vercel.app/index.html#apps",
+  suite: "https://isuitemacos-cyan.vercel.app/index.html",
   github: "https://github.com/hikaribrandan3-code",
   linkedin: "https://www.linkedin.com/in/daiske-brandan-726656323/",
   email: "mailto:hikaristudioai@gmail.com",
@@ -194,12 +195,15 @@ function Reveal({ children, className = "", delay = 0 }) {
     </motion.div>
   );
 }
-function Label({ n, children, badge, subdued }) {
+function Label({ n, children, badge, subdued, website }) {
   return (
     <div className="section-label">
       <span>{n}</span>
       <span className="label-divider">/</span>
       <span>{children}</span>
+      {website && <External className="project-domain" href={website}>
+        {new URL(website).hostname.replace("www.", "")} <ArrowUpRight size={12} />
+      </External>}
       {badge && (
         <span className={`badge ${subdued ? "muted" : ""}`}>
           <i />
@@ -435,7 +439,6 @@ function Hero() {
 function UGC({ onOpen }) {
   const ref = useRef(null),
     reduce = useMotionPreference(),
-    [captured, setCaptured] = useState(0),
     [handoff, setHandoff] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -451,9 +454,6 @@ function UGC({ onOpen }) {
     [0, 1],
     [reduce ? 0 : -8, reduce ? 0 : 3],
   );
-  function capture() {
-    setCaptured((count) => count + 1);
-  }
   return (
     <section
       className="project-section dark ugc-section"
@@ -463,7 +463,7 @@ function UGC({ onOpen }) {
       <div className="food-backdrop" />
       <div className="wrap project-grid">
         <Reveal className="project-copy">
-          <Label n="01" badge="Live product">
+          <Label n="01" badge="Live product" website="https://www.ugccamera.com/">
             UGC CAMERA
           </Label>
           <h2>
@@ -510,77 +510,7 @@ function UGC({ onOpen }) {
               className="camera-phone"
               label="Interactive preview of the UGC restaurant camera"
             >
-              <div className="camera-view">
-                <img
-                  src={`${A}burger.jpg`}
-                  alt="Burger in a restaurant camera viewfinder"
-                  loading="lazy"
-                  width="1000"
-                  height="800"
-                />
-                <span className="location-tag">
-                  <MapPin size={12} />
-                  Pico Studio <Crown size={11} />
-                </span>
-                <span className="viewfinder corner-tl" />
-                <span className="viewfinder corner-tr" />
-                <span className="viewfinder corner-bl" />
-                <span className="viewfinder corner-br" />
-                <div className="camera-caption">
-                  GOOD FOOD.
-                  <br />
-                  <strong>YOUR POINT OF VIEW.</strong>
-                </div>
-                <AnimatePresence>
-                  {captured && (
-                    <motion.div
-                      key={captured}
-                      className="capture-flash"
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4 }}
-                    />
-                  )}
-                </AnimatePresence>
-              </div>
-              <div className="camera-controls">
-                <span>PHOTO</span>
-                <span className="selected">FOOD</span>
-                <span>SQUARE</span>
-                <div className="capture-row">
-                  <span className="thumbnail">
-                    <img
-                      src={`${A}burger.jpg`}
-                      alt="Captured food thumbnail"
-                      loading="lazy"
-                    />
-                  </span>
-                  <button
-                    className="shutter"
-                    onClick={capture}
-                    aria-label="Preview a photo capture"
-                  >
-                    <span />
-                  </button>
-                  <External
-                    href={links.ugc}
-                    className="camera-demo-icon"
-                    aria-label="Open the real UGC Camera demo"
-                  >
-                    <Camera size={21} />
-                  </External>
-                </div>
-                <div className="capture-feedback" aria-live="polite">
-                  {captured ? (
-                    <External href={links.ugc}>
-                      Nice shot. Try the real camera <ArrowUpRight size={10} />
-                    </External>
-                  ) : (
-                    "Tap the shutter for a little preview"
-                  )}
-                </div>
-              </div>
+              <UgcCameraPreview demoUrl={links.ugc} />
             </Phone>
           </motion.div>
           <div className="annotation camera-note">
@@ -626,13 +556,18 @@ function MenuTap({ onOpen }) {
     [0, 1],
     [reduce ? 0 : 50, reduce ? 0 : -30],
   );
-  const [playing, setPlaying] = useState(false);
-  const phoneRef = useRef(null);
+  const actions = [
+    [Utensils, "View Our Menu", "Food, drinks & more", "#ff8c36"],
+    [Wifi, "Connect to Wi-Fi", "Stay connected", "#159dff"],
+    [Star, "Review us on Google", "A little love goes a long way", "#f7bf19"],
+    [Gamepad2, "Play a Game", "While you wait", "#994cff"],
+    [Instagram, "Follow Us", "Keep in touch", "#ec4b82"],
+  ];
   return (
     <section className="project-section light menutap-section" ref={ref}>
       <div className="wrap project-grid">
         <Reveal className="project-copy">
-          <Label n="02" badge="Live product">
+          <Label n="02" badge="Live product" website="https://www.foodspotmobile.com/">
             MENUTAP
           </Label>
           <h2>
@@ -681,40 +616,39 @@ function MenuTap({ onOpen }) {
             <span />
             <ArrowRight />
           </div>
-          <motion.div
-            ref={phoneRef}
-            className="tap-phone-motion"
-            style={{ y: phoneY }}
-          >
+          <motion.div className="tap-phone-motion" style={{ y: phoneY }}>
             <Phone
               className="menu-phone"
               label="MenuTap restaurant experience preview"
             >
-              <MenuTapDemo
-                playing={playing}
-                onPlay={() => setPlaying(true)}
-                onBack={() => {
-                  setPlaying(false);
-                  requestAnimationFrame(() =>
-                    phoneRef.current?.querySelector(".game-entry")?.focus(),
-                  );
-                }}
-                menuUrl={links.menutap}
-              />
+              <div className="restaurant-brand">
+                <MapPin size={21} />
+                <strong>
+                  FOOD<span>SPOT</span>
+                </strong>
+                <small>RESTAURANTE & BAR</small>
+              </div>
+              <div className="menu-welcome">Make yourself at home.</div>
+              <div className="menu-actions">
+                {actions.map(([Icon, title, sub, color]) => (
+                  <div key={title} className="menu-action">
+                    <span
+                      className="menu-action-icon"
+                      style={{ color, background: `${color}14` }}
+                    >
+                      <Icon size={22} />
+                    </span>
+                    <span>
+                      <strong>{title}</strong>
+                      <small>{sub}</small>
+                    </span>
+                    <ChevronRight size={14} />
+                  </div>
+                ))}
+              </div>
+              <span className="powered-by">a little tap. a better table.</span>
             </Phone>
           </motion.div>
-          <Joystick active={playing} onPlay={() => setPlaying(true)} />
-          <div className="arcade-doodle annotation">
-            yes, it actually works.
-            <svg viewBox="0 0 150 185" fill="none" aria-hidden="true">
-              <path
-                d="M10 6C7 98 119 46 135 167m-14-10 14 10 1-18"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
           <div className="annotation tap-note">
             one physical tap.
             <br />a whole digital world.
@@ -895,6 +829,8 @@ function MacApps({ onOpen }) {
               Small but useful macOS apps
               <br />
               that solve real problems.
+              <span className="mac-open-source"><Github size={14} /> Open source. Built for Apple Silicon.</span>
+              <small className="mac-compatibility">M2 or newer is a great fit. Check each app’s requirements. Independent builds aren’t Apple-notarized, so macOS may show a first-launch warning.</small>
             </p>
             <CTA href={links.suite}>
               Explore the apps <ArrowUpRight size={16} />
@@ -950,7 +886,7 @@ function MacApps({ onOpen }) {
                           <span>{app.name}</span>
                           <span />
                         </div>
-                        <MacDemo active={active} />
+                        <MacDemo active={active} image={app.image ? `${A}${app.image}` : null} name={app.name} />
                       </motion.div>
                     </AnimatePresence>
                     <div className="mac-dock">
@@ -1160,7 +1096,7 @@ function Process({ onOpen }) {
     </section>
   );
 }
-function AutoBarber({ onOpen }) {
+function AutoBarber() {
   const [review, setReview] = useState(0);
   const reviews = barberReviews;
   return (
@@ -1194,9 +1130,10 @@ function AutoBarber({ onOpen }) {
               Real customers. Real problems. Real solutions.
             </span>
           </div>
-          <CTA onClick={() => onOpen("autobarber")}>
-            Read the full story <ArrowUpRight size={16} />
+          <CTA href={googleReviewsUrl}>
+            See all Google reviews <ArrowUpRight size={16} />
           </CTA>
+          <span className="business-story-note">The full story is coming. I’m writing it next.</span>
         </Reveal>
         <div className="business-visual">
           <img
@@ -1211,11 +1148,11 @@ function AutoBarber({ onOpen }) {
           </span>
         </div>
         <Reveal className="business-proof">
-          <div className="google-mark">G</div>
+          <div className="google-mark"><GoogleMark size={27} /></div>
           <span className="review-stars">★★★★★</span>
           <div className="review-card" aria-live="polite">
             <span className="review-aggregate">4.9 / 165 GOOGLE REVIEWS</span>
-            <blockquote>“{reviews[review].quote}”</blockquote>
+            <blockquote>“{reviews[review].quote}{reviews[review].excerpt ? "…" : ""}”</blockquote>
             <External href={reviews[review].href} className="review-author">
               {reviews[review].name} <ArrowUpRight size={12} />
             </External>
@@ -1231,8 +1168,8 @@ function AutoBarber({ onOpen }) {
               />
             ))}
           </div>
-          <External href="https://share.google/3Cf9TEYFuTnP7Z5TO">
-            Read the real Google reviews <ArrowUpRight size={15} />
+          <External href={googleReviewsUrl}>
+            Read all 165 Google reviews <ArrowUpRight size={15} />
           </External>
         </Reveal>
         <ReviewWall />
@@ -1462,10 +1399,10 @@ function Contact() {
           <footer className="wrap">
             <MotionToggle />
             <a href="#home" className="brand footer-brand">
-              Hikari
+              Hikari Brandan
               <Crown />
             </a>
-            <span>SEATTLE ROOTS. ARGENTINA BASE. WORLDWIDE MINDSET.</span>
+            <FooterQuote />
             <span>© {new Date().getFullYear()} HIKARI BRANDAN</span>
             <a href="#home">
               Back to top <ArrowUpRight size={14} />
@@ -1504,8 +1441,8 @@ function App() {
       />
       <header className="site-header">
         <div className="wrap nav-inner">
-          <a className="brand" href="#home" aria-label="Hikari, back to home">
-            Hikari
+          <a className="brand" href="#home" aria-label="Hikari Brandan, back to home">
+            Hikari Brandan
             <Crown />
           </a>
           <nav aria-label="Main navigation">

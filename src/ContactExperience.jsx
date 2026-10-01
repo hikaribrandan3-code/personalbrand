@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -9,6 +9,7 @@ import {
   Github,
   Globe2,
   Linkedin,
+  LoaderCircle,
   Mail,
   MapPin,
   MessageSquare,
@@ -19,6 +20,7 @@ import {
   UserRound,
   UsersRound,
 } from "lucide-react";
+import { FooterQuote } from "./FooterQuote";
 import { useMotionPreference } from "./motion-preferences";
 
 const email = "hikaristudioai@gmail.com";
@@ -273,7 +275,12 @@ function PostcardForm() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
-  const [draft, setDraft] = useState(false);
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  const [website, setWebsite] = useState("");
+  const requestId = useRef(null);
+  const sending = useRef(false);
+  const pending = status === "sending";
   const topics = [
     [BriefcaseBusiness, "A role"],
     [Box, "A product"],
@@ -283,12 +290,30 @@ function PostcardForm() {
   const body = `Hi Hikari,\n\n${message}\n\n${name}\n${address}\nAbout: ${topic}`;
   const mailto = `mailto:${email}?subject=${encodeURIComponent(`${topic} — ${name || "Let’s talk"}`)}&body=${encodeURIComponent(body)}`;
   const whatsappDraft = `${whatsapp}?text=${encodeURIComponent(body)}`;
-  function submit(e) {
+  function edited() { setStatus("idle"); setError(""); requestId.current = null; }
+  async function submit(e) {
     e.preventDefault();
-    setDraft(true);
+    if (sending.current) return;
+    sending.current = true;
+    setStatus("sending"); setError("");
+    requestId.current ||= crypto.randomUUID();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email: address, message, topic, website, requestId: requestId.current }),
+        signal: AbortSignal.timeout(15000),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.sent) throw new Error(result.error || "Your message couldn’t be sent. Please retry, or use email or WhatsApp.");
+      setStatus("sent");
+    } catch (failure) {
+      setStatus("error");
+      setError(failure.name === "TimeoutError" ? "Sending took too long. Your message is still here—please retry." : failure.message);
+    } finally { sending.current = false; }
   }
   return (
-    <form className="postcard-form" onSubmit={submit}>
+    <form className={`postcard-form send-${status}`} onSubmit={submit} aria-busy={pending}>
+      <label className="contact-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
       <div className="postcard-header">
         <span className="tiny-label">SEND A MESSAGE</span>
         <h3>
@@ -311,12 +336,13 @@ function PostcardForm() {
               name="name"
               autoComplete="name"
               required
+              disabled={pending}
               maxLength={80}
               placeholder="Alex Johnson"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
-                setDraft(false);
+                edited();
               }}
             />
           </span>
@@ -330,12 +356,13 @@ function PostcardForm() {
               type="email"
               autoComplete="email"
               required
+              disabled={pending}
               maxLength={254}
               placeholder="alex@company.com"
               value={address}
               onChange={(e) => {
                 setAddress(e.target.value);
-                setDraft(false);
+                edited();
               }}
             />
           </span>
@@ -347,13 +374,14 @@ function PostcardForm() {
           {topics.map(([Icon, label]) => (
             <label key={label} className={topic === label ? "is-selected" : ""}>
               <input
+                disabled={pending}
                 type="radio"
                 name="topic"
                 value={label}
                 checked={topic === label}
                 onChange={() => {
                   setTopic(label);
-                  setDraft(false);
+                  edited();
                 }}
               />
               <Icon size={17} />
@@ -370,20 +398,22 @@ function PostcardForm() {
             name="message"
             rows={4}
             required
+            disabled={pending}
             minLength={10}
             maxLength={500}
             placeholder="Tell me about the project, role, or idea…"
             value={message}
             onChange={(e) => {
               setMessage(e.target.value);
-              setDraft(false);
+              edited();
             }}
           />
           <small aria-hidden="true">{message.length} / 500</small>
         </span>
       </label>
-      <button className="postcard-send" type="submit">
-        <Send size={19} /> Prepare email draft <ArrowRight size={18} />
+      <button className="postcard-send" type="submit" disabled={pending || status === "sent"}>
+        {pending ? <LoaderCircle className="sending-spinner" size={19} /> : status === "sent" ? <Check size={19} /> : <Send size={19} />}
+        {pending ? "Sending…" : status === "sent" ? "Message sent" : "Send to Hikari"} <ArrowRight size={18} />
       </button>
       <div className="postcard-delivery">
         <span>
@@ -393,27 +423,12 @@ function PostcardForm() {
           <WhatsAppIcon size={17} /> WhatsApp <ArrowUpRight size={12} />
         </a>
       </div>
-      <p className="delivery-note">
-        Prepare a draft, then send it from your email app.
-      </p>
-      {draft && (
-        <div className="draft-ready" role="status">
-          <Check size={16} />
-          <div>
-            <strong>Your draft is ready.</strong>
-            <p>
-              Open it in your email app, or{" "}
-              <a href={whatsappDraft} target="_blank" rel="noopener noreferrer">
-                continue on WhatsApp
-              </a>
-              .
-            </p>
-            <a href={mailto}>
-              Open email draft <ArrowUpRight size={11} />
-            </a>
-          </div>
-        </div>
-      )}
+      {status === "sent" && <div className="message-sent" role="status">
+        <span className="sent-aircraft" aria-hidden="true"><Send size={27} /></span>
+        <Check size={17} /><div><strong>On its way to Hikari.</strong><p>Thanks for reaching out. I’ll get back to you soon.</p><button type="button" onClick={() => { setMessage(""); edited(); }}>Send another message</button></div>
+      </div>}
+      {status === "error" && <p className="contact-error" role="alert">{error} <a href={mailto}>Email Hikari</a></p>}
+
     </form>
   );
 }
@@ -486,8 +501,9 @@ export default function ContactExperience({ motionToggle }) {
         <footer className="closing-footer">
           <div className="closing-signature">
             <a href="#home">Hikari Brandan</a>
-            <small>SEATTLE ROOTS. ARGENTINA BASE. WORLDWIDE MINDSET.</small>
+            <small>SEATTLE ROOTS. ARGENTINA BASE.</small>
           </div>
+          <FooterQuote />
           <div className="closing-actions">
             {socials.map(([Icon, label, href]) => (
               <a
