@@ -1,11 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import contact from "../api/contact.js";
+import { origin } from "../scripts/seo-data.mjs";
 
 const valid = { name: "Portfolio visitor", email: "visitor@example.com", topic: "A role", message: "I would like to discuss a role.", requestId: "7f679068-3ea9-47b2-8757-b1e017b74425", website: "" };
 let ip = 0;
 async function send(body = valid, overrides = {}) {
-  const req = { method: "POST", body, headers: { origin: "https://personalbrand-murex.vercel.app", "content-type": "application/json", "x-forwarded-for": `test-${++ip}` }, ...overrides };
+  const req = { method: "POST", body, headers: { origin, "content-type": "application/json", "x-forwarded-for": `test-${++ip}` }, ...overrides };
   const res = { headers: {}, setHeader(k,v) { this.headers[k] = v; }, status(n) { this.code = n; return this; }, json(value) { this.body = value; return this; } };
   await contact(req,res); return res;
 }
@@ -39,7 +40,7 @@ test("contact validates input, sends to the configured inbox, and never reports 
   globalThis.fetch = async () => { throw new Error("timeout"); };
   assert.equal((await send()).code,502);
   globalThis.fetch = async () => ({ok:true,json:async()=>({id:"accepted"})});
-  const headers = {origin:"https://personalbrand-murex.vercel.app", "content-type":"application/json", "x-forwarded-for":"repeat-test"};
+  const headers = {origin, "content-type":"application/json", "x-forwarded-for":"repeat-test"};
   for(let i=0;i<5;i++) assert.equal((await send(valid,{headers})).code,200);
   assert.equal((await send(valid,{headers})).code,429);
 });

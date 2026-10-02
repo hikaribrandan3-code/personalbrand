@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { origin as productionOrigin } from "../scripts/seo-data.mjs";
 
 const topics = new Set(["A role", "A product", "Collaboration", "Something else"]);
 const attempts = new Map();
@@ -12,7 +13,7 @@ export default async function contact(req, res) {
     return res.status(405).json({ error: "Use the contact form to send a message." });
   }
   const origin = req.headers.origin;
-  const allowed = new Set(["https://personalbrand-murex.vercel.app", process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`, process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]);
+  const allowed = new Set([productionOrigin, process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`, process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]);
   if (origin && !allowed.has(origin)) return res.status(403).json({ error: "Please send your message from the portfolio." });
   if (!req.headers["content-type"]?.startsWith("application/json")) return res.status(415).json({ error: "Invalid message format." });
   let body;

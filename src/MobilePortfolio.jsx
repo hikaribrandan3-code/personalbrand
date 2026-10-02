@@ -6,6 +6,7 @@ import GoogleMark from "./GoogleMark";
 import { macApps, projectData } from "./projectData";
 import { barberReviews, googleReviewsUrl } from "./reviewData";
 import { useMotionPreference } from "./motion-preferences";
+import BuildNotesLink from "./BuildNotesLink";
 import "./mobile-portfolio.css";
 
 const A = "/assets/";
@@ -35,8 +36,8 @@ function ArrowNote({ children, className = "" }) {
 function Device({ src, alt, children, className = "" }) {
   return <div className={`mp-device ${className}`}>{src && <img src={`${A}${src}`} alt={alt} loading="lazy" width="390" height="844" />}{children}</div>;
 }
-function ProjectActions({ href, demo, project, projectHref, onOpen }) {
-  return <div className="mp-actions"><Out href={href} className="mp-button mp-yellow">{demo}<ArrowRight size={17} /></Out>{projectHref ? <Out href={projectHref} className="mp-button mp-outline">View Project</Out> : <button className="mp-button mp-outline" onClick={() => onOpen(project)}>View Project</button>}</div>;
+function ProjectActions({ href, demo, project, projectHref, onOpen, projectLabel = "View Project" }) {
+  return <div className="mp-actions"><Out href={href} className="mp-button mp-yellow">{demo}<ArrowRight size={17} /></Out>{projectHref ? <Out href={projectHref} className="mp-button mp-outline">{projectLabel}</Out> : <BuildNotesLink project={project} className="mp-button mp-outline" onOpen={() => onOpen(project)}>{projectLabel}</BuildNotesLink>}</div>;
 }
 
 function MobileUGC() {
@@ -72,7 +73,7 @@ function MobileMenuTap({ onOpen }) {
       <Device src="mobile/menutap-menu-real.jpg" alt="Actual MenuTap mobile restaurant menu, captured from its live demo" />
       <img className="mp-menu-sticker" src={`${A}mobile/menutap-sticker.webp`} alt="The physical MenuTap NFC tabletop product" width="400" height="400" loading="lazy" decoding="async" />
     </div>
-    <ProjectActions href={menuTapHub} demo="See the Demo" project="menutap" onOpen={onOpen} />
+    <ProjectActions href={menuTapHub} demo="See the Demo" project="menutap" onOpen={onOpen} projectLabel="Build Notes" />
     <Pills items={[[Code2,"Next.js"],[Radio,"NFC (NTAG213)"],[Database,"Database"]]} />
   </section>;
 }
@@ -140,7 +141,7 @@ function MobileFoodSpot({ onOpen }) {
       </figure>
     </div>
     <div className="mp-screen-picker" aria-label="FoodSpot Mobile screens">{foodspotScreens.map((item, i) => <button key={item.label} aria-pressed={screen === i} onClick={() => setScreen(i)}>{item.label}</button>)}</div>
-    <ProjectActions href={screen === 0 ? foodspotReceipt : foodspotDemo} demo={screen === 0 ? "Try the Receipt" : "View Demo"} project="foodspot" onOpen={onOpen} />
+    <ProjectActions href={screen === 0 ? foodspotReceipt : foodspotDemo} demo={screen === 0 ? "Try the Receipt" : "View Demo"} project="foodspot" onOpen={onOpen} projectLabel="Build Notes" />
     <Pills items={[[Code2,"React"],[Database,"Supabase"],[Camera,"UGC receipt"]]} />
   </section>;
 }
@@ -161,7 +162,7 @@ function MobileMac({ onOpen }) {
     <p className="mp-mac-caption">{app.name.replace("Screen Bridge", "ScreenBridge")} · {app.image ? "Actual application window" : "Local AI • source available"}</p>
     <Out href={suite} className="mp-button mp-yellow mp-full">Explore All Mac Apps<ArrowRight size={17} /></Out>
     <Pills items={[[Apple,"Swift"],[Sparkles,"SwiftUI"],[Cpu,"macOS APIs"]]} />
-    <button className="mp-text-action" onClick={() => onOpen("mac")}>Open source. Built for Apple Silicon.<ArrowUpRight size={14} /></button>
+    <BuildNotesLink project="mac" className="mp-text-action" onOpen={() => onOpen("mac")}>Open source. Built for Apple Silicon.<ArrowUpRight size={14} /></BuildNotesLink>
   </section>;
 }
 
@@ -183,7 +184,7 @@ function MobileProcess({ onOpen }) {
     <p>I use AI to move faster, explore more ideas, and get to working products. The interesting part is what happens after the prompt.</p>
     <ol className="mp-steps">{steps.map(([Icon,title,description,color]) => <li key={title}><span className="mp-step-icon" style={{background:color}}><Icon size={23} aria-hidden="true" /></span><b>{title}</b><span>{description}</span></li>)}</ol>
     <div className="mp-hand-end">THE PROMPT ISN’T THE PRODUCT.</div>
-    <button className="mp-text-action" onClick={() => onOpen("engineering")}>My engineering notes<ArrowUpRight size={14} /></button>
+    <BuildNotesLink project="engineering" className="mp-text-action" onOpen={() => onOpen("engineering")}>My engineering notes<ArrowUpRight size={14} /></BuildNotesLink>
   </section>;
 }
 
@@ -230,6 +231,16 @@ export default function MobilePortfolio({ onOpen }) {
   const [active, setActive] = useState("home");
   const [compact, setCompact] = useState(false);
   const reduce = useMotionPreference();
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("mp-background-ready");
+        observer.unobserve(entry.target);
+      }
+    }), { rootMargin: "600px" });
+    root.current.querySelectorAll(".mp-product-art").forEach(node => observer.observe(node));
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     let frame;
     const update = () => {

@@ -15,7 +15,7 @@
 
 ## Live deployment verification
 
-- Retained production site: [personalbrand-murex.vercel.app](https://personalbrand-murex.vercel.app), Vercel project `personalbrand` in the `hikaristudioai-8443` account.
+- Production site: [hikari-brandan.vercel.app](https://hikari-brandan.vercel.app), Vercel project `personalbrand` in the `hikaristudioai-8443` account.
 - Live browser inspection reported no warning or error log entries during the checked flows.
 - All five Mac project-dialog tabs showed the corresponding headline and correct public source repository.
 - Escape closed the live dialog and restored focus to its opener.
@@ -25,7 +25,7 @@ The development server briefly logged a hot-reload error while CSS was being rew
 
 ## Sharing metadata and scope
 
-Canonical, Open Graph image/URL and Twitter card metadata are configured around the retained production URL `https://personalbrand-murex.vercel.app`.
+Canonical, Open Graph image/URL and Twitter card metadata are configured around the production URL `https://hikari-brandan.vercel.app`.
 
 ## Final desktop polish pass
 

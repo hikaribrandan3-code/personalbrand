@@ -38,6 +38,6 @@ The default Resend sender can send only to the account owner's inbox. This lets 
 
 Redeploy after configuring variables, submit one clearly labeled portfolio delivery test to the owner inbox and verify a Delivered event in Resend. Until variables exist the API responds 503 honestly and offers email/WhatsApp. **Real production sending is not verified.** Do not report it working yet.
 
-Canonical site: https://personalbrand-murex.vercel.app/
+Canonical site: https://hikari-brandan.vercel.app/
 Repository: https://github.com/hikaribrandan3-code/personalbrand.git
 See docs/contact-setup.md and docs/asset-sources.md for setup/provenance.

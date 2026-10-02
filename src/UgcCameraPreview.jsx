@@ -18,7 +18,7 @@ const mobileMoments = [
 export default function UgcCameraPreview({ demoUrl }) {
   const reduce = useMotionPreference();
   const ref = useRef(null);
-  const [isDesktop, setIsDesktop] = useState(() => window.matchMedia("(min-width: 1001px)").matches);
+  const [isDesktop, setIsDesktop] = useState(() => typeof window === "undefined" || window.matchMedia("(min-width: 1001px)").matches);
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const [paused, setPaused] = useState(false);

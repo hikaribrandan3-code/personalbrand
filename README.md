@@ -1,6 +1,6 @@
 # Hikari Brandan — product developer portfolio
 
-Live at [personalbrand-murex.vercel.app](https://personalbrand-murex.vercel.app). A desktop portfolio built with React, Vite and Motion. It follows the supplied black, white and yellow art direction, with a real portrait, project stories, handwritten details, interactive device previews and an animated Mac app collection.
+Live at [hikari-brandan.vercel.app](https://hikari-brandan.vercel.app). A desktop portfolio built with React, Vite and Motion. It follows the supplied black, white and yellow art direction, with a real portrait, project stories, handwritten details, interactive device previews and an animated Mac app collection.
 
 The homepage introduces UGC Camera, MenuTap, FoodSpot, five Mac apps, the development workflow and The Auto Barber. Project dialogs provide deeper notes without leaving the story. Public source and downloads are linked only where established; provenance and limitations are documented in [docs/asset-sources.md](docs/asset-sources.md).
 

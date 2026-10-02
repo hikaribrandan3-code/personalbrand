@@ -62,6 +62,8 @@ import DesktopNavigation from "./DesktopNavigation";
 import UgcCameraPreview from "./UgcCameraPreview";
 import { FooterQuote } from "./FooterQuote";
 import { DeferredBackground, DesktopReceiptVideo } from "./DeferredMedia";
+import BuildNotesLink from "./BuildNotesLink";
+import { openNotes, projectPaths } from "./projectPaths";
 import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
@@ -150,7 +152,7 @@ function External({ href, children, className = "", ...props }) {
     </a>
   );
 }
-function CTA({ href, onClick, children, secondary = false, className = "" }) {
+function CTA({ href, onClick, notesProject, children, secondary = false, className = "" }) {
   const reduce = useMotionPreference();
   const x = useSpring(0, spring),
     y = useSpring(0, spring);
@@ -169,11 +171,13 @@ function CTA({ href, onClick, children, secondary = false, className = "" }) {
     },
     style: { x, y },
   };
-  return href ? (
+  const destination = notesProject ? projectPaths[notesProject] : href;
+  return destination ? (
     <motion.a
-      href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      href={destination}
+      target={destination.startsWith("http") ? "_blank" : undefined}
+      rel={destination.startsWith("http") ? "noopener noreferrer" : undefined}
+      onClick={notesProject ? (event) => openNotes(event, onClick) : undefined}
       {...props}
     >
       {children}
@@ -238,7 +242,7 @@ function Doodle({ className = "" }) {
     </svg>
   );
 }
-function TechCard({ items, onOpen, label = "Behind the build" }) {
+function TechCard({ items, onOpen, project, label = "Behind the build" }) {
   return (
     <Reveal className="tech-card" delay={0.1}>
       <div className="tech-title">
@@ -253,9 +257,9 @@ function TechCard({ items, onOpen, label = "Behind the build" }) {
           </div>
         ))}
       </div>
-      <button className="notes-link" onClick={onOpen}>
+      <BuildNotesLink className="notes-link" project={project} onOpen={onOpen}>
         Engineering notes <ArrowUpRight size={15} />
-      </button>
+      </BuildNotesLink>
     </Reveal>
   );
 }
@@ -507,7 +511,7 @@ function UGC({ onOpen }) {
             <CTA href={links.ugc}>
               Try the demo <ArrowUpRight size={16} />
             </CTA>
-            <CTA onClick={() => onOpen("ugc")} secondary>
+            <CTA notesProject="ugc" onClick={() => onOpen("ugc")} secondary>
               View project
             </CTA>
           </div>
@@ -555,7 +559,7 @@ function UGC({ onOpen }) {
             [Globe2, "Vercel"],
             [Code2, "Backend services"],
           ]}
-          onOpen={() => onOpen("ugc")}
+          project="ugc" onOpen={() => onOpen("ugc")}
         />
       </div>
       {handoff && (
@@ -612,7 +616,7 @@ function MenuTap({ onOpen }) {
             <CTA href={links.menutap}>
               See the demo <ArrowUpRight size={16} />
             </CTA>
-            <CTA onClick={() => onOpen("menutap")} secondary>
+            <CTA notesProject="menutap" onClick={() => onOpen("menutap")} secondary>
               View project
             </CTA>
           </div>
@@ -689,7 +693,7 @@ function MenuTap({ onOpen }) {
             [Star, "Review entry"],
             [Gamepad2, "Games + socials"],
           ]}
-          onOpen={() => onOpen("menutap")}
+          project="menutap" onOpen={() => onOpen("menutap")}
         />
       </div>
     </section>
@@ -714,7 +718,7 @@ function FoodSpot({ onOpen }) {
             <p>B2B restaurant software for running the business and engaging its customers — from dashboard and menu management to inventory.</p>
             <div className="project-actions">
               <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders">Explore the demo <ArrowUpRight size={16} /></CTA>
-              <CTA secondary onClick={() => onOpen("foodspot")}>The story <ArrowUpRight size={16} /></CTA>
+              <CTA secondary notesProject="foodspot" onClick={() => onOpen("foodspot")}>The story <ArrowUpRight size={16} /></CTA>
             </div>
             <div className="evolution"><span>Real mobile UI · populated demo</span></div>
           </Reveal>
@@ -929,9 +933,9 @@ function MacApps({ onOpen }) {
             <small>{app.note}</small>
           </p>
           <div className="app-links">
-            <button onClick={() => onOpen("mac")}>
+            <BuildNotesLink project="mac" onOpen={() => onOpen("mac")}>
               Engineering notes <ArrowUpRight size={14} />
-            </button>
+            </BuildNotesLink>
             <External
               href={`https://github.com/hikaribrandan3-code/${app.repo}`}
             >
@@ -1101,7 +1105,7 @@ function Process({ onOpen }) {
               />
             </svg>
           </span>
-          <CTA onClick={() => onOpen("engineering")}>
+          <CTA notesProject="engineering" onClick={() => onOpen("engineering")}>
             My engineering notes <ArrowUpRight size={16} />
           </CTA>
         </div>
@@ -1436,7 +1440,7 @@ function Contact() {
   );
 }
 function App() {
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 767px)").matches);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches);
   const [project, setProject] = useState(null),
     [active, setActive] = useState("home");
   const { scrollYProgress } = useScroll();
