@@ -325,27 +325,27 @@ export const projectData = {
   },
   foodspot: {
     label: "03 / FOODSPOT MOBILE",
-    status: "Earlier exploration",
-    title: "The project that led to the next two.",
+    status: "Past B2B SaaS · Live demo",
+    title: "A restaurant transaction can start a story.",
     intro:
-      "My longest, broadest MVP explored a Shopify-like digital commerce experience for local food businesses, beyond a static menu.",
+      "B2B restaurant software connecting operations, customer engagement and organic content. The core idea was a UGC receipt that continues the experience after purchase.",
     sections: [
       {
         title: "Problem",
         paragraphs: [
-          "I wanted local food businesses to have a fuller commerce experience, connecting the menu, ordering and what happens after a purchase.",
+          "Restaurant software manages menus, inventory and transactions, but the customer relationship often stops when the order is complete. I wanted the restaurant experience to continue after purchase.",
         ],
       },
       {
         title: "What I built",
         paragraphs: [
-          "Interactive menus, ordering and menu management; food tags and calories; local events; Mercado Pago and cash flows; POS concepts; inventory and expense functionality; and post-purchase experiences.",
+          "Restaurant dashboards, menu management and inventory, alongside rewards, events and customer-facing ordering. The portfolio shows the real mobile UI using the populated Smash Burger demo.",
         ],
       },
       {
-        title: "Key decision",
+        title: "The UGC receipt",
         paragraphs: [
-          "Restaurant software is crowded, and replacing an operational stack creates adoption friction. I isolated the most differentiated behaviors instead of making the MVP larger.",
+          "When an order is delivered, its receipt becomes a photo invitation. An animated character prompts the customer to open the branded camera and turn a completed transaction into an opportunity for organic content.",
         ],
       },
       {
@@ -366,7 +366,10 @@ export const projectData = {
       "Restaurant commerce",
       "Mercado Pago / cash flows",
     ],
-    links: [],
+    links: [
+      { label: "Explore the product demo", href: "https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders" },
+      { label: "Try the UGC receipt", href: "https://foodspotapp-gold.vercel.app/smash-burger-demo/status" },
+    ],
   },
   mac: {
     label: "04 / MAC APPS",

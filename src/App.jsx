@@ -58,9 +58,9 @@ import ContactExperience, {
   WhatsAppIcon,
 } from "./ContactExperience";
 import MacDemo from "./MacDemos";
+import DesktopNavigation from "./DesktopNavigation";
 import UgcCameraPreview from "./UgcCameraPreview";
 import { FooterQuote } from "./FooterQuote";
-import ProductDNA from "./ProductDNA";
 import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
@@ -694,120 +694,87 @@ function MenuTap({ onOpen }) {
 }
 function FoodSpot({ onOpen }) {
   const reduce = useMotionPreference();
+  const [activeScreen, setActiveScreen] = useState(0);
+  const receiptVideo = useRef(null);
+  const sectionRef = useRef(null);
+  const screens = [
+    { name: "Dashboard", file: "dashboard-mobile.jpg", alt: "Real FoodSpot mobile restaurant dashboard" },
+    { name: "Menu", file: "menu-mobile.jpg", alt: "Real FoodSpot mobile menu management" },
+    { name: "Inventory", file: "inventory-mobile.jpg", alt: "Real FoodSpot mobile inventory and stock counts" },
+  ];
+  useEffect(() => {
+    if (window.location.hash === "#foodspot")
+      sectionRef.current?.scrollIntoView({ behavior: "instant", block: "start" });
+    if (window.location.hash === "#foodspot-receipt")
+      document.getElementById("foodspot-receipt")?.scrollIntoView({ behavior: "instant", block: "start" });
+  }, []);
+  useEffect(() => {
+    if (reduce) receiptVideo.current?.pause();
+  }, [reduce]);
   return (
-    <section className="project-section dark foodspot-section">
-      <div className="pizza-backdrop" />
-      <div className="wrap project-grid">
-        <Reveal className="project-copy">
-          <Label n="03" badge="Past B2B SaaS" subdued>
-            FOODSPOT MOBILE
-          </Label>
-          <h2>
-            BEFORE EITHER OF THOSE,
-            <br />I TRIED REBUILDING
-            <br />
-            HOW LOCAL FOOD
-            <br />
-            COMMERCE COULD WORK.
-          </h2>
-          <p>
-            My broadest MVP became a source of product knowledge for the next
-            two.
-          </p>
-          <div className="project-actions">
-            <CTA onClick={() => onOpen("foodspot")}>
-              The project story <ArrowUpRight size={16} />
-            </CTA>
+    <>
+      <section id="foodspot" ref={sectionRef} className="project-section dark foodspot-section">
+        <div className="pizza-backdrop" />
+        <div className="wrap project-grid">
+          <Reveal className="project-copy">
+            <Label n="03" badge="Past B2B SaaS · Live demo" subdued>FOODSPOT MOBILE</Label>
+            <h2>RESTAURANT<br />SOFTWARE.<br />WITH A LIFE<br /><span className="yellow">AFTER THE SALE.</span></h2>
+            <p>B2B restaurant software for running the business and engaging its customers — from dashboard and menu management to inventory.</p>
+            <div className="project-actions">
+              <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders">Explore the demo <ArrowUpRight size={16} /></CTA>
+              <CTA secondary onClick={() => onOpen("foodspot")}>The story <ArrowUpRight size={16} /></CTA>
+            </div>
+            <div className="evolution"><span>Real mobile UI · populated demo</span></div>
+          </Reveal>
+          <div className="device-stage foodspot-stage foodspot-capture-stage">
+            <motion.div initial={reduce ? false : { rotate: -12, y: 35 }} whileInView={{ rotate: -6, y: 0 }} viewport={{ once: true }} transition={{ type: "spring", bounce: 0.15, duration: 0.8 }}>
+              <Phone className="foodspot-phone foodspot-real-phone" label={`Real FoodSpot Mobile ${screens[activeScreen].name} interface`}>
+                <img key={screens[activeScreen].file} className="foodspot-real-screen" src={`${A}foodspot/${screens[activeScreen].file}`} alt={screens[activeScreen].alt} width="390" height="832" loading="lazy" />
+              </Phone>
+            </motion.div>
+            <div className="foodspot-screen-tabs" role="group" aria-label="Explore FoodSpot mobile operations">
+              {screens.map((item, index) => <button key={item.name} type="button" aria-pressed={activeScreen === index} onClick={() => setActiveScreen(index)}>{item.name}</button>)}
+            </div>
           </div>
-          <div className="evolution">
-            <span>FoodSpot</span>
-            <ArrowRight size={13} />
-            <span>UGC Camera + MenuTap</span>
-          </div>
-        </Reveal>
-        <div className="device-stage foodspot-stage">
-          <motion.div
-            initial={reduce ? false : { rotate: -12, y: 35 }}
-            whileInView={{ rotate: -6, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", bounce: 0.15, duration: 0.8 }}
-          >
-            <Phone
-              className="foodspot-phone"
-              label="Representative FoodSpot food discovery interface"
-            >
-              <div className="foodspot-header">
-                <MapPin />
-                <strong>FoodSpot</strong>
-                <small>Find your next favorite.</small>
-              </div>
-              <div className="foodspot-search">
-                <Search size={13} />
-                What are you craving?
-              </div>
-              <div className="foodspot-categories">
-                <span className="active">Burgers</span>
-                <span>Pizza</span>
-                <span>Cafés</span>
-              </div>
-              <strong className="foodspot-near">
-                A little closer. A lot tastier.
-              </strong>
-              <div className="foodspot-list">
-                <div>
-                  <img
-                    src={`${A}burger.jpg`}
-                    alt="Burger discovery card"
-                    loading="lazy"
-                  />
-                  <span>Burgers & good company</span>
-                  <small>Neighborhood favorites</small>
-                </div>
-                <div>
-                  <img
-                    src={`${A}pizza.jpg`}
-                    alt="Pizza discovery card"
-                    loading="lazy"
-                  />
-                  <span>Just one more slice</span>
-                  <small>Around the corner</small>
-                </div>
-              </div>
-              <div className="foodspot-footer">
-                <MapPin />
-                <Search />
-                <Star />
-              </div>
-            </Phone>
-          </motion.div>
-          <div className="annotation foodspot-note">
-            the first idea didn’t
-            <br />
-            have to be the last one.
-            <Doodle />
-          </div>
-          <span className="scene-counter">PRODUCT EVOLUTION, IN PUBLIC.</span>
+          <Reveal className="lesson-card foodspot-evidence-card">
+            <span className="tiny-label">PRODUCT / OPERATIONS</span>
+            <h3>Run the<br />restaurant.</h3>
+            <p>Dashboard. Menu. Inventory.<br />One mobile workspace.</p>
+            <div className="foodspot-supporting-shots">
+              {[1, 2].map(index => <button key={screens[index].name} type="button" onClick={() => setActiveScreen(index)} aria-label={`View real mobile ${screens[index].name} screen`}>
+                <img src={`${A}foodspot/${screens[index].file}`} alt={screens[index].alt} width="390" height="832" loading="lazy" /><span>{index === 1 ? "Menu management" : "Inventory tracking"}</span>
+              </button>)}
+            </div>
+          </Reveal>
         </div>
-        <Reveal className="lesson-card">
-          <span className="tiny-label">THE TAKEAWAY</span>
-          <h3>
-            Build.
-            <br />
-            Listen.
-            <br />
-            Rethink.
-          </h3>
-          <p>
-            A larger product isn’t always a better one. Its most useful ideas
-            became two more focused restaurant products.
-          </p>
-          <ProductDNA onOpen={onOpen} />
-          <button className="notes-link" onClick={() => onOpen("foodspot")}>
-            What I learned <ArrowUpRight size={15} />
-          </button>
-        </Reveal>
-      </div>
-    </section>
+      </section>
+      <section id="foodspot-receipt" className="project-section dark foodspot-section foodspot-differentiator" aria-label="FoodSpot Mobile UGC receipt">
+        <div className="wrap project-grid">
+          <Reveal className="project-copy">
+            <span className="tiny-label">FOODSPOT MOBILE / THE DIFFERENTIATOR</span>
+            <h2>THE UGC RECEIPT.<br /><span className="yellow">TURN EVERY ORDER<br />INTO ORGANIC<br />CONTENT.</span></h2>
+            <p>FoodSpot Mobile introduced a new post-purchase surface: the UGC Receipt — a digital receipt that invites customers to photograph their order and create branded, organic content immediately after delivery.</p>
+            <div className="foodspot-receipt-flow" aria-label="Order delivered, UGC receipt, take a photo, organic content">
+              {[[Utensils, "ORDER", "DELIVERED"], [FileText, "UGC", "RECEIPT"], [Camera, "TAKE", "A PHOTO"], [Activity, "ORGANIC", "CONTENT"]].map(([Icon, first, second], index) => <div className="foodspot-flow-step" key={first}>
+                {index > 0 && <ArrowRight className="foodspot-flow-arrow" size={18} aria-hidden="true" />}
+                <span className="foodspot-flow-icon"><Icon size={23} aria-hidden="true" /></span><span>{first}<br />{second}</span>
+              </div>)}
+            </div>
+            <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/status">Try the live receipt <ArrowUpRight size={16} /></CTA>
+          </Reveal>
+          <div className="device-stage foodspot-stage">
+            <Phone className="foodspot-phone foodspot-real-phone" label="Real FoodSpot Mobile UGC receipt interaction">
+              <video ref={receiptVideo} className="foodspot-real-screen" src={`${A}foodspot/ugc-receipt-mobile.mp4`} poster={`${A}foodspot/receipt-mobile.jpg`} width="390" height="832" autoPlay={!reduce} muted loop playsInline controls={reduce} preload="metadata" aria-label="Delivered receipt and animated customer photo invitation" />
+            </Phone>
+          </div>
+          <Reveal className="foodspot-engagement">
+            <span className="tiny-label">CUSTOMER ENGAGEMENT</span>
+            <img src={`${A}foodspot/events-mobile.jpg`} alt="Real FoodSpot mobile Events screen in light mode" width="390" height="832" loading="lazy" />
+            <span>Events, rewards & reasons to return.</span>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }
 function MacApps({ onOpen }) {
@@ -1521,6 +1488,7 @@ function App() {
         className="scroll-progress"
         style={{ scaleX: scrollYProgress }}
       />
+      <DesktopNavigation />
       <header className="site-header">
         <div className="wrap nav-inner">
           <a className="brand" href="#home" aria-label="Hikari Brandan, back to home">
