@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, Home, BriefcaseBusiness, UserRound, FileText, Globe2, MessageSquare, Send, Github, Linkedin, Mail, Apple, Code2, Database, Camera, Radio, Lightbulb, Search, Brain, FlaskConical, Bug, Wrench, Sparkles, GraduationCap, UsersRound, ChevronLeft, ChevronRight, MapPin, Cpu, GitBranch } from "lucide-react";
-import { GlobeJourney, LanguageFlags, WhatsAppIcon } from "./ContactExperience";
+import { ArrowRight, ArrowUpRight, Home, BriefcaseBusiness, UserRound, FileText, Globe2, MessageSquare, Send, Github, Linkedin, Mail, Apple, Code2, Database, Camera, Radio, Lightbulb, Search, Brain, FlaskConical, Bug, Wrench, Sparkles, GraduationCap, UsersRound, ChevronLeft, ChevronRight, MapPin, Cpu, GitBranch, Play, Pause } from "lucide-react";
+import { LanguageFlags, WhatsAppIcon } from "./ContactExperience";
 import { FooterQuote } from "./FooterQuote";
 import GoogleMark from "./GoogleMark";
 import { macApps, projectData } from "./projectData";
@@ -16,6 +16,9 @@ const resume = "/Daiske-Brandan-Resume.pdf";
 const email = "mailto:hikaristudioai@gmail.com";
 const suite = "https://isuitemacos-cyan.vercel.app/index.html";
 const foodspotDemo = "https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders";
+const foodspotReceipt = "https://foodspotapp-gold.vercel.app/smash-burger-demo/status";
+const menuTapHub = "https://www.foodspotmobile.com/t/foodspot-demo";
+const ugcWebsite = "https://www.ugccamera.com/";
 
 function Out({ href, children, className = "", ...props }) {
   return <a href={href} className={className} target={href.startsWith("mailto:") ? undefined : "_blank"} rel="noopener noreferrer" {...props}>{children}</a>;
@@ -32,8 +35,8 @@ function ArrowNote({ children, className = "" }) {
 function Device({ src, alt, children, className = "" }) {
   return <div className={`mp-device ${className}`}>{src && <img src={`${A}${src}`} alt={alt} loading="lazy" width="390" height="844" />}{children}</div>;
 }
-function ProjectActions({ href, demo, project, onOpen }) {
-  return <div className="mp-actions"><Out href={href} className="mp-button mp-yellow">{demo}<ArrowRight size={17} /></Out><button className="mp-button mp-outline" onClick={() => onOpen(project)}>View Project</button></div>;
+function ProjectActions({ href, demo, project, projectHref, onOpen }) {
+  return <div className="mp-actions"><Out href={href} className="mp-button mp-yellow">{demo}<ArrowRight size={17} /></Out>{projectHref ? <Out href={projectHref} className="mp-button mp-outline">View Project</Out> : <button className="mp-button mp-outline" onClick={() => onOpen(project)}>View Project</button>}</div>;
 }
 
 function CameraApplication() {
@@ -47,7 +50,7 @@ function CameraApplication() {
   return <div className="mp-live-frame" ref={frame}><iframe className="mp-live-camera" style={{transform:`translate(-50%, -50%) scale(${scale})`}} src={projectData.ugc.demoUrl} title="Real UGC Camera application" allow="camera; autoplay; fullscreen" /></div>;
 }
 
-function MobileUGC({ onOpen }) {
+function MobileUGC() {
   const [live, setLive] = useState(false);
   const camera = useRef(null);
   useEffect(() => {
@@ -63,20 +66,19 @@ function MobileUGC({ onOpen }) {
   return <section id="projects" className="mp-section mp-project mp-ugc" aria-labelledby="mp-ugc-title">
     <Label n="01" status="Live Product">UGC CAMERA</Label>
     <h2 id="mp-ugc-title">I NOTICED CUSTOMERS<br />WERE ALREADY<br />PHOTOGRAPHING<br /><em>THEIR FOOD.</em></h2>
-    <p>So I gave restaurants their own branded camera — a simple QR or NFC tap that opens a beautiful browser camera to capture and share photos.</p>
+    <p>So I gave restaurants their own branded camera — a QR scan or NFC tap opens a camera built for their business to capture and share photos.</p>
     <div ref={camera} className="mp-product-art mp-ugc-art">
       <Device className="mp-camera-device">
         {live ? <CameraApplication /> : <button className="mp-photo-preview" onClick={() => setLive(true)} aria-label="Load the real UGC Camera inside the phone">
           <img src={`${A}ugc-sugar-crumb.webp`} alt="Sugar & Crumb café photo from the UGC Camera Tap & Snap product carousel" width="768" height="768" loading="lazy" />
           <span className="mp-preview-tag"><MapPin size={15} />Sugar & Crumb</span>
-          <span className="mp-photo-caption">TAP & SNAP<br /><b>BRANDED PHOTO PREVIEW</b></span>
           <span className="mp-camera-launch"><Camera size={23} />Open the live camera<ArrowUpRight size={15} /></span>
         </button>}
       </Device>
-      <ArrowNote>AN EXPLORATION<br />IN MOBILE-FIRST<br />FOOD COMMERCE<br />AND POST-PURCHASE<br />ENGAGEMENT.</ArrowNote>
+      <ArrowNote>ORGANIC UGC<br />CONTENT<br />IN SECONDS.</ArrowNote>
     </div>
     {live && <button className="mp-text-action" onClick={() => setLive(false)}>Close live camera · return to the preview</button>}
-    <ProjectActions href={projectData.ugc.demoUrl} demo="Try the Demo" project="ugc" onOpen={onOpen} />
+    <ProjectActions href={projectData.ugc.demoUrl} demo="Try the Demo" projectHref={ugcWebsite} />
     <Pills items={[[Code2,"Next.js"],[Database,"Supabase"],[Camera,"Camera APIs"]]} />
   </section>;
 }
@@ -84,36 +86,73 @@ function MobileUGC({ onOpen }) {
 function MobileMenuTap({ onOpen }) {
   return <section id="menutap" className="mp-section mp-project" aria-labelledby="mp-menu-title">
     <Label n="02" status="Live Product">MENUTAP</Label>
-    <h2 id="mp-menu-title">THEN I WONDERED<br />WHY RESTAURANT<br />TABLES WERE<br />STILL JUST ... TABLES.</h2>
-    <p>So I built MenuTap — a simple NFC tap that brings your menu, Wi-Fi, reviews, games and more to one tap.</p>
+    <h2 id="mp-menu-title">RESTAURANTS PUT A QR<br />ON EVERY TABLE<br />JUST TO OPEN A MENU.<br /><span className="mp-insight-line">I THOUGHT THAT WAS<br />WASTED REAL ESTATE.</span></h2>
+    <p>So I turned one NFC tap into the menu, Wi-Fi, Google reviews, games, socials and more.</p>
     <div className="mp-product-art mp-menu-art">
       <ArrowNote>ONE TAP.<br />EVERYTHING<br />YOUR CUSTOMERS<br />NEED.</ArrowNote>
       <Device src="mobile/menutap-menu-real.jpg" alt="Actual MenuTap mobile restaurant menu, captured from its live demo" />
       <img className="mp-menu-sticker" src={`${A}menutap-sticker.png`} alt="The physical MenuTap NFC tabletop product" width="400" height="400" loading="lazy" />
     </div>
-    <ProjectActions href={projectData.menutap.demoUrl} demo="See the Demo" project="menutap" onOpen={onOpen} />
+    <ProjectActions href={menuTapHub} demo="See the Demo" project="menutap" onOpen={onOpen} />
     <Pills items={[[Code2,"Next.js"],[Radio,"NFC (NTAG213)"],[Database,"Database"]]} />
   </section>;
 }
 
 const foodspotScreens = [
+  { label: "UGC receipt", src: "mobile/foodspot-receipt-poster.jpg", alt: "Actual delivered-order UGC receipt in FoodSpot Mobile", video: true },
   { label: "Menu", src: "foodspot/menu-mobile.jpg", alt: "Actual FoodSpot Mobile menu management screen" },
   { label: "Dashboard", src: "foodspot/dashboard-mobile.jpg", alt: "Actual FoodSpot Mobile restaurant dashboard" },
   { label: "Inventory", src: "foodspot/inventory-mobile.jpg", alt: "Actual FoodSpot Mobile inventory screen" },
-  { label: "UGC receipt", src: "foodspot/receipt-mobile.jpg", alt: "Actual delivered-order UGC receipt in FoodSpot Mobile" },
 ];
+function ReceiptVideo() {
+  const video = useRef(null);
+  const reduce = useMotionPreference();
+  const [loaded, setLoaded] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [manualPlay, setManualPlay] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+  const wantsPlay = (!reduce || manualPlay) && !paused;
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(entry.isIntersecting);
+      if (entry.isIntersecting) setLoaded(true);
+    }, { threshold:.1 });
+    observer.observe(video.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const node = video.current;
+    const update = () => {
+      if (visible && wantsPlay && !document.hidden) node.play().catch(() => setBlocked(true));
+      else node.pause();
+    };
+    update();
+    node.addEventListener("loadeddata", update);
+    document.addEventListener("visibilitychange", update);
+    return () => { node.pause(); node.removeEventListener("loadeddata", update); document.removeEventListener("visibilitychange", update); };
+  }, [visible, wantsPlay, loaded]);
+  const play = () => {
+    setManualPlay(true); setPaused(false); setBlocked(false); setLoaded(true);
+    video.current.play().catch(() => setBlocked(true));
+  };
+  return <div className="mp-receipt-video"><video ref={video} src={loaded ? `${A}mobile/foodspot-receipt-loop.mp4` : undefined} poster={`${A}mobile/foodspot-receipt-poster.jpg`} muted loop playsInline autoPlay={wantsPlay} preload="none" aria-label="Eight-second recording of FoodSpot’s delivered receipt and customer photo invitation" onPlaying={() => setBlocked(false)} />
+    <button className="mp-video-toggle" aria-label={wantsPlay && !blocked ? "Pause receipt video" : "Play receipt video"} onClick={wantsPlay && !blocked ? () => setPaused(true) : play}>{wantsPlay && !blocked ? <Pause size={16} /> : <Play size={16} />}</button>
+  </div>;
+}
 function MobileFoodSpot({ onOpen }) {
   const [screen, setScreen] = useState(0);
   return <section id="foodspot" className="mp-section mp-project" aria-labelledby="mp-foodspot-title">
     <Label n="03" status="Side Project">FOODSPOT</Label>
-    <h2 id="mp-foodspot-title">BEFORE EITHER OF<br />THOSE, I TRIED<br />REBUILDING LOCAL<br />FOOD COMMERCE.</h2>
-    <p>It didn’t become the business, but it taught me enough to build the next two.</p>
+    <h2 id="mp-foodspot-title">BILLION-DOLLAR<br />FOOD APPS DIDN’T<br />HAVE A NATIVE CAMERA<br />FOR FOOD PHOTOGRAPHY.<br /><span className="mp-insight-line">SO I BUILT ONE.</span></h2>
+    <p>FoodSpot introduced a UGC Receipt after delivery — a camera experience for customers to photograph and share their order.</p>
+    <p className="mp-evolution">That experiment helped shape UGC Camera.</p>
     <div className="mp-product-art mp-foodspot-art">
-      <Device src={foodspotScreens[screen].src} alt={foodspotScreens[screen].alt} />
-      <ArrowNote>AN EXPLORATION<br />IN MOBILE-FIRST<br />FOOD COMMERCE<br />AND POST-PURCHASE<br />ENGAGEMENT.</ArrowNote>
+      <Device src={foodspotScreens[screen].video ? undefined : foodspotScreens[screen].src} alt={foodspotScreens[screen].alt}>{foodspotScreens[screen].video && <ReceiptVideo />}</Device>
+      <ArrowNote>DELIVERED.<br />TAKE A PHOTO.<br />SHARE THE MOMENT.</ArrowNote>
     </div>
     <div className="mp-screen-picker" aria-label="FoodSpot Mobile screens">{foodspotScreens.map((item, i) => <button key={item.label} aria-pressed={screen === i} onClick={() => setScreen(i)}>{item.label}</button>)}</div>
-    <ProjectActions href={foodspotDemo} demo="View Demo" project="foodspot" onOpen={onOpen} />
+    <ProjectActions href={screen === 0 ? foodspotReceipt : foodspotDemo} demo={screen === 0 ? "Try the Receipt" : "View Demo"} project="foodspot" onOpen={onOpen} />
     <Pills items={[[Code2,"React"],[Database,"Supabase"],[Camera,"UGC receipt"]]} />
   </section>;
 }
@@ -166,10 +205,10 @@ function MobileBarber() {
   return <section className="mp-barber" aria-labelledby="mp-barber-title">
     <img className="mp-barber-bg" src={`${A}autobarber-workshop.jpg`} alt="" width="1200" height="900" loading="lazy" />
     <div className="mp-barber-content"><Label n="06" status="Past business">THE AUTO BARBER</Label>
-      <h2 id="mp-barber-title">BEFORE I BUILT SOFTWARE,<br />I BUILT A BUSINESS.</h2>
+      <h2 id="mp-barber-title">BEFORE I BUILT<br />SOFTWARE,<br />I BUILT A BUSINESS.</h2>
       <p>Automotive restyling. Real customers, real operations, and learning what it takes to deliver work people trust.</p>
-      <img className="mp-barber-logo" src={`${A}autobarber-logo.png`} alt="The Auto Barber" width="240" height="240" loading="lazy" />
-      <div className="mp-business-facts"><span>Six-figure revenue</span><span>165+ Google reviews</span></div>
+      <figure className="mp-barber-portrait"><img src={`${A}mobile/autobarber-portrait.jpg`} alt="Hikari in the Auto Barber shop, wearing the branded apron and holding a detailing towel with a gloved hand" width="900" height="900" loading="lazy" /></figure>
+      <div className="mp-business-facts" aria-label="Auto Barber business results"><div><b>6-FIGURE</b><span>REVENUE</span></div><div><b>165+</b><span>GOOGLE REVIEWS</span></div><div><b>4.9</b><span className="mp-stars" aria-label="Five stars">★★★★★</span></div></div>
       <div className="mp-review"><div className="mp-review-head"><GoogleMark size={25} /><span><b>4.9</b><span className="mp-stars" aria-label="Five stars">★★★★★</span></span></div><blockquote>“{item.quote}{item.excerpt ? "…" : ""}”</blockquote><Out href={item.href}>{item.name}<ArrowUpRight size={13} /></Out><div className="mp-review-controls"><button aria-label="Previous customer review" onClick={() => setReview((review + barberReviews.length - 1) % barberReviews.length)}><ChevronLeft size={18} /></button><span aria-live="polite">{review + 1} / {barberReviews.length}</span><button aria-label="Next customer review" onClick={() => setReview((review + 1) % barberReviews.length)}><ChevronRight size={18} /></button></div></div>
       <Out href={googleReviewsUrl} className="mp-button mp-yellow mp-full">See all Google reviews<ArrowUpRight size={16} /></Out>
       <span className="mp-small-note">The full story is coming. I’m writing it next.</span>
@@ -188,7 +227,7 @@ function MobileStack() {
   return <section className="mp-section mp-stack"><Label n="07">THE TOOLBOX</Label><h3>Tools I work with<br /><span>to build, ship and learn.</span></h3><div className="mp-tool-groups">{toolGroups.map(([Icon,title,items]) => <div key={title}><h4><Icon size={17} aria-hidden="true" />{title}</h4><ul>{items.map(tool => <li key={tool}>{tool}</li>)}</ul></div>)}</div></section>;
 }
 function MobileOpportunities() {
-  return <section className="mp-section mp-opportunities"><Label n="08">WHAT I’M LOOKING FOR</Label><h3>I’m looking for a<br /><em>junior developer role.</em></h3><p>I’m looking for a small, ambitious team where I can work close to the product and customers, build quickly, learn from experienced engineers, and take ownership of real problems.</p><div className="mp-role-cards">{[[Code2,"Junior developer","Real products. Real problems."],[Globe2,"Fully remote","Worldwide. English & Español."],[GraduationCap,"Open to learn & grow","With experienced engineers."],[UsersRound,"What I bring","Product thinking and execution."]].map(([Icon,title,text]) => <div key={title}><Icon size={21} aria-hidden="true" /><b>{title}</b><span>{text}</span></div>)}</div></section>;
+  return <section className="mp-section mp-opportunities"><Label n="08">WHAT I’M LOOKING FOR</Label><h3>I’M LOOKING FOR A<br /><em>DEVELOPER ROLE.</em></h3><p>I’m looking for a small, ambitious team where I can work close to the product and customers, build quickly, learn from experienced engineers, and take ownership of real problems.</p><div className="mp-role-cards">{[[Code2,"Developer","Real products. Real problems."],[Globe2,"Fully remote","Worldwide. English & Español."],[GraduationCap,"Open to learn & grow","With experienced engineers."],[UsersRound,"What I bring","Product thinking and execution."]].map(([Icon,title,text]) => <div key={title}><Icon size={21} aria-hidden="true" /><b>{title}</b><span>{text}</span></div>)}</div></section>;
 }
 
 function MobileContact() {
@@ -230,10 +269,10 @@ export default function MobilePortfolio({ onOpen }) {
     return () => observer.disconnect();
   }, [reduce]);
   return <div ref={root} className={`mobile-portfolio ${reduce ? "mp-reduced" : ""}`}>
-    <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">HB</a><a href="#contact" className="mp-header-cta">Let’s talk<ArrowUpRight size={16} /></a></header>
+    <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">Hikari Brandan</a><a href="#contact" className="mp-header-cta">Let’s talk<ArrowUpRight size={16} /></a></header>
     <main className="mp-paper">
-      <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m always open to new opportunities, collaborations and interesting problems to solve. Whether it’s a product, a role, or just an idea — let’s talk.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><div className="mp-globe"><GlobeJourney /></div><div className="mp-message-card"><span>SEND A MESSAGE</span><h3>Let’s start<br />a conversation.</h3><p>Tell me a bit about what you have in mind and I’ll get back to you soon.</p><a href="#contact" className="mp-button mp-black mp-full"><Send size={20} />Send to Hikari<ArrowUpRight size={16} /></a></div></section>
-      <MobileUGC onOpen={onOpen} /><MobileMenuTap onOpen={onOpen} /><MobileFoodSpot onOpen={onOpen} /><MobileMac onOpen={onOpen} /><MobileProcess onOpen={onOpen} /><MobileBarber /><MobileStack /><MobileOpportunities /><MobileContact /><MobileFooter />
+      <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m Hikari. I turn real problems into useful products with product thinking, AI and code.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><figure className="mp-personal-portrait"><img src={`${A}mobile/hikari-roots-portrait.jpg`} alt="Hikari Brandan, raised in Seattle, Washington, and building from Córdoba, Argentina" width="1200" height="1312" /></figure></section>
+      <MobileUGC /><MobileMenuTap onOpen={onOpen} /><MobileFoodSpot onOpen={onOpen} /><MobileMac onOpen={onOpen} /><MobileProcess onOpen={onOpen} /><MobileBarber /><MobileStack /><MobileOpportunities /><MobileContact /><MobileFooter />
     </main>
     <nav className="mp-bottom-nav" aria-label="Mobile navigation">{[[Home,"home","Home"],[BriefcaseBusiness,"projects","Projects"],[UserRound,"about","About"]].map(([Icon,id,label]) => <a href={`#${id}`} key={id} aria-current={active === id ? "location" : undefined} className={active === id ? "mp-active" : ""}><Icon size={22} aria-hidden="true" /><span>{label}</span></a>)}<Out href={resume}><FileText size={22} aria-hidden="true" /><span>Résumé</span></Out></nav>
   </div>;
