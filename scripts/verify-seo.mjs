@@ -31,6 +31,19 @@ for (const path of paths) {
   assert.ok(!person.worksFor && !person.founder, `${path}: no invented employment or founder relationship`);
   if (path === '/') {
     assert.ok(!html.includes('<div id="root"></div>'), 'Initial portfolio HTML must contain content');
+    const socialImage = `${origin}/assets/hikari-brandan-social-share.jpg`;
+    const socialAlt = 'Hikari Brandan — AI Product Developer portfolio featuring UGC Camera, MenuTap, B2B SaaS, web and mobile product development.';
+    for (const metadata of [
+      `<meta property="og:image" content="${socialImage}">`,
+      `<meta property="og:image:secure_url" content="${socialImage}">`,
+      '<meta property="og:image:width" content="1200">',
+      '<meta property="og:image:height" content="446">',
+      `<meta property="og:image:alt" content="${socialAlt}">`,
+      '<meta name="twitter:card" content="summary_large_image">',
+      `<meta name="twitter:image" content="${socialImage}">`,
+      `<meta name="twitter:image:alt" content="${socialAlt}">`,
+    ]) assert.ok(html.includes(metadata), `Homepage share metadata: ${metadata}`);
+    await access('dist/assets/hikari-brandan-social-share.jpg');
     const headline = html.match(/<h1[^>]*>.*?<\/h1>/s)[0].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
     assert.equal(headline, 'I BUILD PRODUCTS FROM PROBLEMS OTHER PEOPLE OVERLOOK.');
   } else {
