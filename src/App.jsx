@@ -66,6 +66,7 @@ import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
 import { barberReviews, googleReviewsUrl } from "./reviewData";
 const ProjectDrawer = lazy(() => import("./ProjectDrawer"));
+const MobilePortfolio = lazy(() => import("./MobilePortfolio"));
 const A = "/assets/";
 const links = {
   ugc: "https://www.ugccamera.com/camera-demo?name=UGC%20Camera&type=business",
@@ -1463,10 +1464,18 @@ function Contact() {
   );
 }
 function App() {
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 767px)").matches);
   const [project, setProject] = useState(null),
     [active, setActive] = useState("home");
   const { scrollYProgress } = useScroll();
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
+    if (isMobile) return;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
@@ -1478,7 +1487,14 @@ function App() {
       if (el) observer.observe(el);
     }
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
+  if (isMobile) return <>
+    <a className="skip-link" href="#projects">Skip to projects</a>
+    <Suspense fallback={<div role="status" style={{ padding:32, color:"#f7f6f1", minHeight:"100vh" }}>Opening the portfolio…</div>}>
+      <MobilePortfolio onOpen={setProject} />
+    </Suspense>
+    {project && <Suspense fallback={<div className="drawer-loading" role="status">Opening the story…</div>}><ProjectDrawer project={project} onClose={() => setProject(null)} /></Suspense>}
+  </>;
   return (
     <>
       <a className="skip-link" href="#projects">
