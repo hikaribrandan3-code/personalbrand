@@ -1,4 +1,4 @@
-import { useMotionPreference, useMotionControls } from "./motion-preferences";
+import { useMotionPreference } from "./motion-preferences";
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import {
   AnimatePresence,
@@ -61,6 +61,7 @@ import MacDemo from "./MacDemos";
 import DesktopNavigation from "./DesktopNavigation";
 import UgcCameraPreview from "./UgcCameraPreview";
 import { FooterQuote } from "./FooterQuote";
+import { DeferredBackground, DesktopReceiptVideo } from "./DeferredMedia";
 import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
@@ -82,7 +83,7 @@ const apps = [
     name: "iVoz",
     sub: "Voice → text",
     icon: "ivoz-icon.png",
-    image: "ivoz-window-real.png",
+    image: "desktop/ivoz-window-real.webp",
     description:
       "Hold a shortcut. Speak. Release. Local dictation, with optional text cleanup.",
     repo: "ivoz-macos",
@@ -93,7 +94,7 @@ const apps = [
     name: "iOrganize",
     sub: "A little less chaos",
     icon: "iorganize-icon.png",
-    image: "iorganize-sanitize-real.jpg",
+    image: "desktop/iorganize-sanitize-real.webp",
     description:
       "Review cleanup candidates, find duplicates, and organize your Mac with local rules.",
     repo: "iorganize",
@@ -104,7 +105,7 @@ const apps = [
     name: "Screen Bridge",
     sub: "Another screen. Same network.",
     icon: "screen-bridge-icon.png",
-    image: "screen-bridge-real.jpg",
+    image: "desktop/screen-bridge-real.webp",
     description:
       "An experimental virtual Mac display streamed to a compatible device over your local network.",
     repo: "screen-bridge-macos",
@@ -115,7 +116,7 @@ const apps = [
     name: "iStats",
     sub: "Know your Mac",
     icon: "istats-icon.png",
-    image: "istats-dashboard-real.jpg",
+    image: "desktop/istats-dashboard-real.webp",
     description:
       "A lightweight view of CPU, memory, network, disk and the processes behind them.",
     repo: "istats",
@@ -354,7 +355,7 @@ function Hero() {
             <CTA href="#projects">
               See my work <ArrowDown size={16} />
             </CTA>
-            <CTA href="/Daiske-Brandan-Resume.pdf" secondary>
+            <CTA href="/Hikari_Brandan_Resume.pdf" secondary>
               View résumé <ArrowUpRight size={16} />
             </CTA>
           </div>
@@ -367,7 +368,7 @@ function Hero() {
         <motion.div className="portrait-stage" style={{ y }}>
           <img
             className="portrait"
-            src={`${A}portrait.png`}
+            src={`${A}desktop/portrait.webp`}
             alt="Hikari Brandan wearing his FoodSpot Mobile shirt"
             width="960"
             height="960"
@@ -396,7 +397,7 @@ function Hero() {
             className="polaroid polaroid-mac"
             whileHover={reduce ? {} : { rotate: 0, y: -5 }}
           >
-            <img src={`${A}ivoz-window-real.png`} alt="Real iVoz app window" />
+            <img src={`${A}desktop/ivoz-window-real-polaroid.webp`} alt="Real iVoz app window" width="450" height="312" />
             <span>VOICE → TEXT</span>
             <small>iVoz · macOS speech-to-text</small>
           </motion.div>
@@ -405,7 +406,8 @@ function Hero() {
             whileHover={reduce ? {} : { rotate: 0, y: -5 }}
           >
             <img
-              src={`${A}menutap-sticker.png`}
+              src={`${A}desktop/menutap-sticker-polaroid.webp`}
+              width="450" height="450"
               alt="The physical MenuTap NFC sticker"
             />
             <span>TAP THE TABLE ↗</span>
@@ -463,7 +465,7 @@ function UGC({ onOpen }) {
       id="projects"
       ref={ref}
     >
-      <div className="food-backdrop" />
+      <DeferredBackground className="food-backdrop" />
       <div className="wrap project-grid">
         <Reveal className="project-copy">
           <Label n="01" badge="Live product" website="https://www.ugccamera.com/">
@@ -587,7 +589,7 @@ function MenuTap({ onOpen }) {
     [Instagram, "Follow Us", "Keep in touch", "#ec4b82"],
   ];
   return (
-    <section className="project-section light menutap-section" ref={ref}>
+    <section id="menutap" className="project-section light menutap-section" ref={ref}>
       <div className="wrap project-grid">
         <Reveal className="project-copy">
           <Label n="02" badge="Live product" website="https://www.foodspotmobile.com/">
@@ -626,11 +628,11 @@ function MenuTap({ onOpen }) {
             style={{ rotate: stickerRotate }}
           >
             <img
-              src={`${A}menutap-sticker.png`}
+              src={`${A}desktop/menutap-sticker.webp`}
               alt="Actual MenuTap physical NFC artwork: menu, Wi-Fi, reviews, games and socials in one tap"
-              loading="lazy"
-              width="1254"
-              height="1254"
+              loading="lazy" decoding="async"
+              width="1000"
+              height="1000"
             />
           </motion.div>
           <div className="tap-connection" aria-hidden="true">
@@ -696,26 +698,15 @@ function MenuTap({ onOpen }) {
 function FoodSpot({ onOpen }) {
   const reduce = useMotionPreference();
   const [activeScreen, setActiveScreen] = useState(0);
-  const receiptVideo = useRef(null);
-  const sectionRef = useRef(null);
   const screens = [
     { name: "Dashboard", file: "dashboard-mobile.jpg", alt: "Real FoodSpot mobile restaurant dashboard" },
     { name: "Menu", file: "menu-mobile.jpg", alt: "Real FoodSpot mobile menu management" },
     { name: "Inventory", file: "inventory-mobile.jpg", alt: "Real FoodSpot mobile inventory and stock counts" },
   ];
-  useEffect(() => {
-    if (window.location.hash === "#foodspot")
-      sectionRef.current?.scrollIntoView({ behavior: "instant", block: "start" });
-    if (window.location.hash === "#foodspot-receipt")
-      document.getElementById("foodspot-receipt")?.scrollIntoView({ behavior: "instant", block: "start" });
-  }, []);
-  useEffect(() => {
-    if (reduce) receiptVideo.current?.pause();
-  }, [reduce]);
   return (
     <>
-      <section id="foodspot" ref={sectionRef} className="project-section dark foodspot-section">
-        <div className="pizza-backdrop" />
+      <section id="foodspot" className="project-section dark foodspot-section">
+        <DeferredBackground className="pizza-backdrop" />
         <div className="wrap project-grid">
           <Reveal className="project-copy">
             <Label n="03" badge="Past B2B SaaS · Live demo" subdued>FOODSPOT MOBILE</Label>
@@ -730,7 +721,7 @@ function FoodSpot({ onOpen }) {
           <div className="device-stage foodspot-stage foodspot-capture-stage">
             <motion.div initial={reduce ? false : { rotate: -12, y: 35 }} whileInView={{ rotate: -6, y: 0 }} viewport={{ once: true }} transition={{ type: "spring", bounce: 0.15, duration: 0.8 }}>
               <Phone className="foodspot-phone foodspot-real-phone" label={`Real FoodSpot Mobile ${screens[activeScreen].name} interface`}>
-                <img key={screens[activeScreen].file} className="foodspot-real-screen" src={`${A}foodspot/${screens[activeScreen].file}`} alt={screens[activeScreen].alt} width="390" height="832" loading="lazy" />
+                <img key={screens[activeScreen].file} className="foodspot-real-screen" src={`${A}foodspot/${screens[activeScreen].file}`} alt={screens[activeScreen].alt} width="390" height="832" loading="lazy" decoding="async" />
               </Phone>
             </motion.div>
             <div className="foodspot-screen-tabs" role="group" aria-label="Explore FoodSpot mobile operations">
@@ -743,7 +734,7 @@ function FoodSpot({ onOpen }) {
             <p>Dashboard. Menu. Inventory.<br />One mobile workspace.</p>
             <div className="foodspot-supporting-shots">
               {[1, 2].map(index => <button key={screens[index].name} type="button" onClick={() => setActiveScreen(index)} aria-label={`View real mobile ${screens[index].name} screen`}>
-                <img src={`${A}foodspot/${screens[index].file}`} alt={screens[index].alt} width="390" height="832" loading="lazy" /><span>{index === 1 ? "Menu management" : "Inventory tracking"}</span>
+                <img src={`${A}foodspot/${screens[index].file}`} alt={screens[index].alt} width="390" height="832" loading="lazy" decoding="async" /><span>{index === 1 ? "Menu management" : "Inventory tracking"}</span>
               </button>)}
             </div>
           </Reveal>
@@ -765,12 +756,12 @@ function FoodSpot({ onOpen }) {
           </Reveal>
           <div className="device-stage foodspot-stage">
             <Phone className="foodspot-phone foodspot-real-phone" label="Real FoodSpot Mobile UGC receipt interaction">
-              <video ref={receiptVideo} className="foodspot-real-screen" src={`${A}foodspot/ugc-receipt-mobile.mp4`} poster={`${A}foodspot/receipt-mobile.jpg`} width="390" height="832" autoPlay={!reduce} muted loop playsInline controls={reduce} preload="metadata" aria-label="Delivered receipt and animated customer photo invitation" />
+              <DesktopReceiptVideo />
             </Phone>
           </div>
           <Reveal className="foodspot-engagement">
             <span className="tiny-label">CUSTOMER ENGAGEMENT</span>
-            <img src={`${A}foodspot/events-mobile.jpg`} alt="Real FoodSpot mobile Events screen in light mode" width="390" height="832" loading="lazy" />
+            <img src={`${A}foodspot/events-mobile.jpg`} alt="Real FoodSpot mobile Events screen in light mode" width="390" height="832" loading="lazy" decoding="async" />
             <span>Events, rewards & reasons to return.</span>
           </Reveal>
         </div>
@@ -891,7 +882,7 @@ function MacApps({ onOpen }) {
                           aria-pressed={active === i}
                           onClick={() => setActive(i)}
                         >
-                          <img src={`${A}${a.icon}`} alt="" loading="lazy" />
+                          <img src={`${A}${a.icon}`} alt="" width="64" height="64" loading="lazy" decoding="async" />
                           <i className={active === i ? "on" : ""} />
                         </button>
                       ))}
@@ -917,7 +908,7 @@ function MacApps({ onOpen }) {
                   aria-pressed={active === i}
                   onClick={() => setActive(i)}
                 >
-                  <img src={`${A}${a.icon}`} alt="" loading="lazy" />
+                  <img src={`${A}${a.icon}`} alt="" width="64" height="64" loading="lazy" decoding="async" />
                   <strong>{a.name}</strong>
                   <small>{a.sub}</small>
                   {i === 2 ? (
@@ -1020,7 +1011,7 @@ const debugExamples = [
     product: "UGC Camera",
     title: "Sticker touch targets were too small.",
     copy: "Dragging and deleting worked, but resizing and rotating stickers felt too precise on mobile. I compared the interaction directly with Instagram’s sticker controls and realized our interactive touch area was smaller. The touch target was expanded without unnecessarily making the visible control larger, making the interaction easier to use on a phone.",
-    image: `${A}ugc-salad-spot.png`,
+    image: `${A}desktop/ugc-salad-spot.webp`,
     alt: "Salad Spot branded-camera photo from UGC Camera",
   },
   {
@@ -1033,7 +1024,7 @@ const debugExamples = [
     product: "iVoz (macOS)",
     title: "Hotkeys and permissions weren’t behaving correctly.",
     copy: "Some keyboard shortcuts weren’t being recognized consistently, and microphone permission could be requested again after relaunching the app. I tested different hotkeys and repeated launch/permission scenarios on macOS until the shortcut handling and permission flow behaved reliably.",
-    image: `${A}ivoz-window-real.png`,
+    image: `${A}desktop/ivoz-window-real.webp`,
     alt: "Actual iVoz macOS application window",
   },
 ];
@@ -1130,7 +1121,7 @@ function Process({ onOpen }) {
               <div className="debug-card-label"><b>0{index + 1}</b><span>{example.product}</span></div>
               {example.image ? (
                 <div className="debug-card-visual">
-                  <img src={example.image} alt={example.alt} loading="lazy" />
+                  <img src={example.image} alt={example.alt} loading="lazy" decoding="async" />
                 </div>
               ) : (
                 <div className="debug-flow" aria-label="Callback URL, console, Edge Function logs, RLS or data access, retest">
@@ -1151,7 +1142,7 @@ function AutoBarber() {
   const reviews = barberReviews;
   return (
     <section className="business-section dark" id="about">
-      <div className="business-backdrop" />
+      <DeferredBackground className="business-backdrop" />
       <div className="wrap business-grid">
         <Reveal>
           <Label n="06" badge="Past business" subdued>
@@ -1188,8 +1179,9 @@ function AutoBarber() {
         <div className="business-visual">
           <img
             src={`${A}autobarber-logo.png`}
+            width="92" height="92"
             alt="The Auto Barber logo"
-            loading="lazy"
+            loading="lazy" decoding="async"
           />
           <span className="annotation">
             same builder.
@@ -1291,25 +1283,6 @@ function Stack() {
     </section>
   );
 }
-function MotionToggle() {
-  const { disabled, toggle, systemReduced } = useMotionControls();
-  return (
-    <button
-      className="motion-toggle"
-      onClick={toggle}
-      aria-pressed={disabled || systemReduced}
-      title={
-        systemReduced
-          ? "Your device requests reduced motion"
-          : "Toggle website motion"
-      }
-    >
-      Motion {disabled || systemReduced ? "off" : "on"}{" "}
-      <span aria-hidden="true">{disabled || systemReduced ? "○" : "●"}</span>
-    </button>
-  );
-}
-
 function Contact() {
   return (
     <>
@@ -1339,7 +1312,7 @@ function Contact() {
                 alt=""
                 width="433"
                 height="650"
-                loading="lazy"
+                loading="lazy" decoding="async"
               />
             </div>
             <h3>
@@ -1390,7 +1363,7 @@ function Contact() {
         </div>
       </section>
       <div id="contact">
-        <ContactExperience motionToggle={<MotionToggle />} />
+        <ContactExperience />
         <section className="contact-section mobile-closing">
           <div className="contact-orbit" aria-hidden="true" />
           <div className="wrap contact-inner">
@@ -1428,7 +1401,7 @@ function Contact() {
                   GitHub
                   <ArrowUpRight />
                 </External>
-                <External href="/Daiske-Brandan-Resume.pdf">
+                <External href="/Hikari_Brandan_Resume.pdf">
                   <FileText />
                   Résumé
                   <ArrowUpRight />
@@ -1447,7 +1420,6 @@ function Contact() {
             </div>
           </div>
           <footer className="wrap">
-            <MotionToggle />
             <a href="#home" className="brand footer-brand">
               Hikari Brandan
               <Crown />
@@ -1469,11 +1441,34 @@ function App() {
     [active, setActive] = useState("home");
   const { scrollYProgress } = useScroll();
   useEffect(() => {
+    if (isMobile || !window.location.hash) return;
+    // The desktop bundle mounts after the browser's initial anchor lookup.
+    const frame = requestAnimationFrame(() => {
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: "instant", block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [isMobile]);
+  useEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");
     const update = () => setIsMobile(media.matches);
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
+  useEffect(() => {
+    if (isMobile) return;
+    const targets = [...document.querySelectorAll(".review-track-inner, .cloud-drift, .bulb-glow, .product-dna path")];
+    const visible = new Set();
+    const sync = () => targets.forEach(element => {
+      element.style.animationPlayState = visible.has(element) && !document.hidden ? "running" : "paused";
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target));
+      sync();
+    });
+    targets.forEach(element => { element.style.animationPlayState = "paused"; observer.observe(element); });
+    document.addEventListener("visibilitychange", sync);
+    return () => { observer.disconnect(); document.removeEventListener("visibilitychange", sync); targets.forEach(element => element.style.removeProperty("animation-play-state")); };
+  }, [isMobile]);
   useEffect(() => {
     if (isMobile) return;
     const observer = new IntersectionObserver(
@@ -1524,7 +1519,7 @@ function App() {
             <a className={active === "about" ? "active" : ""} href="#about">
               About
             </a>
-            <External href="/Daiske-Brandan-Resume.pdf">
+            <External href="/Hikari_Brandan_Resume.pdf">
               Résumé <ArrowUpRight size={12} />
             </External>
           </nav>

@@ -1,6 +1,11 @@
+@font-face { font-family:MobileDisplay; src:url('/assets/mobile/display.woff2') format('woff2'); font-weight:800; font-display:swap; }
+@font-face { font-family:MobileBody; src:url('/assets/mobile/body.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:MobileBody; src:url('/assets/mobile/body-bold.woff2') format('woff2'); font-weight:700; font-display:swap; }
+@font-face { font-family:MobileHand; src:url('/assets/mobile/hand.woff2') format('woff2'); font-weight:700; font-display:swap; }
 /* A dedicated mobile composition. Every rule is scoped to this branch. */
 html:has(.mobile-portfolio) { scroll-padding-top:0; }
-.mobile-portfolio { --mp-paper:#f7f6f1; --mp-ink:#101211; color:var(--mp-ink); background:#101211; font:400 15px/1.45 Body,Arial,sans-serif; padding:0 8px calc(105px + env(safe-area-inset-bottom)); }
+@media (max-width:767px) { html:root,html body { font-family:MobileBody,Arial,sans-serif; } }
+.mobile-portfolio { --mp-paper:#f7f6f1; --mp-ink:#101211; color:var(--mp-ink); background:#101211; font:400 15px/1.45 MobileBody,Arial,sans-serif; padding:0 8px calc(105px + env(safe-area-inset-bottom)); }
 .mobile-portfolio a { text-decoration:none; }
 .mobile-portfolio button, .mobile-portfolio a { touch-action:manipulation; }
 .mobile-portfolio button { cursor:pointer; }
@@ -9,13 +14,13 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mobile-portfolio :is(section,footer) { scroll-margin-top:86px; }
 .mp-header { position:sticky; top:0; z-index:30; height:84px; display:flex; align-items:center; justify-content:space-between; padding:0 22px; background:#101211; transition:height .2s ease; }
 .mp-header.mp-compact { height:66px; }
-.mp-mark { color:#fff; font:700 clamp(25px,7.4vw,34px)/1 Hand,cursive; letter-spacing:-1px; white-space:nowrap; }
+.mp-mark { color:#fff; font:700 clamp(25px,7.4vw,34px)/1 MobileHand,cursive; letter-spacing:-1px; white-space:nowrap; }
 .mp-header-cta { display:flex; gap:9px; align-items:center; color:#101211; background:#ffe100; padding:11px 20px; border-radius:99px; font-size:13px; font-weight:700; min-height:44px; }
 .mp-paper { background:radial-gradient(ellipse at 15% 14%,#fff8 0,transparent 45%),var(--mp-paper); border-radius:30px; overflow:clip; }
 .mp-intro { padding:32px 24px 36px; }
 .mp-available { display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid #dfe1dd; border-radius:30px; padding:7px 12px; font-size:12px; color:#3d4651; }
 .mp-available > span { width:9px; height:9px; border-radius:50%; background:#00ae75; }
-.mp-intro h1 { font:700 clamp(36px,10.6vw,55px)/1.04 Body,Arial,sans-serif; letter-spacing:-1.7px; margin:26px 0 23px; }
+.mp-intro h1 { font:700 clamp(36px,10.6vw,55px)/1.04 MobileBody,Arial,sans-serif; letter-spacing:-1.7px; margin:26px 0 23px; }
 .mp-intro h1 em { color:#59616e; font-style:italic; display:inline-block; transform:skewX(-5deg); }
 .mp-intro > p { color:#434b55; max-width:430px; line-height:1.5; }
 .mp-identity { display:grid; gap:22px; margin:28px 0 8px; }
@@ -42,7 +47,7 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mp-label i { color:#838990; font-style:normal; padding:0 5px; }
 .mp-status { border-radius:99px; padding:6px 12px; font-size:11px; font-weight:700; background:#d1f6e6; color:#0c4637; white-space:nowrap; }
 .mp-status-past { background:#e6eaec; color:#263540; }
-.mp-section h2 { font:700 clamp(22px,6.5vw,34px)/1.04 Body,Arial,sans-serif; letter-spacing:-.8px; }
+.mp-section h2 { font:700 clamp(22px,6.5vw,34px)/1.04 MobileBody,Arial,sans-serif; letter-spacing:-.8px; }
 .mp-section h2 em { color:#ef8b00; font-style:normal; }
 .mp-section > p { margin-top:13px; color:#414b56; line-height:1.4; }
 .mp-product-art { position:relative; margin:24px -24px 17px; height:clamp(350px,106vw,455px); background:linear-gradient(0deg,#fffc,transparent 60%),url('/assets/mobile/cafe-background.jpg') center/cover; isolation:isolate; overflow:clip; }
@@ -50,16 +55,13 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mp-product-art .mp-device { position:absolute; height:calc(100% - 45px); width:auto; max-width:260px; top:20px; left:22px; transform:rotate(-6deg); }
 .mp-device { padding:6px; border:2px solid #94958e; border-radius:32px; background:#101211; box-shadow:0 16px 24px #13161130; aspect-ratio:390/844; overflow:hidden; }
 .mp-device > img { width:100%; height:100%; object-fit:contain; border-radius:25px; display:block; }
-.mp-note { position:absolute; right:12px; top:34px; width:34%; font:700 clamp(15px,4.2vw,20px)/1.2 Hand,cursive; transform:rotate(-8deg); }
+.mp-note { position:absolute; right:12px; top:34px; width:34%; font:700 clamp(15px,4.2vw,20px)/1.2 MobileHand,cursive; transform:rotate(-8deg); }
 .mp-note svg { display:block; width:54px; height:65px; margin:7px 0 0 2px; }
 .mp-note path { stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
 .mp-ugc-art { background-image:linear-gradient(0deg,#fffc,transparent 65%),url('/assets/ugc-sugar-crumb.webp'); background-position:center; }
 .mp-photo-preview { display:block; height:100%; width:100%; position:relative; overflow:hidden; border-radius:25px; background:#171713; color:#fff; padding:0; border:0; text-align:left; }
-.mp-live-frame { position:relative; width:100%; height:100%; border-radius:25px; overflow:hidden; }
-.mp-live-camera { position:absolute; left:50%; top:50%; display:block; width:390px; height:844px; border:0; background:#101211; }
 .mp-photo-preview > img { height:100%; width:100%; object-fit:cover; display:block; }
 .mp-preview-tag { position:absolute; top:11%; left:7%; display:flex; gap:6px; align-items:center; border:1px solid #ffffff79; background:#ffffff28; backdrop-filter:blur(12px); border-radius:30px; padding:8px 10px; color:#fff; font-size:11px; font-weight:700; text-shadow:0 1px 2px #0006; }
-.mp-camera-launch { position:absolute; inset:auto 0 0; padding:15px 10px; display:flex; align-items:center; justify-content:center; gap:7px; color:#fff; background:#111e; font-size:10px; }
 .mp-menu-art .mp-device { left:46%; transform:rotate(5deg); top:22px; }
 .mp-menu-art .mp-note { top:16px; left:25px; width:38%; }
 .mp-menu-sticker { position:absolute; width:61%; max-height:230px; object-fit:contain; bottom:8px; left:10px; transform:rotate(-10deg); filter:drop-shadow(0 12px 14px #0005); }
@@ -96,14 +98,14 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mp-step-icon { width:35px; height:35px; border-radius:50%; display:grid; place-items:center; }
 .mp-steps li b { font-size:12px; }
 .mp-steps li > span:last-child { font-size:12px; line-height:1.4; color:#4a5561; }
-.mp-hand-end { font:700 clamp(18px,5vw,25px)/1.2 Hand,cursive; text-align:center; margin:18px 0 8px; }
+.mp-hand-end { font:700 clamp(18px,5vw,25px)/1.2 MobileHand,cursive; text-align:center; margin:18px 0 8px; }
 .mp-barber { position:relative; isolation:isolate; color:#fff; background:#111; }
 .mp-barber-bg { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:.32; z-index:-2; }
 .mp-barber::after { content:""; position:absolute; inset:0; background:linear-gradient(#1115,#111e 60%); z-index:-1; }
 .mp-barber-content { padding:34px 24px; }
 .mp-barber .mp-label { font-size:10px; }
 .mp-barber .mp-status { color:#fff; background:#ffffff26; font-size:10px; }
-.mp-barber h2 { font:800 clamp(31px,8.8vw,45px)/1.03 Display,Impact,sans-serif; letter-spacing:.2px; }
+.mp-barber h2 { font:800 clamp(31px,8.8vw,45px)/1.03 MobileDisplay,Impact,sans-serif; letter-spacing:.2px; }
 .mp-barber p { margin-top:17px; color:#e7e8e4; }
 .mp-barber-portrait { margin:23px -5px 0 !important; overflow:hidden; border-radius:17px; aspect-ratio:4/5; }
 .mp-barber-portrait img { display:block; width:100%; height:100%; object-fit:cover; object-position:57% 15%; }
@@ -122,7 +124,7 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mp-review-controls button { background:#f1f3f4; border:0; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; }
 .mp-review-controls span { color:#697179; font-size:11px; }
 .mp-small-note { display:block; margin:14px 0 0; font-size:12px; color:#d5d8d1; }
-.mp-section h3 { font:700 29px/1.12 Body,Arial,sans-serif; letter-spacing:-1px; }
+.mp-section h3 { font:700 29px/1.12 MobileBody,Arial,sans-serif; letter-spacing:-1px; }
 .mp-section h3 > span { font-size:23px; font-weight:400; color:#49515b; letter-spacing:-.5px; }
 .mp-tool-groups { display:grid; gap:19px; margin-top:25px; }
 .mp-tool-groups h4 { display:flex; gap:8px; align-items:center; font-size:12px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
@@ -144,14 +146,12 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mp-footer .footer-quote { width:auto; max-width:none; padding:27px 0; border-top:1px solid #d8dad3; border-bottom:1px solid #d8dad3; text-align:center; margin:0 0 26px; }
 .mp-footer .footer-quote p { font-size:14px; line-height:1.5; color:#475663; }
 .mp-footer .footer-quote cite { font-size:10px; display:block; text-transform:uppercase; letter-spacing:1.1px; margin-top:9px; color:#586670; }
-.mp-signature { font:700 33px/1.2 Hand,cursive; color:#101211; display:inline-block; min-height:44px; }
+.mp-signature { font:700 33px/1.2 MobileHand,cursive; color:#101211; display:inline-block; min-height:44px; }
 .mp-footer-roots { letter-spacing:1.3px; font-size:9px; margin:8px 0 18px !important; }
 .mp-socials { display:flex; gap:12px; margin:0 0 17px; }
 .mp-socials a { width:46px; height:46px; border:1px solid #bfc6ca; border-radius:12px; display:grid; place-items:center; color:#151a1d; }
 .mp-socials a:last-child { color:#1f7955; }
 .mp-copyright { font-size:9px; letter-spacing:1px; line-height:1.9; color:#4b5863; margin:23px 0 10px !important; }
-.mp-motion-toggle { display:flex; align-items:center; gap:10px; font-size:11px; background:transparent; border:1px solid #d9dbd4; min-height:44px; padding:10px 13px; border-radius:24px; color:#55636b; }
-.mp-motion-toggle span { width:5px; height:5px; border-radius:50%; background:currentColor; }
 .mp-bottom-nav { position:fixed; z-index:50; bottom:0; left:8px; right:8px; display:grid; grid-template-columns:repeat(4,1fr); background:linear-gradient(125deg,#111513,#090b0a); border:1px solid #ffffff32; border-radius:25px 25px 0 0; padding:10px 8px calc(12px + env(safe-area-inset-bottom)); box-shadow:0 -4px 18px #0002; }
 .mp-bottom-nav a { display:flex; flex-direction:column; gap:5px; align-items:center; justify-content:center; color:#d3d7d3; min-height:52px; font-size:11px; transition:color .2s; }
 .mp-bottom-nav .mp-active { color:#ffe100; }.mp-bottom-nav .mp-active svg { fill:#ffe100; stroke:#ffe100; }
@@ -169,3 +169,32 @@ html:has(.mobile-portfolio) { scroll-padding-top:0; }
 .mp-receipt-video video { display:block; width:100%; height:100%; object-fit:contain; }
 .mp-video-toggle { position:absolute; right:5px; bottom:47px; display:grid; place-items:center; min-width:44px; min-height:44px; border:1px solid #fff6; border-radius:50%; color:#fff; background:#171b19d9; }
 @media (max-width:350px) { .mp-header { padding:0 11px; }.mp-header-cta { padding:11px 15px; }.mp-personal-portrait { margin-left:-19px !important; margin-right:-19px !important; }.mp-business-facts { gap:7px; } }
+
+/* The same branded photo message, presented as an editorial sticker. */
+.mp-ugc-note { color:#101211; top:38px; right:10px; width:39%; line-height:1.5; z-index:2; }
+.mp-ugc-note > span { background:white; border-radius:9px; padding:2px 5px; box-decoration-break:clone; -webkit-box-decoration-break:clone; box-shadow:0 0 0 3px white; }
+.mp-ugc-note::before,.mp-ugc-note::after { content:""; position:absolute; width:21px; height:6px; border-radius:6px; background:#ffbb18; box-shadow:0 0 0 3px white; }
+.mp-ugc-note::before { top:-9px; left:-5px; rotate:42deg; }
+.mp-ugc-note::after { bottom:72px; right:6px; rotate:25deg; }
+.mp-ugc-note svg { width:64px; height:72px; margin:9px 0 0 22px; color:#111; filter:drop-shadow(2px 0 white) drop-shadow(-2px 0 white) drop-shadow(0 2px white) drop-shadow(0 -2px white); }
+
+/* Promotional annotations stay inside the existing mobile product canvases. */
+.mp-promo-note { color:#fff; text-shadow:1.5px 0 #111,-1.5px 0 #111,0 1.5px #111,0 -1.5px #111,2px 2px 2px #111; z-index:3; }
+.mp-promo-note mark { background:#ffe100; color:#101211; text-shadow:none; padding:0 3px; border-radius:3px 7px 2px 5px; box-shadow:2px 0 #ffe100,-2px 0 #ffe100; }
+.mp-menu-art .mp-menu-note { top:12px; left:18px; width:42%; font-size:clamp(16px,4.5vw,20px); line-height:1.06; }
+.mp-menu-features { display:block; margin-top:9px; font-size:clamp(14px,3.8vw,18px); line-height:1.08; }
+.mp-menu-features em { color:#ffe100; font-style:normal; }
+.mp-menu-note svg { position:absolute; left:72%; top:92px; width:56px; height:175px; margin:0; color:#fff; filter:drop-shadow(1.5px 0 #111) drop-shadow(-1.5px 0 #111) drop-shadow(0 1.5px #111); }
+.mp-receipt-note { top:13px; right:12px; width:41%; font-size:clamp(16px,4.5vw,20px); line-height:1.22; }
+.mp-receipt-note svg { width:48px; height:42px; margin:4px 0 0 -50px; color:#ffe100; filter:drop-shadow(1px 1px #111); }
+.mp-customer-story { position:absolute; top:35%; right:12px; width:36%; height:57%; border:2px solid #fff; border-radius:16px; background:#242018; transform:rotate(5deg); overflow:hidden; box-shadow:0 8px 16px #0004; }
+.mp-customer-story > img { display:block; width:100%; height:100%; object-fit:cover; }
+.mp-story-progress { position:absolute; top:6px; left:7px; right:7px; display:flex; gap:3px; }
+.mp-story-progress span { flex:1; height:2px; border-radius:2px; background:#ffffffa0; }
+.mp-story-author { position:absolute; top:12px; left:7px; right:7px; display:flex; align-items:center; gap:3px; color:#fff; font-size:7px; text-shadow:0 1px 3px #000; }
+.mp-story-author > svg { flex:none; background:#10121180; border-radius:50%; padding:1px; }
+.mp-story-author small { font-size:6px; opacity:.8; }
+.mp-story-close { margin-left:auto; font:400 15px/1 Arial,sans-serif; }
+.mp-story-business { position:absolute; top:35px; right:6px; display:flex; align-items:center; gap:3px; background:#fff; color:#101211; border-radius:4px; padding:4px 5px; font-size:clamp(7px,2vw,10px); font-weight:700; transform:rotate(-3deg); }
+.mp-story-business svg { flex:none; }
+@media (max-width:350px) { .mp-menu-art .mp-menu-note { left:14px; }.mp-menu-note svg { top:87px; height:150px; }.mp-story-author { font-size:6px; gap:2px; }.mp-story-business { top:31px; right:4px; padding:3px 4px; } }

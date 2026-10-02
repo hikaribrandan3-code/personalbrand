@@ -1,0 +1,510 @@
+{
+  "before": {
+    "shifts": 0,
+    "lcp": 500,
+    "paints": [
+      {
+        "name": "first-paint",
+        "ms": 132
+      },
+      {
+        "name": "first-contentful-paint",
+        "ms": 132
+      }
+    ],
+    "longTasks": 0,
+    "resources": [
+      {
+        "name": "/load-probe.js",
+        "bytes": 969,
+        "decoded": 1355,
+        "ms": 18
+      },
+      {
+        "name": "/assets/display.ttf",
+        "bytes": 87856,
+        "decoded": 87556,
+        "ms": 18
+      },
+      {
+        "name": "/assets/hand.ttf",
+        "bytes": 251556,
+        "decoded": 251256,
+        "ms": 25
+      },
+      {
+        "name": "/assets/body.ttf",
+        "bytes": 48580,
+        "decoded": 48280,
+        "ms": 22
+      },
+      {
+        "name": "/assets/body-bold.ttf",
+        "bytes": 48500,
+        "decoded": 48200,
+        "ms": 24
+      },
+      {
+        "name": "/assets/portrait.png",
+        "bytes": 610117,
+        "decoded": 609817,
+        "ms": 31
+      },
+      {
+        "name": "/assets/github-vHB__ARA.js",
+        "bytes": 4599,
+        "decoded": 10618,
+        "ms": 26
+      },
+      {
+        "name": "/assets/reviewData-D7a8WVjZ.js",
+        "bytes": 4227,
+        "decoded": 9575,
+        "ms": 27
+      },
+      {
+        "name": "/assets/index-Du-CLmUE.css",
+        "bytes": 25950,
+        "decoded": 113223,
+        "ms": 30
+      },
+      {
+        "name": "/assets/index-BARN1GRj.js",
+        "bytes": 80662,
+        "decoded": 256556,
+        "ms": 35
+      },
+      {
+        "name": "/assets/App-D670o6qy.js",
+        "bytes": 28356,
+        "decoded": 89368,
+        "ms": 6
+      },
+      {
+        "name": "/assets/x-jOzuo4I7.js",
+        "bytes": 41505,
+        "decoded": 127461,
+        "ms": 8
+      },
+      {
+        "name": "/favicon.svg",
+        "bytes": 482,
+        "decoded": 182,
+        "ms": 3
+      },
+      {
+        "name": "/assets/ivoz-window-real.png",
+        "bytes": 1032305,
+        "decoded": 1032005,
+        "ms": 8
+      },
+      {
+        "name": "/assets/menutap-sticker.png",
+        "bytes": 1377551,
+        "decoded": 1377251,
+        "ms": 10
+      },
+      {
+        "name": "/assets/ugc-salad-spot.png",
+        "bytes": 1983842,
+        "decoded": 1983542,
+        "ms": 14
+      },
+      {
+        "name": "/assets/foodspot/receipt-mobile.jpg",
+        "bytes": 55762,
+        "decoded": 55462,
+        "ms": 4
+      },
+      {
+        "name": "/assets/foodspot/ugc-receipt-mobile.mp4",
+        "bytes": 227724,
+        "decoded": 227424,
+        "ms": 4
+      },
+      {
+        "name": "/assets/cafe.jpg",
+        "bytes": 544629,
+        "decoded": 544329,
+        "ms": 4
+      },
+      {
+        "name": "/assets/portrait-mask.svg",
+        "bytes": 1899,
+        "decoded": 5768,
+        "ms": 3
+      },
+      {
+        "name": "/assets/pizza.jpg",
+        "bytes": 364300,
+        "decoded": 364000,
+        "ms": 3
+      },
+      {
+        "name": "/assets/autobarber-workshop.jpg",
+        "bytes": 999496,
+        "decoded": 999196,
+        "ms": 4
+      },
+      {
+        "name": "/assets/ugc-nail-room.webp",
+        "bytes": 32472,
+        "decoded": 32172,
+        "ms": 8
+      },
+      {
+        "name": "/assets/ugc-casa-social.webp",
+        "bytes": 58498,
+        "decoded": 58198,
+        "ms": 9
+      },
+      {
+        "name": "/assets/ugc-covaccia.webp",
+        "bytes": 43998,
+        "decoded": 43698,
+        "ms": 9
+      },
+      {
+        "name": "/assets/ugc-donut-house.webp",
+        "bytes": 32750,
+        "decoded": 32450,
+        "ms": 9
+      },
+      {
+        "name": "/assets/ugc-mangolda.webp",
+        "bytes": 31076,
+        "decoded": 30776,
+        "ms": 9
+      }
+    ],
+    "fonts": "loaded",
+    "ready": false,
+    "width": 1440
+  },
+  "after": {
+    "shifts": 0,
+    "lcp": 488,
+    "paints": [
+      {
+        "name": "first-paint",
+        "ms": 104
+      },
+      {
+        "name": "first-contentful-paint",
+        "ms": 104
+      }
+    ],
+    "longTasks": 56,
+    "resources": [
+      {
+        "name": "/load-probe.js",
+        "bytes": 969,
+        "decoded": 1355,
+        "ms": 11
+      },
+      {
+        "name": "/assets/desktop/display.woff2",
+        "bytes": 33480,
+        "decoded": 33180,
+        "ms": 10
+      },
+      {
+        "name": "/assets/desktop/body.woff2",
+        "bytes": 19420,
+        "decoded": 19120,
+        "ms": 14
+      },
+      {
+        "name": "/assets/desktop/hand.woff2",
+        "bytes": 106000,
+        "decoded": 105700,
+        "ms": 13
+      },
+      {
+        "name": "/assets/desktop/body-bold.woff2",
+        "bytes": 19632,
+        "decoded": 19332,
+        "ms": 15
+      },
+      {
+        "name": "/assets/desktop/portrait.webp",
+        "bytes": 61612,
+        "decoded": 61312,
+        "ms": 17
+      },
+      {
+        "name": "/assets/github-vHB__ARA.js",
+        "bytes": 4599,
+        "decoded": 10618,
+        "ms": 16
+      },
+      {
+        "name": "/assets/reviewData-D7a8WVjZ.js",
+        "bytes": 4227,
+        "decoded": 9575,
+        "ms": 17
+      },
+      {
+        "name": "/assets/index-B2TKzgoL.css",
+        "bytes": 25996,
+        "decoded": 113558,
+        "ms": 18
+      },
+      {
+        "name": "/assets/index-CBgiH5SP.js",
+        "bytes": 80662,
+        "decoded": 256556,
+        "ms": 23
+      },
+      {
+        "name": "/assets/App-DJxsIIGk.js",
+        "bytes": 29108,
+        "decoded": 91790,
+        "ms": 6
+      },
+      {
+        "name": "/assets/x-BGBHAUt2.js",
+        "bytes": 41505,
+        "decoded": 127461,
+        "ms": 8
+      },
+      {
+        "name": "/favicon.svg",
+        "bytes": 482,
+        "decoded": 182,
+        "ms": 3
+      },
+      {
+        "name": "/assets/desktop/ivoz-window-real-polaroid.webp",
+        "bytes": 12848,
+        "decoded": 12548,
+        "ms": 2
+      },
+      {
+        "name": "/assets/desktop/menutap-sticker-polaroid.webp",
+        "bytes": 23184,
+        "decoded": 22884,
+        "ms": 2
+      },
+      {
+        "name": "/assets/desktop/cafe.webp",
+        "bytes": 321612,
+        "decoded": 321312,
+        "ms": 6
+      },
+      {
+        "name": "/assets/portrait-mask.svg",
+        "bytes": 1899,
+        "decoded": 5768,
+        "ms": 5
+      },
+      {
+        "name": "/assets/desktop/ugc-salad-spot.webp",
+        "bytes": 158906,
+        "decoded": 158606,
+        "ms": 3
+      },
+      {
+        "name": "/assets/desktop/menutap-sticker.webp",
+        "bytes": 58884,
+        "decoded": 58584,
+        "ms": 3
+      }
+    ],
+    "fonts": "loaded",
+    "ready": false,
+    "width": 1440
+  },
+  "mobile": {
+    "shifts": 0,
+    "lcp": 120,
+    "paints": [
+      {
+        "name": "first-paint",
+        "ms": 120
+      },
+      {
+        "name": "first-contentful-paint",
+        "ms": 120
+      }
+    ],
+    "longTasks": 0,
+    "resources": [
+      {
+        "name": "/load-probe.js",
+        "bytes": 969,
+        "decoded": 1355,
+        "ms": 11
+      },
+      {
+        "name": "/assets/mobile/hand.woff2",
+        "bytes": 106000,
+        "decoded": 105700,
+        "ms": 11
+      },
+      {
+        "name": "/assets/mobile/body.woff2",
+        "bytes": 19420,
+        "decoded": 19120,
+        "ms": 12
+      },
+      {
+        "name": "/assets/mobile/body-bold.woff2",
+        "bytes": 19632,
+        "decoded": 19332,
+        "ms": 14
+      },
+      {
+        "name": "/assets/reviewData-D7a8WVjZ.js",
+        "bytes": 4227,
+        "decoded": 9575,
+        "ms": 16
+      },
+      {
+        "name": "/assets/mobile/hikari-roots-portrait.jpg",
+        "bytes": 105923,
+        "decoded": 105623,
+        "ms": 17
+      },
+      {
+        "name": "/assets/github-vHB__ARA.js",
+        "bytes": 4599,
+        "decoded": 10618,
+        "ms": 17
+      },
+      {
+        "name": "/assets/index-B2TKzgoL.css",
+        "bytes": 25996,
+        "decoded": 113558,
+        "ms": 19
+      },
+      {
+        "name": "/assets/index-CBgiH5SP.js",
+        "bytes": 80662,
+        "decoded": 256556,
+        "ms": 22
+      },
+      {
+        "name": "/assets/ugc-sugar-crumb.webp",
+        "bytes": 45450,
+        "decoded": 45150,
+        "ms": 2
+      },
+      {
+        "name": "/assets/mobile/display.woff2",
+        "bytes": 33480,
+        "decoded": 33180,
+        "ms": 14
+      },
+      {
+        "name": "/favicon.svg",
+        "bytes": 482,
+        "decoded": 182,
+        "ms": 2
+      }
+    ],
+    "fonts": "loaded",
+    "ready": true,
+    "width": 390
+  },
+  "widths": [
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1280
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1366
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1440
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1512
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1728
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1920
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "flex",
+      "overflow": 0,
+      "width": 1024
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "none",
+      "overflow": 0,
+      "width": 1000
+    },
+    {
+      "brokenAssets": [],
+      "headings": [],
+      "mobileNav": false,
+      "nav": "none",
+      "overflow": 0,
+      "width": 768
+    }
+  ],
+  "mobileWidths": [
+    {
+      "desktopNav": false,
+      "nav": true,
+      "overflow": 0,
+      "width": 320
+    },
+    {
+      "desktopNav": false,
+      "nav": true,
+      "overflow": 0,
+      "width": 375
+    },
+    {
+      "desktopNav": false,
+      "nav": true,
+      "overflow": 0,
+      "width": 430
+    },
+    {
+      "desktopNav": false,
+      "nav": true,
+      "overflow": 0,
+      "width": 767
+    }
+  ]
+}

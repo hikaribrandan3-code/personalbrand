@@ -677,7 +677,7 @@ html[data-motion="off"] .review-track-group[aria-hidden="true"] {
   inset: 0;
   background:
     linear-gradient(#e5ebf2bb, #d5c6b8bb),
-    url("/assets/cafe.jpg") center / cover;
+    url("/assets/desktop/cafe.webp") center / cover;
   filter: blur(9px);
   z-index: -1;
 }
@@ -1339,12 +1339,7 @@ html[data-motion="off"] .review-track-group[aria-hidden="true"] {
   align-items: center;
   justify-content: space-between;
 }
-.closing-bottom .motion-toggle {
-  border-color: #92949a55;
-  color: #4c5761;
-  padding: 5px 9px;
-  font-size: 8px;
-}
+
 
 @media (min-width: 1001px) {
   .stack-section {
@@ -1986,7 +1981,7 @@ html[data-motion="off"] .sample-chart i {
   .ugc-section .food-backdrop {
     background:
       linear-gradient(90deg, #100f0df2 0%, #100f0dd9 27%, #100f0d80 48%, #100f0d20 72%, #100f0d30 100%),
-      url("/assets/ugc-salad-spot.png") 58% 52% / cover;
+      url("/assets/desktop/ugc-salad-spot.webp") 58% 52% / cover;
   }
   .ugc-section .project-copy h2.ugc-desktop-story {
     font-size: clamp(40px, 3.05vw, 54px);

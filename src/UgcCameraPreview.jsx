@@ -3,7 +3,7 @@ import { Camera, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useMotionPreference } from "./motion-preferences";
 
 const desktopMoments = [
-  { image: "ugc-salad-spot.png", location: "SALAD SPOT", locationLabel: "Salad Spot", alt: "Fresh composed salad at Salad Spot, shown in the branded camera", mode: "Tap & Snap" },
+  { image: "desktop/ugc-salad-spot.webp", location: "SALAD SPOT", locationLabel: "Salad Spot", alt: "Fresh composed salad at Salad Spot, shown in the branded camera", mode: "Tap & Snap" },
   { image: "ugc-nail-room.webp", location: "NAIL ROOM", alt: "Nail salon moment from the Tap & Snap carousel", mode: "Tap & Snap" },
   { image: "ugc-casa-social.webp", location: "CASA SOCIAL", alt: "Friends dining together from the Tap & Snap carousel", mode: "Tap & Snap" },
   { image: "ugc-covaccia.webp", location: "COVACCIA PIZZA", alt: "Pizza delivery moment from the Scan & Snap carousel", mode: "Scan & Snap" },
@@ -49,7 +49,7 @@ export default function UgcCameraPreview({ demoUrl }) {
     onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
     onFocus={() => setPaused(true)} onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false); }}>
     <div className="camera-view ugc-photo-view">
-      {moments.map((item, i) => <img key={item.image} src={`/assets/${item.image}`} alt={i === index ? item.alt : ""} aria-hidden={i !== index} className={i === index ? "is-current" : ""} width="600" height="862" loading="lazy" />)}
+      {moments.map((item, i) => <img key={item.image} src={i === index || (visible && (i === (index + 1) % momentCount || i === (index + momentCount - 1) % momentCount)) ? `/assets/${item.image}` : undefined} alt={i === index ? item.alt : ""} aria-hidden={i !== index} className={i === index ? "is-current" : ""} width="600" height="862" loading="lazy" decoding="async" />)}
       <span className="ugc-preview-mode">{moment.mode} / BRANDED CAMERA</span>
       <span className="location-tag" aria-label={`${moment.locationLabel || moment.location} location tag`}><MapPin size={14} aria-hidden="true" />{moment.locationLabel || moment.location}</span>
       <span className="viewfinder corner-tl" /><span className="viewfinder corner-tr" />
@@ -67,7 +67,7 @@ export default function UgcCameraPreview({ demoUrl }) {
         {["Tap & Snap", "Scan & Snap"].map((mode, i) => <button key={mode} aria-pressed={moment.mode === mode} onClick={() => change(i * 3)}>{mode}</button>)}
       </div>
       <div className="capture-row">
-        <span className="thumbnail"><img src={`/assets/${moment.image}`} alt="" /></span>
+        <span className="thumbnail"><img src={`/assets/${moment.image}`} alt="" width="32" height="32" loading="lazy" decoding="async" /></span>
         <button className="shutter" onClick={() => { setCaptured((c) => c + 1); setPaused(true); }} aria-label="Preview a branded photo capture"><span /></button>
         <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="camera-demo-icon" aria-label="Open the real UGC Camera demo"><Camera size={21} /></a>
       </div>

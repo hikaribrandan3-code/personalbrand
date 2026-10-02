@@ -273,7 +273,7 @@ function PreviewTransition({ image, name, children }) {
   return <div ref={ref} className={`mac-preview-transition ${showDemo ? "show-demo" : "show-screenshot"} ${reduce ? "no-fade" : ""}`}>
     {showDemo && children}
     {image && <div className="mac-original-preview" aria-hidden={showDemo}>
-      <img src={image} alt={`Actual ${name} application interface`} />
+      <img src={image} alt={`Actual ${name} application interface`} loading="lazy" decoding="async" />
       <button disabled={showDemo} tabIndex={showDemo ? -1 : undefined} onClick={() => setShowDemo(true)}>Actual app → try the preview <ArrowRight size={11} /></button>
     </div>}
   </div>;

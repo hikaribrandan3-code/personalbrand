@@ -4,7 +4,7 @@
 - `cafe-background.jpg`: a 760px, compressed derivative of the existing café background for the mobile compositions (89 KB instead of 532 KB).
 - FoodSpot screens reuse `../foodspot/` and the source notes in that directory.
 - Mac screenshots and icons reuse the actual app assets in `../`.
-- UGC's first view is explicitly a branded photo preview using the existing Tap & Snap carousel photo. Tapping the phone loads the actual hosted camera application in an iframe; the portfolio does not simulate camera capture. The ordinary demo CTA opens the same real application directly.
+- UGC is a visual branded photo demonstration using the existing Tap & Snap carousel photo. The phone has no embedded camera or launch action. Its consistent sticker message is ‘ORGANIC UGC CONTENT IN SECONDS.’ The external demo CTA still opens the real product.
 
 ## Recruiter refinement assets — 2026-10-02
 
@@ -13,3 +13,16 @@
 - `foodspot-receipt-loop.mp4`: exactly 8 seconds (7.5–15.5s) from the supplied iPhone screen recording. The Safari bottom toolbar is cropped out while keeping the app navigation. H.264, 540 × 1054, 24 fps, no audio, fast-start playback, approximately 311 KB.
 - `foodspot-receipt-poster.jpg`: an actual frame from that same trimmed recording, used when autoplay is blocked or reduced motion is enabled.
 - Mobile MenuTap demo destination is the verified customer hub at https://www.foodspotmobile.com/t/foodspot-demo (the Back link from the existing menu demo). UGC View Project uses the existing public product website https://www.ugccamera.com/.
+
+## Final mobile load polish — 2026-10-02
+
+- Mobile-only WOFF2 fonts preserve the original glyphs and metrics. Desktop retains its original TTF assets.
+- `menutap-sticker.webp`, `autobarber-workshop.webp`, `ivoz-window-real.webp`: resized and compressed derivatives for mobile only; original desktop sources retained.
+- The mobile entry renders directly, without the desktop component module or its scroll effects. Desktop and project drawers load on demand.
+- Only mobile intro fonts and the portrait are prioritized. Receipt media loads near the viewport and pauses outside it.
+
+## Mobile promotional artwork — 2026-10-02
+
+- `foodspot-customer-story.webp`: a 315 × 640 crop of the supplied UGC Receipts reference's customer burger/fries Story, approximately 42 KB. The original full-resolution reference is not shipped. Native Story progress/author cues and the “Smash Burger” business tag are visual overlays; this is an illustrative Story, not a real customer testimonial.
+- The Story is lazy-loaded beside the existing receipt video. The video source, deferred media loading, pause/play behavior, phone placement and product canvas dimensions are preserved.
+- MenuTap keeps its existing live-menu capture and optimized NFC product asset, with readable black/white/yellow handwritten captions and an arrow toward the NFC product.

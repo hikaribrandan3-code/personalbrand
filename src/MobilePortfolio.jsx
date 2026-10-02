@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Home, BriefcaseBusiness, UserRound, FileText, Globe2, MessageSquare, Send, Github, Linkedin, Mail, Apple, Code2, Database, Camera, Radio, Lightbulb, Search, Brain, FlaskConical, Bug, Wrench, Sparkles, GraduationCap, UsersRound, ChevronLeft, ChevronRight, MapPin, Cpu, GitBranch, Play, Pause } from "lucide-react";
-import { LanguageFlags, WhatsAppIcon } from "./ContactExperience";
+import { LanguageFlags, WhatsAppIcon } from "./ContactIcons";
 import { FooterQuote } from "./FooterQuote";
 import GoogleMark from "./GoogleMark";
 import { macApps, projectData } from "./projectData";
 import { barberReviews, googleReviewsUrl } from "./reviewData";
-import { useMotionControls, useMotionPreference } from "./motion-preferences";
+import { useMotionPreference } from "./motion-preferences";
 import "./mobile-portfolio.css";
 
 const A = "/assets/";
 const github = "https://github.com/hikaribrandan3-code";
 const linkedin = "https://www.linkedin.com/in/daiske-brandan-726656323/";
 const whatsapp = "https://wa.me/543513668122";
-const resume = "/Daiske-Brandan-Resume.pdf";
+const resume = "/Hikari_Brandan_Resume.pdf";
 const email = "mailto:hikaristudioai@gmail.com";
 const suite = "https://isuitemacos-cyan.vercel.app/index.html";
 const foodspotDemo = "https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders";
@@ -39,45 +39,20 @@ function ProjectActions({ href, demo, project, projectHref, onOpen }) {
   return <div className="mp-actions"><Out href={href} className="mp-button mp-yellow">{demo}<ArrowRight size={17} /></Out>{projectHref ? <Out href={projectHref} className="mp-button mp-outline">View Project</Out> : <button className="mp-button mp-outline" onClick={() => onOpen(project)}>View Project</button>}</div>;
 }
 
-function CameraApplication() {
-  const frame = useRef(null);
-  const [scale, setScale] = useState(.4);
-  useEffect(() => {
-    const observer = new ResizeObserver(([entry]) => setScale(Math.min(entry.contentRect.width / 390, entry.contentRect.height / 844)));
-    observer.observe(frame.current);
-    return () => observer.disconnect();
-  }, []);
-  return <div className="mp-live-frame" ref={frame}><iframe className="mp-live-camera" style={{transform:`translate(-50%, -50%) scale(${scale})`}} src={projectData.ugc.demoUrl} title="Real UGC Camera application" allow="camera; autoplay; fullscreen" /></div>;
-}
-
 function MobileUGC() {
-  const [live, setLive] = useState(false);
-  const camera = useRef(null);
-  useEffect(() => {
-    if (!live) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) setLive(false);
-    });
-    observer.observe(camera.current);
-    const stop = () => { if (document.hidden) setLive(false); };
-    document.addEventListener("visibilitychange", stop);
-    return () => { observer.disconnect(); document.removeEventListener("visibilitychange", stop); };
-  }, [live]);
   return <section id="projects" className="mp-section mp-project mp-ugc" aria-labelledby="mp-ugc-title">
     <Label n="01" status="Live Product">UGC CAMERA</Label>
     <h2 id="mp-ugc-title">I NOTICED CUSTOMERS<br />WERE ALREADY<br />PHOTOGRAPHING<br /><em>THEIR FOOD.</em></h2>
     <p>So I gave restaurants their own branded camera — a QR scan or NFC tap opens a camera built for their business to capture and share photos.</p>
-    <div ref={camera} className="mp-product-art mp-ugc-art">
+    <div className="mp-product-art mp-ugc-art">
       <Device className="mp-camera-device">
-        {live ? <CameraApplication /> : <button className="mp-photo-preview" onClick={() => setLive(true)} aria-label="Load the real UGC Camera inside the phone">
-          <img src={`${A}ugc-sugar-crumb.webp`} alt="Sugar & Crumb café photo from the UGC Camera Tap & Snap product carousel" width="768" height="768" loading="lazy" />
+        <div className="mp-photo-preview">
+          <img src={`${A}ugc-sugar-crumb.webp`} alt="Sugar & Crumb café photo from the UGC Camera Tap & Snap product carousel" width="768" height="768" loading="lazy" decoding="async" />
           <span className="mp-preview-tag"><MapPin size={15} />Sugar & Crumb</span>
-          <span className="mp-camera-launch"><Camera size={23} />Open the live camera<ArrowUpRight size={15} /></span>
-        </button>}
+        </div>
       </Device>
-      <ArrowNote>ORGANIC UGC<br />CONTENT<br />IN SECONDS.</ArrowNote>
+      <ArrowNote className="mp-ugc-note"><span>ORGANIC UGC</span><br /><span>CONTENT</span><br /><span>IN SECONDS.</span></ArrowNote>
     </div>
-    {live && <button className="mp-text-action" onClick={() => setLive(false)}>Close live camera · return to the preview</button>}
     <ProjectActions href={projectData.ugc.demoUrl} demo="Try the Demo" projectHref={ugcWebsite} />
     <Pills items={[[Code2,"Next.js"],[Database,"Supabase"],[Camera,"Camera APIs"]]} />
   </section>;
@@ -89,9 +64,13 @@ function MobileMenuTap({ onOpen }) {
     <h2 id="mp-menu-title">RESTAURANTS PUT A QR<br />ON EVERY TABLE<br />JUST TO OPEN A MENU.<br /><span className="mp-insight-line">I THOUGHT THAT WAS<br />WASTED REAL ESTATE.</span></h2>
     <p>So I turned one NFC tap into the menu, Wi-Fi, Google reviews, games, socials and more.</p>
     <div className="mp-product-art mp-menu-art">
-      <ArrowNote>ONE TAP.<br />EVERYTHING<br />YOUR CUSTOMERS<br />NEED.</ArrowNote>
+      <div className="mp-note mp-promo-note mp-menu-note">
+        <span>ONE TAP.<br />EVERYTHING<br /><mark>YOUR CUSTOMERS</mark><br />NEED.</span>
+        <span className="mp-menu-features"><em>MENU.</em><br /><em>REVIEWS.</em><br /><em>GAMES.</em><br />SOCIALS.<br />AND MORE.</span>
+        <svg viewBox="0 0 60 100" preserveAspectRatio="none" aria-hidden="true"><path d="M7 4Q60 55 23 91m-3-14 3 16 12-10" /></svg>
+      </div>
       <Device src="mobile/menutap-menu-real.jpg" alt="Actual MenuTap mobile restaurant menu, captured from its live demo" />
-      <img className="mp-menu-sticker" src={`${A}menutap-sticker.png`} alt="The physical MenuTap NFC tabletop product" width="400" height="400" loading="lazy" />
+      <img className="mp-menu-sticker" src={`${A}mobile/menutap-sticker.webp`} alt="The physical MenuTap NFC tabletop product" width="400" height="400" loading="lazy" decoding="async" />
     </div>
     <ProjectActions href={menuTapHub} demo="See the Demo" project="menutap" onOpen={onOpen} />
     <Pills items={[[Code2,"Next.js"],[Radio,"NFC (NTAG213)"],[Database,"Database"]]} />
@@ -116,10 +95,13 @@ function ReceiptVideo() {
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       setVisible(entry.isIntersecting);
-      if (entry.isIntersecting) setLoaded(true);
     }, { threshold:.1 });
+    const preload = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setLoaded(true); preload.disconnect(); }
+    }, { rootMargin:"300px" });
     observer.observe(video.current);
-    return () => observer.disconnect();
+    preload.observe(video.current);
+    return () => { observer.disconnect(); preload.disconnect(); };
   }, []);
   useEffect(() => {
     const node = video.current;
@@ -136,7 +118,7 @@ function ReceiptVideo() {
     setManualPlay(true); setPaused(false); setBlocked(false); setLoaded(true);
     video.current.play().catch(() => setBlocked(true));
   };
-  return <div className="mp-receipt-video"><video ref={video} src={loaded ? `${A}mobile/foodspot-receipt-loop.mp4` : undefined} poster={`${A}mobile/foodspot-receipt-poster.jpg`} muted loop playsInline autoPlay={wantsPlay} preload="none" aria-label="Eight-second recording of FoodSpot’s delivered receipt and customer photo invitation" onPlaying={() => setBlocked(false)} />
+  return <div className="mp-receipt-video"><video ref={video} src={loaded ? `${A}mobile/foodspot-receipt-loop.mp4` : undefined} poster={loaded ? `${A}mobile/foodspot-receipt-poster.jpg` : undefined} muted loop playsInline autoPlay={wantsPlay} preload="none" aria-label="Eight-second recording of FoodSpot’s delivered receipt and customer photo invitation" onPlaying={() => setBlocked(false)} />
     <button className="mp-video-toggle" aria-label={wantsPlay && !blocked ? "Pause receipt video" : "Play receipt video"} onClick={wantsPlay && !blocked ? () => setPaused(true) : play}>{wantsPlay && !blocked ? <Pause size={16} /> : <Play size={16} />}</button>
   </div>;
 }
@@ -149,7 +131,13 @@ function MobileFoodSpot({ onOpen }) {
     <p className="mp-evolution">That experiment helped shape UGC Camera.</p>
     <div className="mp-product-art mp-foodspot-art">
       <Device src={foodspotScreens[screen].video ? undefined : foodspotScreens[screen].src} alt={foodspotScreens[screen].alt}>{foodspotScreens[screen].video && <ReceiptVideo />}</Device>
-      <ArrowNote>DELIVERED.<br />TAKE A PHOTO.<br />SHARE THE MOMENT.</ArrowNote>
+      <ArrowNote className="mp-promo-note mp-receipt-note">THE ORDER ENDS.<br />THE CONTENT STARTS.<br /><mark>UGC RECEIPTS.</mark></ArrowNote>
+      <figure className="mp-customer-story" aria-label="Illustrative customer Story showing a burger, fries and the Smash Burger business tag">
+        <img src={`${A}mobile/foodspot-customer-story.webp`} alt="Customer holding a Smash Burger and sharing a Story saying Best burger in town" width="315" height="640" loading="lazy" decoding="async" />
+        <div className="mp-story-progress" aria-hidden="true"><span /><span /><span /></div>
+        <div className="mp-story-author" aria-hidden="true"><UserRound size={12} /><span>your.customer</span><small>2h</small><span className="mp-story-close">×</span></div>
+        <span className="mp-story-business"><MapPin size={11} aria-hidden="true" />Smash Burger</span>
+      </figure>
     </div>
     <div className="mp-screen-picker" aria-label="FoodSpot Mobile screens">{foodspotScreens.map((item, i) => <button key={item.label} aria-pressed={screen === i} onClick={() => setScreen(i)}>{item.label}</button>)}</div>
     <ProjectActions href={screen === 0 ? foodspotReceipt : foodspotDemo} demo={screen === 0 ? "Try the Receipt" : "View Demo"} project="foodspot" onOpen={onOpen} />
@@ -165,9 +153,9 @@ function MobileMac({ onOpen }) {
     <Label n="04" status="Live Products">MAC APPS</Label>
     <h2 id="mp-mac-title">AND SOMETIMES<br />THE PROBLEM IS<br />JUST MINE.</h2>
     <p>Small but useful macOS apps that solve real problems.</p>
-    <div className="mp-app-grid" aria-label="Choose a Mac app">{macApps.map((item, i) => <button key={item.id} aria-pressed={index === i} onClick={() => setIndex(i)}><img src={item.icon} alt="" width="56" height="56" loading="lazy" /><b>{item.name.replace("Screen Bridge", "ScreenBridge")}</b><span>{appSubs[i]}</span></button>)}</div>
+    <div className="mp-app-grid" aria-label="Choose a Mac app">{macApps.map((item, i) => <button key={item.id} aria-pressed={index === i} onClick={() => setIndex(i)}><img src={item.icon} alt="" width="56" height="56" loading="lazy" decoding="async" /><b>{item.name.replace("Screen Bridge", "ScreenBridge")}</b><span>{appSubs[i]}</span></button>)}</div>
     <div className="mp-macbook">
-      <div className="mp-mac-screen" aria-live="polite">{app.image ? <img src={app.image} alt={app.imageAlt} width="900" height="600" loading="lazy" /> : <div className="mp-ibrain"><img src={app.icon} alt="" width="48" height="48" /><h3>{app.name}</h3><p>{app.tagline}</p><Out href={app.links[0].href}>Explore the source<ArrowUpRight size={14} /></Out></div>}</div>
+      <div className="mp-mac-screen" aria-live="polite">{app.image ? <img src={app.id === "ivoz" ? `${A}mobile/ivoz-window-real.webp` : app.image} alt={app.imageAlt} width="900" height="600" loading="lazy" decoding="async" /> : <div className="mp-ibrain"><img src={app.icon} alt="" width="48" height="48" /><h3>{app.name}</h3><p>{app.tagline}</p><Out href={app.links[0].href}>Explore the source<ArrowUpRight size={14} /></Out></div>}</div>
       <div className="mp-mac-base" aria-hidden="true" />
     </div>
     <p className="mp-mac-caption">{app.name.replace("Screen Bridge", "ScreenBridge")} · {app.image ? "Actual application window" : "Local AI • source available"}</p>
@@ -203,11 +191,11 @@ function MobileBarber() {
   const [review, setReview] = useState(0);
   const item = barberReviews[review];
   return <section className="mp-barber" aria-labelledby="mp-barber-title">
-    <img className="mp-barber-bg" src={`${A}autobarber-workshop.jpg`} alt="" width="1200" height="900" loading="lazy" />
+    <img className="mp-barber-bg" src={`${A}mobile/autobarber-workshop.webp`} alt="" width="1200" height="900" loading="lazy" decoding="async" />
     <div className="mp-barber-content"><Label n="06" status="Past business">THE AUTO BARBER</Label>
       <h2 id="mp-barber-title">BEFORE I BUILT<br />SOFTWARE,<br />I BUILT A BUSINESS.</h2>
       <p>Automotive restyling. Real customers, real operations, and learning what it takes to deliver work people trust.</p>
-      <figure className="mp-barber-portrait"><img src={`${A}mobile/autobarber-portrait.jpg`} alt="Hikari in the Auto Barber shop, wearing the branded apron and holding a detailing towel with a gloved hand" width="900" height="900" loading="lazy" /></figure>
+      <figure className="mp-barber-portrait"><img src={`${A}mobile/autobarber-portrait.jpg`} alt="Hikari in the Auto Barber shop, wearing the branded apron and holding a detailing towel with a gloved hand" width="900" height="900" loading="lazy" decoding="async" /></figure>
       <div className="mp-business-facts" aria-label="Auto Barber business results"><div><b>6-FIGURE</b><span>REVENUE</span></div><div><b>165+</b><span>GOOGLE REVIEWS</span></div><div><b>4.9</b><span className="mp-stars" aria-label="Five stars">★★★★★</span></div></div>
       <div className="mp-review"><div className="mp-review-head"><GoogleMark size={25} /><span><b>4.9</b><span className="mp-stars" aria-label="Five stars">★★★★★</span></span></div><blockquote>“{item.quote}{item.excerpt ? "…" : ""}”</blockquote><Out href={item.href}>{item.name}<ArrowUpRight size={13} /></Out><div className="mp-review-controls"><button aria-label="Previous customer review" onClick={() => setReview((review + barberReviews.length - 1) % barberReviews.length)}><ChevronLeft size={18} /></button><span aria-live="polite">{review + 1} / {barberReviews.length}</span><button aria-label="Next customer review" onClick={() => setReview((review + 1) % barberReviews.length)}><ChevronRight size={18} /></button></div></div>
       <Out href={googleReviewsUrl} className="mp-button mp-yellow mp-full">See all Google reviews<ArrowUpRight size={16} /></Out>
@@ -234,8 +222,7 @@ function MobileContact() {
   return <section id="contact" className="mp-section mp-contact"><Label n="09">LET’S TALK</Label><h3>You’ve seen the receipts.<br /><em>Let’s talk.</em></h3><ArrowNote>Real projects.<br />Real progress.<br />Let’s build<br />what’s next.</ArrowNote><Out href={`${email}?subject=Let%E2%80%99s%20book%20a%20call`} className="mp-button mp-yellow mp-full">Book a Call<ArrowRight size={18} /></Out><p className="mp-call-note">Email me to arrange a time.</p><div className="mp-contact-actions"><Out href={email}><Mail size={18} />Email Me<ArrowUpRight size={13} /></Out><Out href={linkedin}><Linkedin size={18} />LinkedIn<ArrowUpRight size={13} /></Out><Out href={github}><Github size={18} />GitHub<ArrowUpRight size={13} /></Out><Out href={whatsapp}><WhatsAppIcon size={19} />WhatsApp<ArrowUpRight size={13} /></Out></div></section>;
 }
 function MobileFooter() {
-  const { reduced, systemReduced, toggle } = useMotionControls();
-  return <footer className="mp-footer"><FooterQuote /><a href="#home" className="mp-signature">Hikari Brandan</a><p className="mp-footer-roots">SEATTLE ROOTS. ARGENTINA BASE.</p><div className="mp-socials"><Out href={linkedin} aria-label="LinkedIn"><Linkedin /></Out><Out href={github} aria-label="GitHub"><Github /></Out><Out href={resume} aria-label="View résumé"><FileText /></Out><Out href={whatsapp} aria-label="WhatsApp"><WhatsAppIcon size={24} /></Out></div><LanguageFlags /><p className="mp-copyright">© {new Date().getFullYear()} HIKARI BRANDAN<br />BUILT TO SOLVE REAL PROBLEMS.</p><button className="mp-motion-toggle" aria-pressed={reduced} disabled={systemReduced} onClick={toggle}>{systemReduced ? "Reduced motion · system preference" : `Motion ${reduced ? "off" : "on"}`}<span /></button></footer>;
+  return <footer className="mp-footer"><FooterQuote /><a href="#home" className="mp-signature">Hikari Brandan</a><p className="mp-footer-roots">SEATTLE ROOTS. ARGENTINA BASE.</p><div className="mp-socials"><Out href={linkedin} aria-label="LinkedIn"><Linkedin /></Out><Out href={github} aria-label="GitHub"><Github /></Out><Out href={resume} aria-label="View résumé"><FileText /></Out><Out href={whatsapp} aria-label="WhatsApp"><WhatsAppIcon size={24} /></Out></div><LanguageFlags /><p className="mp-copyright">© {new Date().getFullYear()} HIKARI BRANDAN<br />BUILT TO SOLVE REAL PROBLEMS.</p></footer>;
 }
 
 export default function MobilePortfolio({ onOpen }) {
@@ -269,9 +256,9 @@ export default function MobilePortfolio({ onOpen }) {
     return () => observer.disconnect();
   }, [reduce]);
   return <div ref={root} className={`mobile-portfolio ${reduce ? "mp-reduced" : ""}`}>
-    <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">Hikari Brandan</a><a href="#contact" className="mp-header-cta">Let’s talk<ArrowUpRight size={16} /></a></header>
+    <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">Hikari Brandan</a><Out href="https://api.whatsapp.com/send?phone=543513668122" className="mp-header-cta" aria-label="Contact Hikari on WhatsApp Business">Let’s talk<ArrowUpRight size={16} /></Out></header>
     <main className="mp-paper">
-      <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m Hikari. I turn real problems into useful products with product thinking, AI and code.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><figure className="mp-personal-portrait"><img src={`${A}mobile/hikari-roots-portrait.jpg`} alt="Hikari Brandan, raised in Seattle, Washington, and building from Córdoba, Argentina" width="1200" height="1312" /></figure></section>
+      <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m Hikari. I turn real problems into useful products with product thinking, AI and code.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><figure className="mp-personal-portrait"><img src={`${A}mobile/hikari-roots-portrait.jpg`} alt="Hikari Brandan, raised in Seattle, Washington, and building from Córdoba, Argentina" width="840" height="918" fetchPriority="high" decoding="async" /></figure></section>
       <MobileUGC /><MobileMenuTap onOpen={onOpen} /><MobileFoodSpot onOpen={onOpen} /><MobileMac onOpen={onOpen} /><MobileProcess onOpen={onOpen} /><MobileBarber /><MobileStack /><MobileOpportunities /><MobileContact /><MobileFooter />
     </main>
     <nav className="mp-bottom-nav" aria-label="Mobile navigation">{[[Home,"home","Home"],[BriefcaseBusiness,"projects","Projects"],[UserRound,"about","About"]].map(([Icon,id,label]) => <a href={`#${id}`} key={id} aria-current={active === id ? "location" : undefined} className={active === id ? "mp-active" : ""}><Icon size={22} aria-hidden="true" /><span>{label}</span></a>)}<Out href={resume}><FileText size={22} aria-hidden="true" /><span>Résumé</span></Out></nav>
