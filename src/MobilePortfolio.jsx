@@ -19,7 +19,6 @@ const suite = "https://isuitemacos-cyan.vercel.app/index.html";
 const foodspotDemo = "https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders";
 const foodspotReceipt = "https://foodspotapp-gold.vercel.app/smash-burger-demo/status";
 const menuTapHub = "https://www.foodspotmobile.com/t/foodspot-demo";
-const ugcWebsite = "https://www.ugccamera.com/";
 
 function Out({ href, children, className = "", ...props }) {
   return <a href={href} className={className} target={href.startsWith("mailto:") ? undefined : "_blank"} rel="noopener noreferrer" {...props}>{children}</a>;
@@ -54,7 +53,8 @@ function MobileUGC() {
       </Device>
       <ArrowNote className="mp-ugc-note"><span>ORGANIC UGC</span><br /><span>CONTENT</span><br /><span>IN SECONDS.</span></ArrowNote>
     </div>
-    <ProjectActions href={projectData.ugc.demoUrl} demo="Try the Demo" projectHref={ugcWebsite} />
+    <ProjectActions href={projectData.ugc.demoUrl} demo="Try the Demo" projectHref="https://hikari-brandan.vercel.app/projects/ugc-camera" />
+    <p className="mp-project-proof">Expanded the touch targets for resizing and rotating stickers on mobile.</p>
     <Pills items={[[Code2,"Next.js"],[Database,"Supabase"],[Camera,"Camera APIs"]]} />
   </section>;
 }
@@ -74,6 +74,7 @@ function MobileMenuTap({ onOpen }) {
       <img className="mp-menu-sticker" src={`${A}mobile/menutap-sticker.webp`} alt="The physical MenuTap NFC tabletop product" width="400" height="400" loading="lazy" decoding="async" />
     </div>
     <ProjectActions href={menuTapHub} demo="See the Demo" project="menutap" onOpen={onOpen} projectLabel="Build Notes" />
+    <p className="mp-project-proof">The live customer menu opens in a browser without a sign-in.</p>
     <Pills items={[[Code2,"Next.js"],[Radio,"NFC (NTAG213)"],[Database,"Database"]]} />
   </section>;
 }
@@ -127,9 +128,8 @@ function MobileFoodSpot({ onOpen }) {
   const [screen, setScreen] = useState(0);
   return <section id="foodspot" className="mp-section mp-project" aria-labelledby="mp-foodspot-title">
     <Label n="03" status="Side Project">FOODSPOT</Label>
-    <h2 id="mp-foodspot-title">BILLION-DOLLAR<br />FOOD APPS DIDN’T<br />HAVE A NATIVE CAMERA<br />FOR FOOD PHOTOGRAPHY.<br /><span className="mp-insight-line">SO I BUILT ONE.</span></h2>
-    <p>FoodSpot introduced a UGC Receipt after delivery — a camera experience for customers to photograph and share their order.</p>
-    <p className="mp-evolution">That experiment helped shape UGC Camera.</p>
+    <h2 id="mp-foodspot-title">FOODSPOT’S UGC RECEIPT<br />BECAME A BROWSER<br /><span className="mp-insight-line">CAMERA PRODUCT.</span></h2>
+    <p>FoodSpot’s post-purchase UGC Receipt inspired a focused browser camera experience that later became UGC Camera.</p>
     <div className="mp-product-art mp-foodspot-art">
       <Device src={foodspotScreens[screen].video ? undefined : foodspotScreens[screen].src} alt={foodspotScreens[screen].alt}>{foodspotScreens[screen].video && <ReceiptVideo />}</Device>
       <ArrowNote className="mp-promo-note mp-receipt-note">THE ORDER ENDS.<br />THE CONTENT STARTS.<br /><mark>UGC RECEIPTS.</mark></ArrowNote>
@@ -142,6 +142,7 @@ function MobileFoodSpot({ onOpen }) {
     </div>
     <div className="mp-screen-picker" aria-label="FoodSpot Mobile screens">{foodspotScreens.map((item, i) => <button key={item.label} aria-pressed={screen === i} onClick={() => setScreen(i)}>{item.label}</button>)}</div>
     <ProjectActions href={screen === 0 ? foodspotReceipt : foodspotDemo} demo={screen === 0 ? "Try the Receipt" : "View Demo"} project="foodspot" onOpen={onOpen} projectLabel="Build Notes" />
+    <p className="mp-project-proof">The populated owner demo shows order management; project notes document menu and inventory screens.</p>
     <Pills items={[[Code2,"React"],[Database,"Supabase"],[Camera,"UGC receipt"]]} />
   </section>;
 }
@@ -160,6 +161,7 @@ function MobileMac({ onOpen }) {
       <div className="mp-mac-base" aria-hidden="true" />
     </div>
     <p className="mp-mac-caption">{app.name.replace("Screen Bridge", "ScreenBridge")} · {app.image ? "Actual application window" : "Local AI • source available"}</p>
+    {app.id === "ivoz" && <p className="mp-project-proof">Retested shortcut and microphone-permission behavior across repeated launches.</p>}
     <Out href={suite} className="mp-button mp-yellow mp-full">Explore All Mac Apps<ArrowRight size={17} /></Out>
     <Pills items={[[Apple,"Swift"],[Sparkles,"SwiftUI"],[Cpu,"macOS APIs"]]} />
     <BuildNotesLink project="mac" className="mp-text-action" onOpen={() => onOpen("mac")}>Open source. Built for Apple Silicon.<ArrowUpRight size={14} /></BuildNotesLink>
@@ -200,7 +202,7 @@ function MobileBarber() {
       <div className="mp-business-facts" aria-label="Auto Barber business results"><div><b>6-FIGURE</b><span>REVENUE</span></div><div><b>165+</b><span>GOOGLE REVIEWS</span></div><div><b>4.9</b><span className="mp-stars" aria-label="Five stars">★★★★★</span></div></div>
       <div className="mp-review"><div className="mp-review-head"><GoogleMark size={25} /><span><b>4.9</b><span className="mp-stars" aria-label="Five stars">★★★★★</span></span></div><blockquote>“{item.quote}{item.excerpt ? "…" : ""}”</blockquote><Out href={item.href}>{item.name}<ArrowUpRight size={13} /></Out><div className="mp-review-controls"><button aria-label="Previous customer review" onClick={() => setReview((review + barberReviews.length - 1) % barberReviews.length)}><ChevronLeft size={18} /></button><span aria-live="polite">{review + 1} / {barberReviews.length}</span><button aria-label="Next customer review" onClick={() => setReview((review + 1) % barberReviews.length)}><ChevronRight size={18} /></button></div></div>
       <Out href={googleReviewsUrl} className="mp-button mp-yellow mp-full">See all Google reviews<ArrowUpRight size={16} /></Out>
-      <span className="mp-small-note">The full story is coming. I’m writing it next.</span>
+      <Out href="https://hikari-brandan.vercel.app/projects/the-auto-barber" className="mp-small-note mp-story-link">Read the Auto Barber story<ArrowUpRight size={14} /></Out>
     </div>
   </section>;
 }
@@ -269,7 +271,7 @@ export default function MobilePortfolio({ onOpen }) {
   return <div ref={root} className={`mobile-portfolio ${reduce ? "mp-reduced" : ""}`}>
     <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">Hikari Brandan</a><Out href="https://api.whatsapp.com/send?phone=543513668122" className="mp-header-cta" aria-label="Contact Hikari on WhatsApp Business">Let’s talk<ArrowUpRight size={16} /></Out></header>
     <main className="mp-paper">
-      <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m Hikari. I turn real problems into useful products with product thinking, AI and code.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><figure className="mp-personal-portrait"><img src={`${A}mobile/hikari-roots-portrait.jpg`} alt="Hikari Brandan, raised in Seattle, Washington, and building from Córdoba, Argentina" width="840" height="918" fetchPriority="high" decoding="async" /></figure></section>
+      <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m Hikari, a Product Developer. I turn real problems into useful products with product thinking, AI and code.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><figure className="mp-personal-portrait"><img src={`${A}mobile/hikari-roots-portrait.jpg`} alt="Hikari Brandan, raised in Seattle, Washington, and building from Córdoba, Argentina" width="840" height="918" fetchPriority="high" decoding="async" /></figure></section>
       <MobileUGC /><MobileMenuTap onOpen={onOpen} /><MobileFoodSpot onOpen={onOpen} /><MobileMac onOpen={onOpen} /><MobileProcess onOpen={onOpen} /><MobileBarber /><MobileStack /><MobileOpportunities /><MobileContact /><MobileFooter />
     </main>
     <nav className="mp-bottom-nav" aria-label="Mobile navigation">{[[Home,"home","Home"],[BriefcaseBusiness,"projects","Projects"],[UserRound,"about","About"]].map(([Icon,id,label]) => <a href={`#${id}`} key={id} aria-current={active === id ? "location" : undefined} className={active === id ? "mp-active" : ""}><Icon size={22} aria-hidden="true" /><span>{label}</span></a>)}<Out href={resume}><FileText size={22} aria-hidden="true" /><span>Résumé</span></Out></nav>

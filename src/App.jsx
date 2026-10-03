@@ -515,6 +515,7 @@ function UGC({ onOpen }) {
               View project
             </CTA>
           </div>
+          <p className="project-proof">Expanded the touch targets for resizing and rotating stickers on mobile.</p>
           <button
             className="phone-handoff-link"
             onClick={() => setHandoff(true)}
@@ -620,6 +621,7 @@ function MenuTap({ onOpen }) {
               View project
             </CTA>
           </div>
+          <p className="project-proof">The live customer menu opens in a browser without a sign-in.</p>
           <span className="mobile-hint">
             <Smartphone size={14} />
             Best experienced on your phone
@@ -720,6 +722,7 @@ function FoodSpot({ onOpen }) {
               <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders">Explore the demo <ArrowUpRight size={16} /></CTA>
               <CTA secondary notesProject="foodspot" onClick={() => onOpen("foodspot")}>The story <ArrowUpRight size={16} /></CTA>
             </div>
+            <p className="project-proof">The populated owner demo shows order management; the project page documents menu and inventory screens.</p>
             <div className="evolution"><span>Real mobile UI · populated demo</span></div>
           </Reveal>
           <div className="device-stage foodspot-stage foodspot-capture-stage">
@@ -931,6 +934,7 @@ function MacApps({ onOpen }) {
           <p>
             {app.description}
             <small>{app.note}</small>
+            {app.id === "ivoz" && <small>Retested shortcut and microphone-permission behavior across repeated launches.</small>}
           </p>
           <div className="app-links">
             <BuildNotesLink project="mac" onOpen={() => onOpen("mac")}>
@@ -1178,7 +1182,9 @@ function AutoBarber() {
           <CTA href={googleReviewsUrl}>
             See all Google reviews <ArrowUpRight size={16} />
           </CTA>
-          <span className="business-story-note">The full story is coming. I’m writing it next.</span>
+          <External href="https://hikari-brandan.vercel.app/projects/the-auto-barber" className="business-story-note">
+            Read the Auto Barber story <ArrowUpRight size={13} />
+          </External>
         </Reveal>
         <div className="business-visual">
           <img
