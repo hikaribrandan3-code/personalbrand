@@ -28,7 +28,7 @@ Only iVoz has a verified release download linked in this portfolio: [v1.1.0 Appl
 - `portrait.png`: the supplied real portrait, originally “ChatGPT Image Oct 1, 2026, 03_08_30 AM.png”. Face is not regenerated; any silhouette mask isolates the existing photo.
 - `menutap-sticker.png`: supplied `menutapsticker.png`, used as the recognizable physical NFC object.
 - `ugc-table-product.jpeg`: real creator-supplied Tap & Snap tabletop product photograph, originally `IMG_0207.jpeg`.
-- `Daiske-Brandan-Resume.pdf`: supplied `Daiske_Brandan_AI_Resume_Updated_MacApps.pdf`. Preserved as supplied; older iVoice naming and historical technical wording remain inside the PDF.
+- `Daiske-Brandan-Resume.pdf` and `Hikari_Brandan_Resume.pdf`: updated 2026-10-04 with the supplied Product Editorial resume PDF.
 - `autobarber-logo.png`: supplied Auto Barber logo. Original image is small; it is not evidence of a new brand identity.
 - `autobarber-workshop.jpg`: real business-owner Google album photograph showing a blue Tesla with front paint protection film/exterior coating in the workshop. [Original photograph](https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T_omc4FyhhJQcJfFGuO1QDQ5WgIvFHuyfErKPnlwgcGACYpq9MD_xtY_jtBfbFlPnF94t06PZWjX2RY_POPE987-AmpojcUfNoBf3dfayMI2XXad_tAUKehZhPapE2YBG0z-UdAQ=s1360-w1360-h1020-rw).
 
