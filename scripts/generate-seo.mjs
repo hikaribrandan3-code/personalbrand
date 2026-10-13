@@ -77,7 +77,7 @@ try {
   }
   await writeFile('dist/404.html','<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found — Hikari Brandan</title><meta name="robots" content="noindex, follow"><link rel="stylesheet" href="/assets/evidence.css"></head><body class="evidence-page"><main class="pd-header"><h1>Page not found.</h1><p>This address doesn’t have a portfolio page.</p><a class="pd-link" href="/">Back to portfolio</a></main></body></html>');
   await writeFile('dist/robots.txt',`User-agent: *\nAllow: /\n\n# OAI-SearchBot, PerplexityBot and Claude-SearchBot inherit public access.\n# No change to model-training crawler policy.\nSitemap: ${origin}/sitemap.xml\n`);
-  const paths = preview ? [] : ['/',...pages.map(page=>page.path),'/Hikari_Brandan_Resume.pdf'];
+  const paths = preview ? [] : ['/',...pages.map(page=>page.path),'/ugc-for-ai-startups','/Hikari_Brandan_Resume.pdf'];
   await writeFile('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map(path=>`<url><loc>${absolute(path)}</loc></url>`).join('')}</urlset>`);
   console.log(`Generated initial homepage HTML, ${pages.length} permanent notes pages, metadata, entity graph, robots and sitemap (${preview?'preview noindex':'production indexable'}).`);
 } finally { await rm('.seo-build',{recursive:true,force:true}); }

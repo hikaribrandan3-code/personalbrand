@@ -1,4 +1,5 @@
 export const projectPaths = {
+  ugcServices: "/ugc-for-ai-startups.html",
   ugc: "/projects/ugc-camera",
   menutap: "/projects/menutap",
   foodspot: "/projects/foodspot-mobile",

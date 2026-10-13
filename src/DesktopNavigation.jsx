@@ -63,6 +63,7 @@ export default function DesktopNavigation() {
           <span aria-hidden="true">·</span><span className="desktop-counter-mask"><AnimatePresence mode="popLayout" initial={false}><motion.span key={state.project} initial={{ y: reduced ? 0 : 10, opacity: reduced ? 1 : 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: reduced ? 0 : -10, opacity: 0 }} transition={{ duration: reduced ? 0 : .18 }}>{String(state.project + 1).padStart(2, "0")}</motion.span></AnimatePresence></span><span>/{String(state.total).padStart(2, "0")}</span>
         </span>}
       </a>)}
+      <a href="/ugc-for-ai-startups.html" aria-label="UGC videos for AI and software startups">UGC</a>
       <a href="/Hikari_Brandan_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé <ArrowUpRight size={13} /></a>
     </nav>
     <a className="desktop-contact" href="#contact">Let’s talk <ArrowUpRight size={16} /></a>

@@ -8,6 +8,7 @@ import { barberReviews, googleReviewsUrl } from "./reviewData";
 import { useMotionPreference } from "./motion-preferences";
 import BuildNotesLink from "./BuildNotesLink";
 import "./mobile-portfolio.css";
+import ContentDistribution from "./ContentDistribution";
 
 const A = "/assets/";
 const github = "https://github.com/hikaribrandan3-code";
@@ -234,6 +235,13 @@ export default function MobilePortfolio({ onOpen }) {
   const [compact, setCompact] = useState(false);
   const reduce = useMotionPreference();
   useEffect(() => {
+    if (!window.location.hash) return;
+    const frame = requestAnimationFrame(() => {
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: "instant", block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+  useEffect(() => {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("mp-background-ready");
@@ -269,10 +277,10 @@ export default function MobilePortfolio({ onOpen }) {
     return () => observer.disconnect();
   }, [reduce]);
   return <div ref={root} className={`mobile-portfolio ${reduce ? "mp-reduced" : ""}`}>
-    <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">Hikari Brandan</a><Out href="https://api.whatsapp.com/send?phone=543513668122" className="mp-header-cta" aria-label="Contact Hikari on WhatsApp Business">Let’s talk<ArrowUpRight size={16} /></Out></header>
+    <header className={`mp-header ${compact ? "mp-compact" : ""}`}><a href="#home" className="mp-mark" aria-label="Hikari Brandan, home">Hikari Brandan</a><div className="mp-header-actions"><a href="/ugc-for-ai-startups.html" className="mp-header-ugc" aria-label="UGC videos for AI and software startups">UGC</a><Out href="https://api.whatsapp.com/send?phone=543513668122" className="mp-header-cta" aria-label="Contact Hikari on WhatsApp Business">Let’s talk<ArrowUpRight size={16} /></Out></div></header>
     <main className="mp-paper">
       <section id="home" className="mp-intro" aria-labelledby="mp-intro-title"><span className="mp-available"><span />Open to opportunities</span><h1 id="mp-intro-title">Let’s build<br />something<br /><em>meaningful.</em></h1><p>I’m Hikari, a Product Developer. I turn real problems into useful products with product thinking, AI and code.</p><div className="mp-identity"><div><span className="mp-identity-icon"><Globe2 size={28} /></span><span><b>Fully remote</b><span>Worldwide</span></span></div><div><span className="mp-identity-icon"><MessageSquare size={27} /></span><span><b>Native languages</b><LanguageFlags /></span></div></div><figure className="mp-personal-portrait"><img src={`${A}mobile/hikari-roots-portrait.jpg`} alt="Hikari Brandan, raised in Seattle, Washington, and building from Córdoba, Argentina" width="840" height="918" fetchPriority="high" decoding="async" /></figure></section>
-      <MobileUGC /><MobileMenuTap onOpen={onOpen} /><MobileFoodSpot onOpen={onOpen} /><MobileMac onOpen={onOpen} /><MobileProcess onOpen={onOpen} /><MobileBarber /><MobileStack /><MobileOpportunities /><MobileContact /><MobileFooter />
+      <MobileUGC /><MobileMenuTap onOpen={onOpen} /><MobileFoodSpot onOpen={onOpen} /><MobileMac onOpen={onOpen} /><MobileProcess onOpen={onOpen} /><MobileBarber /><ContentDistribution /><MobileStack /><MobileOpportunities /><MobileContact /><MobileFooter />
     </main>
     <nav className="mp-bottom-nav" aria-label="Mobile navigation">{[[Home,"home","Home"],[BriefcaseBusiness,"projects","Projects"],[UserRound,"about","About"]].map(([Icon,id,label]) => <a href={`#${id}`} key={id} aria-current={active === id ? "location" : undefined} className={active === id ? "mp-active" : ""}><Icon size={22} aria-hidden="true" /><span>{label}</span></a>)}<Out href={resume}><FileText size={22} aria-hidden="true" /><span>Résumé</span></Out></nav>
   </div>;

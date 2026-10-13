@@ -19,6 +19,11 @@
       }
     },
     {
+      "src": "^/ugc-for-ai-startups(?:/|\\.html)$",
+      "status": 308,
+      "headers": { "Location": "/ugc-for-ai-startups" }
+    },
+    {
       "src": "^/(projects/(?:ugc-camera|menutap|foodspot-mobile|macos-app-suite|the-auto-barber)|build-notes)(?:/|\\.html)$",
       "status": 308,
       "headers": {
@@ -30,8 +35,19 @@
       "dest": "/index.html"
     },
     {
+      "src": "^/ugc-for-ai-startups$",
+      "dest": "/ugc-for-ai-startups.html"
+    },
+    {
       "src": "^/(projects/(?:ugc-camera|menutap|foodspot-mobile|macos-app-suite|the-auto-barber)|build-notes)$",
       "dest": "/$1.html"
+    },
+    {
+      "src": "^/analytics/(.*)$",
+      "dest": "/analytics/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=3600"
+      }
     },
     {
       "src": "^/assets/(.*)$",

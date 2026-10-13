@@ -67,6 +67,7 @@ import { openNotes, projectPaths } from "./projectPaths";
 import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
+import ContentDistribution from "./ContentDistribution";
 import { barberReviews, googleReviewsUrl } from "./reviewData";
 const ProjectDrawer = lazy(() => import("./ProjectDrawer"));
 const MobilePortfolio = lazy(() => import("./MobilePortfolio"));
@@ -1529,6 +1530,7 @@ function App() {
             <a className={active === "about" ? "active" : ""} href="#about">
               About
             </a>
+            <a href={projectPaths.ugcServices}>UGC</a>
             <External href="/Hikari_Brandan_Resume.pdf">
               Résumé <ArrowUpRight size={12} />
             </External>
@@ -1546,6 +1548,7 @@ function App() {
         <MacApps onOpen={setProject} />
         <Process onOpen={setProject} />
         <AutoBarber onOpen={setProject} />
+        <ContentDistribution />
         <Stack />
         <Contact />
       </main>

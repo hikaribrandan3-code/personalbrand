@@ -1,0 +1,512 @@
+{
+  "instagram": {
+    "90": {
+      "days": 90,
+      "startDate": "2026-07-14",
+      "endDate": "2026-10-12",
+      "metrics": {
+        "Reel views": 171000,
+        "Viewers": 93000,
+        "Reels": 153,
+        "Shares": 669,
+        "Saves": 818,
+        "Likes": 2300,
+        "Comments": 553,
+        "Reposts": 37
+      },
+      "followers": 729,
+      "source": "/analytics/instagram-90d.pdf",
+      "rounded": [
+        "Reel views",
+        "Viewers",
+        "Likes"
+      ],
+      "demographics": {
+        "gender": [
+          [
+            "Men",
+            75.6
+          ],
+          [
+            "Women",
+            24.4
+          ]
+        ],
+        "age": [
+          [
+            "13\u201317",
+            1.1
+          ],
+          [
+            "18\u201324",
+            20.5
+          ],
+          [
+            "25\u201334",
+            43.4
+          ],
+          [
+            "35\u201344",
+            22.4
+          ],
+          [
+            "45\u201354",
+            8.6
+          ],
+          [
+            "55\u201364",
+            3.1
+          ],
+          [
+            "65+",
+            0.8
+          ]
+        ],
+        "countries": [
+          [
+            "Argentina",
+            60.8
+          ],
+          [
+            "United States",
+            18.6
+          ],
+          [
+            "India",
+            3.3
+          ],
+          [
+            "Chile",
+            2
+          ],
+          [
+            "Mexico",
+            1.8
+          ]
+        ],
+        "cities": [
+          [
+            "C\u00f3rdoba",
+            47.1
+          ],
+          [
+            "Buenos Aires",
+            5.9
+          ],
+          [
+            "Quimil\u00ed",
+            5.3
+          ],
+          [
+            "Termas de R\u00edo Hondo",
+            4.5
+          ],
+          [
+            "Seattle",
+            2.1
+          ]
+        ]
+      }
+    },
+    "30": {
+      "days": 30,
+      "startDate": "2026-09-12",
+      "endDate": "2026-10-12",
+      "metrics": {
+        "Reel views": 38000,
+        "Viewers": 24000,
+        "Reels": 46,
+        "Shares": 240,
+        "Saves": 193,
+        "Likes": 393,
+        "Comments": 35,
+        "Reposts": 7
+      },
+      "followers": 729,
+      "source": "/analytics/instagram-30d.pdf",
+      "rounded": [
+        "Reel views",
+        "Viewers"
+      ]
+    }
+  },
+  "tiktok": {
+    "60": {
+      "days": 60,
+      "startDate": "2026-08-13",
+      "endDate": "2026-10-11",
+      "metrics": {
+        "Video Views": 133240,
+        "Profile Views": 4816,
+        "Likes": 4381,
+        "Comments": 204,
+        "Shares": 944
+      },
+      "timeSeries": [
+        {
+          "date": "2026-08-13",
+          "views": 353,
+          "likes": 9,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-14",
+          "views": 1383,
+          "likes": 24,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-15",
+          "views": 721,
+          "likes": 13,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-16",
+          "views": 1484,
+          "likes": 19,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-17",
+          "views": 652,
+          "likes": 8,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-18",
+          "views": 2600,
+          "likes": 81,
+          "shares": 1
+        },
+        {
+          "date": "2026-08-19",
+          "views": 1878,
+          "likes": 58,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-20",
+          "views": 1817,
+          "likes": 44,
+          "shares": 2
+        },
+        {
+          "date": "2026-08-21",
+          "views": 1518,
+          "likes": 46,
+          "shares": 1
+        },
+        {
+          "date": "2026-08-22",
+          "views": 1588,
+          "likes": 53,
+          "shares": 1
+        },
+        {
+          "date": "2026-08-23",
+          "views": 439,
+          "likes": 9,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-24",
+          "views": 36,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-25",
+          "views": 56,
+          "likes": 1,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-26",
+          "views": 847,
+          "likes": 50,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-27",
+          "views": 1332,
+          "likes": 25,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-28",
+          "views": 139,
+          "likes": 7,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-29",
+          "views": 31,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-30",
+          "views": 997,
+          "likes": 60,
+          "shares": 0
+        },
+        {
+          "date": "2026-08-31",
+          "views": 41,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-01",
+          "views": 20,
+          "likes": 2,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-02",
+          "views": 220,
+          "likes": 5,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-03",
+          "views": 1264,
+          "likes": 49,
+          "shares": 8
+        },
+        {
+          "date": "2026-09-04",
+          "views": 9490,
+          "likes": 270,
+          "shares": 40
+        },
+        {
+          "date": "2026-09-05",
+          "views": 19690,
+          "likes": 493,
+          "shares": 133
+        },
+        {
+          "date": "2026-09-06",
+          "views": 21765,
+          "likes": 555,
+          "shares": 250
+        },
+        {
+          "date": "2026-09-07",
+          "views": 9816,
+          "likes": 246,
+          "shares": 106
+        },
+        {
+          "date": "2026-09-08",
+          "views": 4971,
+          "likes": 157,
+          "shares": 57
+        },
+        {
+          "date": "2026-09-09",
+          "views": 3422,
+          "likes": 102,
+          "shares": 19
+        },
+        {
+          "date": "2026-09-10",
+          "views": 3471,
+          "likes": 90,
+          "shares": 16
+        },
+        {
+          "date": "2026-09-11",
+          "views": 8228,
+          "likes": 225,
+          "shares": 63
+        },
+        {
+          "date": "2026-09-12",
+          "views": 5102,
+          "likes": 128,
+          "shares": 45
+        },
+        {
+          "date": "2026-09-13",
+          "views": 4000,
+          "likes": 112,
+          "shares": 8
+        },
+        {
+          "date": "2026-09-14",
+          "views": 4004,
+          "likes": 191,
+          "shares": 23
+        },
+        {
+          "date": "2026-09-15",
+          "views": 4197,
+          "likes": 218,
+          "shares": 26
+        },
+        {
+          "date": "2026-09-16",
+          "views": 4179,
+          "likes": 255,
+          "shares": 31
+        },
+        {
+          "date": "2026-09-17",
+          "views": 3842,
+          "likes": 254,
+          "shares": 31
+        },
+        {
+          "date": "2026-09-18",
+          "views": 2613,
+          "likes": 163,
+          "shares": 32
+        },
+        {
+          "date": "2026-09-19",
+          "views": 2761,
+          "likes": 234,
+          "shares": 39
+        },
+        {
+          "date": "2026-09-20",
+          "views": 1757,
+          "likes": 114,
+          "shares": 12
+        },
+        {
+          "date": "2026-09-21",
+          "views": 115,
+          "likes": 1,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-22",
+          "views": 75,
+          "likes": 5,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-23",
+          "views": 24,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-24",
+          "views": 36,
+          "likes": 2,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-25",
+          "views": 21,
+          "likes": 1,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-26",
+          "views": 14,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-27",
+          "views": 16,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-28",
+          "views": 15,
+          "likes": 1,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-29",
+          "views": 3,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-09-30",
+          "views": 9,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-01",
+          "views": 5,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-02",
+          "views": 4,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-03",
+          "views": 5,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-04",
+          "views": 3,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-05",
+          "views": 0,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-06",
+          "views": 5,
+          "likes": 1,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-07",
+          "views": 3,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-08",
+          "views": 8,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-09",
+          "views": 127,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-10",
+          "views": 25,
+          "likes": 0,
+          "shares": 0
+        },
+        {
+          "date": "2026-10-11",
+          "views": 3,
+          "likes": 0,
+          "shares": 0
+        }
+      ],
+      "source": "/analytics/tiktok-overview.csv",
+      "viewerSource": "/analytics/tiktok-viewers.csv",
+      "rounded": []
+    }
+  }
+}
