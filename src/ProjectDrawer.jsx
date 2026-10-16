@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText } from "./i18n";
 import { useMotionPreference } from "./motion-preferences";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -35,9 +36,9 @@ function ProjectLinks({ links = [] }) {
 
 function Stack({ items }) {
   return (
-    <ul className="pd-stack" aria-label="Tools and technologies">
+    <ul className="pd-stack" aria-label={localizedText("Tools and technologies")}>
       {items.map((item) => (
-        <li key={item}>{item}</li>
+        <li key={item}><LocalizedText>{item}</LocalizedText></li>
       ))}
     </ul>
   );
@@ -65,9 +66,9 @@ function AppExplorer({ apps, reducedMotion }) {
 
   return (
     <section className="pd-app-explorer" aria-labelledby={`${baseId}-heading`}>
-      <div className="pd-section-kicker">THE COLLECTION / OPEN THE DETAILS</div>
-      <h3 id={`${baseId}-heading`}>Five apps. Five different questions.</h3>
-      <div className="pd-tabs" role="tablist" aria-label="Mac applications">
+      <div className="pd-section-kicker"><LocalizedText>THE COLLECTION / OPEN THE DETAILS</LocalizedText></div>
+      <h3 id={`${baseId}-heading`}><LocalizedText>Five apps. Five different questions.</LocalizedText></h3>
+      <div className="pd-tabs" role="tablist" aria-label={localizedText("Mac applications")}>
         {apps.map((item, index) => (
           <button
             key={item.id}
@@ -102,44 +103,44 @@ function AppExplorer({ apps, reducedMotion }) {
           transition={{ duration: reducedMotion ? 0 : 0.16 }}
         >
           <div className="pd-app-title">
-            <span>{app.eyebrow}</span>
-            <h4>{app.tagline}</h4>
-            <p>{app.description}</p>
+            <span><LocalizedText>{app.eyebrow}</LocalizedText></span>
+            <h4><LocalizedText>{app.tagline}</LocalizedText></h4>
+            <p><LocalizedText>{app.description}</LocalizedText></p>
           </div>
           {app.image ? (
             <figure className="pd-app-figure">
               <img src={app.image} alt={app.imageAlt} loading="lazy" />
-              <figcaption>{app.imageCaption}</figcaption>
+              <figcaption><LocalizedText>{app.imageCaption}</LocalizedText></figcaption>
             </figure>
           ) : (
             <div className="pd-app-identity">
               <img src={app.icon} alt="" width="70" height="70" />
-              <span>iBrain</span>
-              <p>Local Ollama chat + optional cloud providers</p>
+              <span><LocalizedText>iBrain</LocalizedText></span>
+              <p><LocalizedText>Local Ollama chat + optional cloud providers</LocalizedText></p>
             </div>
           )}
           <div className="pd-app-notes">
             <div>
-              <h5>Decisions</h5>
+              <h5><LocalizedText>Decisions</LocalizedText></h5>
               <ul>
                 {app.decisions.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}><LocalizedText>{item}</LocalizedText></li>
                 ))}
               </ul>
-              <h5>What I learned</h5>
-              <p>{app.learned}</p>
+              <h5><LocalizedText>What I learned</LocalizedText></h5>
+              <p><LocalizedText>{app.learned}</LocalizedText></p>
             </div>
             <div className="pd-app-boundaries">
-              <h5>Known limitations</h5>
+              <h5><LocalizedText>Known limitations</LocalizedText></h5>
               <ul>
                 {app.limitations.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}><LocalizedText>{item}</LocalizedText></li>
                 ))}
               </ul>
-              <span className="pd-requirements">{app.requirements}</span>
+              <span className="pd-requirements"><LocalizedText>{app.requirements}</LocalizedText></span>
             </div>
           </div>
-          <h5 className="pd-stack-label">Stack</h5>
+          <h5 className="pd-stack-label"><LocalizedText>Stack</LocalizedText></h5>
           <Stack items={app.stack} />
           <ProjectLinks links={app.links} />
         </motion.div>
@@ -221,8 +222,7 @@ export default function ProjectDrawer({ project, onClose }) {
     const rect = dialogRef.current.getBoundingClientRect();
     if (
       event.clientX < rect.left ||
-      event.clientX > rect.right ||
-      event.clientY < rect.top ||
+      event.clientX > rect.right || event.clientY < rect.top ||
       event.clientY > rect.bottom
     )
       onCloseRef.current?.();
@@ -253,35 +253,35 @@ export default function ProjectDrawer({ project, onClose }) {
     >
       <div className="pd-shell">
         <div className="pd-toolbar">
-          <span>HIKARI / THE WORK BEHIND THE WORK</span>
+          <span><LocalizedText>HIKARI / THE WORK BEHIND THE WORK</LocalizedText></span>
           <button
             ref={closeRef}
             type="button"
             className="pd-close"
-            aria-label="Close project details"
+            aria-label={localizedText("Close project details")}
             onClick={() => onCloseRef.current?.()}
           >
-            <span>Close</span>
+            <span><LocalizedText>Close</LocalizedText></span>
             <X size={18} aria-hidden="true" />
           </button>
         </div>
         <header className="pd-header">
           <div className="pd-meta">
-            <span>{details.label}</span>
-            <span className="pd-status">{details.status}</span>
+            <span><LocalizedText>{details.label}</LocalizedText></span>
+            <span className="pd-status"><LocalizedText>{details.status}</LocalizedText></span>
           </div>
-          <h2 id={`${id}-title`}>{details.title}</h2>
-          <p id={`${id}-intro`}>{details.intro}</p>
+          <h2 id={`${id}-title`}><LocalizedText>{details.title}</LocalizedText></h2>
+          <p id={`${id}-intro`}><LocalizedText>{details.intro}</LocalizedText></p>
           <ProjectLinks links={details.links} />
           {details.mobileRecommended && (
             <p className="pd-mobile-note">
               <Smartphone size={15} aria-hidden="true" />
-              Best experienced on your phone.
+              <LocalizedText>Best experienced on your phone.</LocalizedText>
             </p>
           )}
         </header>
         {details.process && (
-          <ol className="pd-process" aria-label="My development workflow">
+          <ol className="pd-process" aria-label={localizedText("My development workflow")}>
             {details.process.map((step, index) => (
               <li key={step}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -295,16 +295,16 @@ export default function ProjectDrawer({ project, onClose }) {
             <section className="pd-section" key={section.title}>
               <div className="pd-section-label">
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{section.title}</h3>
+                <h3><LocalizedText>{section.title}</LocalizedText></h3>
               </div>
               <div className="pd-section-copy">
                 {section.paragraphs?.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}><LocalizedText>{paragraph}</LocalizedText></p>
                 ))}
                 {section.items && (
                   <ul>
                     {section.items.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item}><LocalizedText>{item}</LocalizedText></li>
                     ))}
                   </ul>
                 )}
@@ -325,9 +325,9 @@ export default function ProjectDrawer({ project, onClose }) {
           )}
         </div>
         <footer className="pd-footer">
-          <span>GOOD PRODUCTS START WITH GOOD QUESTIONS.</span>
+          <span><LocalizedText>GOOD PRODUCTS START WITH GOOD QUESTIONS.</LocalizedText></span>
           <a href="mailto:hikaristudioai@gmail.com">
-            Let’s talk about yours
+            <LocalizedText>Let’s talk about yours</LocalizedText>
             <ArrowUpRight size={16} aria-hidden="true" />
           </a>
         </footer>

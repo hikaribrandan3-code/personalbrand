@@ -1,3 +1,4 @@
+import { LocalizedText, localizedHref, localizedText, useLanguage } from "./i18n";
 import { useMotionPreference } from "./motion-preferences";
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import {
@@ -68,6 +69,7 @@ import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
 import ContentDistribution from "./ContentDistribution";
+import MontajCreatorSection from "./MontajCreatorSection";
 import { barberReviews, googleReviewsUrl } from "./reviewData";
 const ProjectDrawer = lazy(() => import("./ProjectDrawer"));
 const MobilePortfolio = lazy(() => import("./MobilePortfolio"));
@@ -155,6 +157,7 @@ function External({ href, children, className = "", ...props }) {
 }
 function CTA({ href, onClick, notesProject, children, secondary = false, className = "" }) {
   const reduce = useMotionPreference();
+  const { locale } = useLanguage();
   const x = useSpring(0, spring),
     y = useSpring(0, spring);
   function move(e) {
@@ -172,7 +175,7 @@ function CTA({ href, onClick, notesProject, children, secondary = false, classNa
     },
     style: { x, y },
   };
-  const destination = notesProject ? projectPaths[notesProject] : href;
+  const destination = localizedHref(notesProject ? projectPaths[notesProject] : href, locale);
   return destination ? (
     <motion.a
       href={destination}
@@ -206,9 +209,9 @@ function Reveal({ children, className = "", delay = 0 }) {
 function Label({ n, children, badge, subdued, website }) {
   return (
     <div className="section-label">
-      <span>{n}</span>
+      <span><LocalizedText>{n}</LocalizedText></span>
       <span className="label-divider">/</span>
-      <span>{children}</span>
+      <span><LocalizedText>{children}</LocalizedText></span>
       {website && <External className="project-domain" href={website}>
         {new URL(website).hostname.replace("www.", "")} <ArrowUpRight size={12} />
       </External>}
@@ -254,12 +257,12 @@ function TechCard({ items, onOpen, project, label = "Behind the build" }) {
         {items.map(([Icon, name]) => (
           <div key={name}>
             <Icon size={19} />
-            <span>{name}</span>
+            <span><LocalizedText>{name}</LocalizedText></span>
           </div>
         ))}
       </div>
       <BuildNotesLink className="notes-link" project={project} onOpen={onOpen}>
-        Engineering notes <ArrowUpRight size={15} />
+        <LocalizedText>Engineering notes</LocalizedText> <ArrowUpRight size={15} />
       </BuildNotesLink>
     </Reveal>
   );
@@ -305,8 +308,8 @@ function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            PRODUCT-FOCUSED FULL-STACK DEVELOPER <span>·</span> RAISED IN SEATTLE <span>·</span>{" "}
-            BASED IN ARGENTINA
+            <LocalizedText>PRODUCT-FOCUSED FULL-STACK DEVELOPER</LocalizedText> <span>·</span> <LocalizedText>RAISED IN SEATTLE</LocalizedText> <span>·</span>{" "}
+            <LocalizedText>BASED IN ARGENTINA</LocalizedText>
           </motion.div>
           <h1>
             {[
@@ -328,7 +331,7 @@ function Hero() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
-                  {line}
+                  <LocalizedText>{line}</LocalizedText>
                 </motion.span>
               </span>
             ))}
@@ -339,42 +342,42 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.45 }}
           >
-            I use product thinking, AI and code to turn ideas into{" "}
-            <em>real products, businesses and tools people actually use.</em>
+            <LocalizedText>I use product thinking, AI and code to turn ideas into</LocalizedText>{" "}
+            <em><LocalizedText>real products, businesses and tools people actually use.</LocalizedText></em>
           </motion.p>
           <div className="hero-facts">
             <span>
               <BriefcaseBusiness />
-              Product-focused developer
+              <LocalizedText>Product-focused developer</LocalizedText>
             </span>
             <span>
               <MapPin />
-              Raised in Seattle
+              <LocalizedText>Raised in Seattle</LocalizedText>
             </span>
             <span>
               <Globe2 />
-              Based in Argentina
+              <LocalizedText>Based in Argentina</LocalizedText>
             </span>
           </div>
           <div className="hero-cta">
             <CTA href="#projects">
-              See my work <ArrowDown size={16} />
+              <LocalizedText>See my work</LocalizedText> <ArrowDown size={16} />
             </CTA>
             <CTA href="/Hikari_Brandan_Resume.pdf" secondary>
-              View résumé <ArrowUpRight size={16} />
+              <LocalizedText>View résumé</LocalizedText> <ArrowUpRight size={16} />
             </CTA>
           </div>
           <div className="availability">
             <span className="live-dot" />
-            Open to fully remote opportunities{" "}
-            <span className="availability-divider">/</span> English & Español
+            <LocalizedText>Open to fully remote opportunities</LocalizedText>{" "}
+            <span className="availability-divider">/</span> <LocalizedText>English &amp; Español</LocalizedText>
           </div>
         </div>
         <motion.div className="portrait-stage" style={{ y }}>
           <img
             className="portrait"
             src={`${A}desktop/portrait.webp`}
-            alt="Hikari Brandan wearing his FoodSpot Mobile shirt"
+            alt={localizedText("Hikari Brandan wearing his FoodSpot Mobile shirt")}
             width="960"
             height="960"
             fetchPriority="high"
@@ -383,17 +386,17 @@ function Hero() {
         </motion.div>
         <div className="annotation portrait-note">
           <span>
-            persistent
+            <LocalizedText>persistent</LocalizedText>
             <br />
-            problem solver
+            <LocalizedText>problem solver</LocalizedText>
           </span>
           <Doodle />
         </div>
         <div className="annotation thinker-note">
           <span>
-            out-of-the-box
+            <LocalizedText>out-of-the-box</LocalizedText>
             <br />
-            thinker
+            <LocalizedText>thinker</LocalizedText>
           </span>
           <Doodle />
         </div>
@@ -402,9 +405,9 @@ function Hero() {
             className="polaroid polaroid-mac"
             whileHover={reduce ? {} : { rotate: 0, y: -5 }}
           >
-            <img src={`${A}desktop/ivoz-window-real-polaroid.webp`} alt="Real iVoz app window" width="450" height="312" />
-            <span>VOICE → TEXT</span>
-            <small>iVoz · macOS speech-to-text</small>
+            <img src={`${A}desktop/ivoz-window-real-polaroid.webp`} alt={localizedText("Real iVoz app window")} width="450" height="312" />
+            <span><LocalizedText>VOICE → TEXT</LocalizedText></span>
+            <small><LocalizedText>iVoz · macOS speech-to-text</LocalizedText></small>
           </motion.div>
           <motion.div
             className="polaroid polaroid-tap"
@@ -413,10 +416,10 @@ function Hero() {
             <img
               src={`${A}desktop/menutap-sticker-polaroid.webp`}
               width="450" height="450"
-              alt="The physical MenuTap NFC sticker"
+              alt={localizedText("The physical MenuTap NFC sticker")}
             />
-            <span>TAP THE TABLE ↗</span>
-            <small>NFC tabletop · restaurants</small>
+            <span><LocalizedText>TAP THE TABLE ↗</LocalizedText></span>
+            <small><LocalizedText>NFC tabletop · restaurants</LocalizedText></small>
           </motion.div>
           <motion.div
             className="scribble-card"
@@ -424,22 +427,22 @@ function Hero() {
           >
             <Crown />
             <span>
-              ✓ IDEAS
-              <br />✓ PRODUCTS
-              <br />✓ BUSINESSES
+              <LocalizedText>✓ IDEAS</LocalizedText>
+              <br /><LocalizedText>✓ PRODUCTS</LocalizedText>
+              <br /><LocalizedText>✓ BUSINESSES</LocalizedText>
               <br />
               <em>
-                and still
+                <LocalizedText>and still</LocalizedText>
                 <br />
-                learning…
+                <LocalizedText>learning…</LocalizedText>
               </em>
             </span>
           </motion.div>
         </motion.div>
         <div className="hero-bottom">
-          <span>REAL PROBLEMS. REAL PRODUCTS.</span>
+          <span><LocalizedText>REAL PROBLEMS. REAL PRODUCTS.</LocalizedText></span>
           <span>
-            SCROLL TO SEE THE RECEIPTS <ArrowDown size={13} />
+            <LocalizedText>SCROLL TO SEE THE RECEIPTS</LocalizedText> <ArrowDown size={13} />
           </span>
         </div>
       </div>
@@ -474,49 +477,47 @@ function UGC({ onOpen }) {
       <div className="wrap project-grid">
         <Reveal className="project-copy">
           <Label n="01" badge="Live product" website="https://www.ugccamera.com/">
-            UGC CAMERA
+            <LocalizedText>UGC CAMERA</LocalizedText>
           </Label>
           <h2 className="ugc-desktop-story">
-            CUSTOMERS
+            <LocalizedText>CUSTOMERS</LocalizedText>
             <br />
-            TAKE THE PHOTO.
+            <LocalizedText>TAKE THE PHOTO.</LocalizedText>
             <br />
-            YOUR BRAND GETS
+            <LocalizedText>YOUR BRAND GETS</LocalizedText>
             <br />
-            <span className="yellow">LEFT BEHIND.</span>
+            <span className="yellow"><LocalizedText>LEFT BEHIND.</LocalizedText></span>
           </h2>
           <h2 className="ugc-mobile-story">
-            I NOTICED CUSTOMERS
+            <LocalizedText>I NOTICED CUSTOMERS</LocalizedText>
             <br />
-            WERE ALREADY
+            <LocalizedText>WERE ALREADY</LocalizedText>
             <br />
-            PHOTOGRAPHING
+            <LocalizedText>PHOTOGRAPHING</LocalizedText>
             <br />
-            <span className="yellow">THEIR FOOD.</span>
+            <span className="yellow"><LocalizedText>THEIR FOOD.</LocalizedText></span>
           </h2>
           <p className="ugc-desktop-story">
-            Customers are already photographing their food.
+            <LocalizedText>Customers are already photographing their food.</LocalizedText>
             <br />
-            So I built restaurants their own branded camera —
+            <LocalizedText>So I built restaurants their own branded camera —</LocalizedText>
             <br />
-            one NFC tap or QR scan opens the camera, adds
+            <LocalizedText>one NFC tap or QR scan opens the camera, adds</LocalizedText>
             <br />
-            the business to the photo, and makes it ready to share.
+            <LocalizedText>the business to the photo, and makes it ready to share.</LocalizedText>
           </p>
           <p className="ugc-mobile-story">
-            So I gave restaurants their own branded camera — a simple QR or NFC
-            tap that opens a beautiful browser camera to capture and share
-            photos.
+            <LocalizedText>So I gave restaurants their own branded camera — a simple QR or NFC tap that opens a beautiful browser camera to capture and share photos.</LocalizedText>
           </p>
           <div className="project-actions">
             <CTA href={links.ugc}>
-              Try the demo <ArrowUpRight size={16} />
+              <LocalizedText>Try the demo</LocalizedText> <ArrowUpRight size={16} />
             </CTA>
-            <CTA notesProject="ugc" onClick={() => onOpen("ugc")} secondary>
-              View project
+            <CTA href="https://www.ugccamera.com/" secondary>
+              <LocalizedText>View project</LocalizedText>
             </CTA>
           </div>
-          <p className="project-proof">Expanded the touch targets for resizing and rotating stickers on mobile.</p>
+          <p className="project-proof"><LocalizedText>Expanded the touch targets for resizing and rotating stickers on mobile.</LocalizedText></p>
           <button
             className="phone-handoff-link"
             onClick={() => setHandoff(true)}
@@ -526,13 +527,13 @@ function UGC({ onOpen }) {
           </button>
           <div className="ugc-entry-modes">
             <span>
-              TAP & SNAP <small>NFC tabletop</small>
+              <LocalizedText>TAP &amp; SNAP</LocalizedText> <small><LocalizedText>NFC tabletop</LocalizedText></small>
             </span>
             <span>
-              SCAN & SNAP <small>QR / delivery & packaging</small>
+              <LocalizedText>SCAN &amp; SNAP</LocalizedText> <small><LocalizedText>QR / delivery &amp; packaging</LocalizedText></small>
             </span>
             <span className="ugc-shipped-proof">
-              SHIPPED <small>EN · ES · PT-BR</small>
+              <LocalizedText>SHIPPED</LocalizedText> <small><LocalizedText>EN · ES · PT-BR</LocalizedText></small>
             </span>
           </div>
         </Reveal>
@@ -546,11 +547,11 @@ function UGC({ onOpen }) {
             </Phone>
           </motion.div>
           <div className="annotation camera-note">
-            <span className="ugc-desktop-story">the location stays<br />with the photo.</span>
-            <span className="ugc-mobile-story">native location tag.<br />part of the photo.</span>
+            <span className="ugc-desktop-story"><LocalizedText>the location stays</LocalizedText><br /><LocalizedText>with the photo.</LocalizedText></span>
+            <span className="ugc-mobile-story"><LocalizedText>native location tag.</LocalizedText><br /><LocalizedText>part of the photo.</LocalizedText></span>
             <Doodle />
           </div>
-          <span className="scene-counter">CAMERA, BUT MAKE IT YOURS.</span>
+          <span className="scene-counter"><LocalizedText>CAMERA, BUT MAKE IT YOURS.</LocalizedText></span>
         </div>
         <TechCard
           items={[
@@ -599,33 +600,32 @@ function MenuTap({ onOpen }) {
       <div className="wrap project-grid">
         <Reveal className="project-copy">
           <Label n="02" badge="Live product" website="https://www.foodspotmobile.com/">
-            MENUTAP
+            <LocalizedText>MENUTAP</LocalizedText>
           </Label>
           <h2>
-            THEN I WONDERED WHY
+            <LocalizedText>THEN I WONDERED WHY</LocalizedText>
             <br />
-            RESTAURANT TABLES
+            <LocalizedText>RESTAURANT TABLES</LocalizedText>
             <br />
-            WERE STILL
+            <LocalizedText>WERE STILL</LocalizedText>
             <br />
-            JUST… TABLES.
+            <LocalizedText>JUST… TABLES.</LocalizedText>
           </h2>
           <p>
-            So I built MenuTap — a simple NFC tap that brings your menu, Wi-Fi,
-            reviews, games and more to one tap.
+            <LocalizedText>So I built MenuTap — a simple NFC tap that brings your menu, Wi-Fi, reviews, games and more to one tap.</LocalizedText>
           </p>
           <div className="project-actions">
             <CTA href={links.menutap}>
-              See the demo <ArrowUpRight size={16} />
+              <LocalizedText>See the demo</LocalizedText> <ArrowUpRight size={16} />
             </CTA>
-            <CTA notesProject="menutap" onClick={() => onOpen("menutap")} secondary>
-              View project
+            <CTA href="https://www.foodspotmobile.com/" secondary>
+              <LocalizedText>View project</LocalizedText>
             </CTA>
           </div>
-          <p className="project-proof">The live customer menu opens in a browser without a sign-in.</p>
+          <p className="project-proof"><LocalizedText>The live customer menu opens in a browser without a sign-in.</LocalizedText></p>
           <span className="mobile-hint">
             <Smartphone size={14} />
-            Best experienced on your phone
+            <LocalizedText>Best experienced on your phone</LocalizedText>
           </span>
         </Reveal>
         <div className="device-stage tap-stage">
@@ -636,7 +636,7 @@ function MenuTap({ onOpen }) {
           >
             <img
               src={`${A}desktop/menutap-sticker.webp`}
-              alt="Actual MenuTap physical NFC artwork: menu, Wi-Fi, reviews, games and socials in one tap"
+              alt={localizedText("Actual MenuTap physical NFC artwork: menu, Wi-Fi, reviews, games and socials in one tap")}
               loading="lazy" decoding="async"
               width="1000"
               height="1000"
@@ -656,11 +656,11 @@ function MenuTap({ onOpen }) {
               <div className="restaurant-brand">
                 <MapPin size={21} />
                 <strong>
-                  FOOD<span>SPOT</span>
+                  <LocalizedText>FOOD</LocalizedText><span><LocalizedText>SPOT</LocalizedText></span>
                 </strong>
-                <small>RESTAURANTE & BAR</small>
+                <small><LocalizedText>RESTAURANTE &amp; BAR</LocalizedText></small>
               </div>
-              <div className="menu-welcome">Make yourself at home.</div>
+              <div className="menu-welcome"><LocalizedText>Make yourself at home.</LocalizedText></div>
               <div className="menu-actions">
                 {actions.map(([Icon, title, sub, color]) => (
                   <div key={title} className="menu-action">
@@ -671,19 +671,19 @@ function MenuTap({ onOpen }) {
                       <Icon size={22} />
                     </span>
                     <span>
-                      <strong>{title}</strong>
-                      <small>{sub}</small>
+                      <strong><LocalizedText>{title}</LocalizedText></strong>
+                      <small><LocalizedText>{sub}</LocalizedText></small>
                     </span>
                     <ChevronRight size={14} />
                   </div>
                 ))}
               </div>
-              <span className="powered-by">a little tap. a better table.</span>
+              <span className="powered-by"><LocalizedText>a little tap. a better table.</LocalizedText></span>
             </Phone>
           </motion.div>
           <div className="annotation tap-note">
-            one physical tap.
-            <br />a whole digital world.
+            <LocalizedText>one physical tap.</LocalizedText>
+            <br /><LocalizedText>a whole digital world.</LocalizedText>
             <Doodle />
           </div>
         </div>
@@ -716,15 +716,16 @@ function FoodSpot({ onOpen }) {
         <DeferredBackground className="pizza-backdrop" />
         <div className="wrap project-grid">
           <Reveal className="project-copy">
-            <Label n="03" badge="Past B2B SaaS · Live demo" subdued>FOODSPOT MOBILE</Label>
-            <h2>RESTAURANT<br />SOFTWARE.<br />WITH A LIFE<br /><span className="yellow">AFTER THE SALE.</span></h2>
-            <p>B2B restaurant software for running the business and engaging its customers — from dashboard and menu management to inventory.</p>
+            <Label n="03" badge="Past B2B SaaS · Live demo" subdued><LocalizedText>FOODSPOT MOBILE</LocalizedText></Label>
+            <h2><LocalizedText>RESTAURANT</LocalizedText><br /><LocalizedText>SOFTWARE.</LocalizedText><br /><LocalizedText>WITH A LIFE</LocalizedText><br /><span className="yellow"><LocalizedText>AFTER THE SALE.</LocalizedText></span></h2>
+            <p><LocalizedText>B2B restaurant software for running the business and engaging its customers — from dashboard and menu management to inventory.</LocalizedText></p>
             <div className="project-actions">
-              <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders">Explore the demo <ArrowUpRight size={16} /></CTA>
-              <CTA secondary notesProject="foodspot" onClick={() => onOpen("foodspot")}>The story <ArrowUpRight size={16} /></CTA>
+              <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/owner/orders"><LocalizedText>Explore the demo</LocalizedText> <ArrowUpRight size={16} /></CTA>
+              <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/status" secondary><LocalizedText>Try the live receipt</LocalizedText> <ArrowUpRight size={16} /></CTA>
             </div>
-            <p className="project-proof">The populated owner demo shows order management; the project page documents menu and inventory screens.</p>
-            <div className="evolution"><span>Real mobile UI · populated demo</span></div>
+            <p className="project-proof"><LocalizedText>Explore the populated owner demo, then open engineering notes for menu and inventory details.</LocalizedText></p>
+            <BuildNotesLink className="notes-link foodspot-notes-link" project="foodspot" onOpen={() => onOpen("foodspot")}><LocalizedText>Engineering notes</LocalizedText> <ArrowUpRight size={15} /></BuildNotesLink>
+            <div className="evolution"><span><LocalizedText>Real mobile UI · populated demo</LocalizedText></span></div>
           </Reveal>
           <div className="device-stage foodspot-stage foodspot-capture-stage">
             <motion.div initial={reduce ? false : { rotate: -12, y: 35 }} whileInView={{ rotate: -6, y: 0 }} viewport={{ once: true }} transition={{ type: "spring", bounce: 0.15, duration: 0.8 }}>
@@ -732,14 +733,14 @@ function FoodSpot({ onOpen }) {
                 <img key={screens[activeScreen].file} className="foodspot-real-screen" src={`${A}foodspot/${screens[activeScreen].file}`} alt={screens[activeScreen].alt} width="390" height="832" loading="lazy" decoding="async" />
               </Phone>
             </motion.div>
-            <div className="foodspot-screen-tabs" role="group" aria-label="Explore FoodSpot mobile operations">
-              {screens.map((item, index) => <button key={item.name} type="button" aria-pressed={activeScreen === index} onClick={() => setActiveScreen(index)}>{item.name}</button>)}
+            <div className="foodspot-screen-tabs" role="group" aria-label={localizedText("Explore FoodSpot mobile operations")}>
+              {screens.map((item, index) => <button key={item.name} type="button" aria-pressed={activeScreen === index} onClick={() => setActiveScreen(index)}><LocalizedText>{item.name}</LocalizedText></button>)}
             </div>
           </div>
           <Reveal className="lesson-card foodspot-evidence-card">
-            <span className="tiny-label">PRODUCT / OPERATIONS</span>
-            <h3>Run the<br />restaurant.</h3>
-            <p>Dashboard. Menu. Inventory.<br />One mobile workspace.</p>
+            <span className="tiny-label"><LocalizedText>PRODUCT / OPERATIONS</LocalizedText></span>
+            <h3><LocalizedText>Run the</LocalizedText><br /><LocalizedText>restaurant.</LocalizedText></h3>
+            <p><LocalizedText>Dashboard. Menu. Inventory.</LocalizedText><br /><LocalizedText>One mobile workspace.</LocalizedText></p>
             <div className="foodspot-supporting-shots">
               {[1, 2].map(index => <button key={screens[index].name} type="button" onClick={() => setActiveScreen(index)} aria-label={`View real mobile ${screens[index].name} screen`}>
                 <img src={`${A}foodspot/${screens[index].file}`} alt={screens[index].alt} width="390" height="832" loading="lazy" decoding="async" /><span>{index === 1 ? "Menu management" : "Inventory tracking"}</span>
@@ -748,19 +749,19 @@ function FoodSpot({ onOpen }) {
           </Reveal>
         </div>
       </section>
-      <section id="foodspot-receipt" className="project-section dark foodspot-section foodspot-differentiator" aria-label="FoodSpot Mobile UGC receipt">
+      <section id="foodspot-receipt" className="project-section dark foodspot-section foodspot-differentiator" aria-label={localizedText("FoodSpot Mobile UGC receipt")}>
         <div className="wrap project-grid">
           <Reveal className="project-copy">
-            <span className="tiny-label">FOODSPOT MOBILE / THE DIFFERENTIATOR</span>
-            <h2>THE UGC RECEIPT.<br /><span className="yellow">TURN EVERY ORDER<br />INTO ORGANIC<br />CONTENT.</span></h2>
-            <p>FoodSpot Mobile introduced a new post-purchase surface: the UGC Receipt — a digital receipt that invites customers to photograph their order and create branded, organic content immediately after delivery.</p>
-            <div className="foodspot-receipt-flow" aria-label="Order delivered, UGC receipt, take a photo, organic content">
+            <span className="tiny-label"><LocalizedText>FOODSPOT MOBILE / THE DIFFERENTIATOR</LocalizedText></span>
+            <h2><LocalizedText>THE UGC RECEIPT.</LocalizedText><br /><span className="yellow"><LocalizedText>TURN EVERY ORDER</LocalizedText><br /><LocalizedText>INTO ORGANIC</LocalizedText><br /><LocalizedText>CONTENT.</LocalizedText></span></h2>
+            <p><LocalizedText>FoodSpot Mobile introduced a new post-purchase surface: the UGC Receipt — a digital receipt that invites customers to photograph their order and create branded, organic content immediately after delivery.</LocalizedText></p>
+            <div className="foodspot-receipt-flow" aria-label={localizedText("Order delivered, UGC receipt, take a photo, organic content")}>
               {[[Utensils, "ORDER", "DELIVERED"], [FileText, "UGC", "RECEIPT"], [Camera, "TAKE", "A PHOTO"], [Activity, "ORGANIC", "CONTENT"]].map(([Icon, first, second], index) => <div className="foodspot-flow-step" key={first}>
                 {index > 0 && <ArrowRight className="foodspot-flow-arrow" size={18} aria-hidden="true" />}
-                <span className="foodspot-flow-icon"><Icon size={23} aria-hidden="true" /></span><span>{first}<br />{second}</span>
+                <span className="foodspot-flow-icon"><Icon size={23} aria-hidden="true" /></span><span><LocalizedText>{first}</LocalizedText><br /><LocalizedText>{second}</LocalizedText></span>
               </div>)}
             </div>
-            <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/status">Try the live receipt <ArrowUpRight size={16} /></CTA>
+            <CTA href="https://foodspotapp-gold.vercel.app/smash-burger-demo/status"><LocalizedText>Try the live receipt</LocalizedText> <ArrowUpRight size={16} /></CTA>
           </Reveal>
           <div className="device-stage foodspot-stage">
             <Phone className="foodspot-phone foodspot-real-phone" label="Real FoodSpot Mobile UGC receipt interaction">
@@ -768,9 +769,9 @@ function FoodSpot({ onOpen }) {
             </Phone>
           </div>
           <Reveal className="foodspot-engagement">
-            <span className="tiny-label">CUSTOMER ENGAGEMENT</span>
-            <img src={`${A}foodspot/events-mobile.jpg`} alt="Real FoodSpot mobile Events screen in light mode" width="390" height="832" loading="lazy" decoding="async" />
-            <span>Events, rewards & reasons to return.</span>
+            <span className="tiny-label"><LocalizedText>CUSTOMER ENGAGEMENT</LocalizedText></span>
+            <img src={`${A}foodspot/events-mobile.jpg`} alt={localizedText("Real FoodSpot mobile Events screen in light mode")} width="390" height="832" loading="lazy" decoding="async" />
+            <span><LocalizedText>Events, rewards &amp; reasons to return.</LocalizedText></span>
           </Reveal>
         </div>
       </section>
@@ -805,33 +806,32 @@ function MacApps({ onOpen }) {
         <div className="mac-heading">
           <Reveal>
             <Label n="04" badge="Live products">
-              MAC APPS / iSUITE
+              <LocalizedText>MAC APPS / iSUITE</LocalizedText>
             </Label>
             <h2>
-              I DIDN’T WANT
+              <LocalizedText>I DIDN’T WANT</LocalizedText>
               <br />
-              ANOTHER SUBSCRIPTION.
+              <LocalizedText>ANOTHER SUBSCRIPTION.</LocalizedText>
               <br />
-              <span>SO I BUILT MY OWN.</span>
+              <span><LocalizedText>SO I BUILT MY OWN.</LocalizedText></span>
             </h2>
             <p>
-              Small, native macOS productivity apps built to solve problems in
-              my own workflow.
-              <span className="mac-open-source"><Github size={14} /> Open source. Built for Apple Silicon.</span>
-              <small className="mac-compatibility">M2 or newer is a great fit. Check each app’s requirements. Independent builds aren’t Apple-notarized, so macOS may show a first-launch warning.</small>
+              <LocalizedText>Small, native macOS productivity apps built to solve problems in my own workflow.</LocalizedText>
+              <span className="mac-open-source"><Github size={14} /> <LocalizedText>Open source. Built for Apple Silicon.</LocalizedText></span>
+              <small className="mac-compatibility"><LocalizedText>M2 or newer is a great fit. Check each app’s requirements. Independent builds aren’t Apple-notarized, so macOS may show a first-launch warning.</LocalizedText></small>
             </p>
             <CTA href={links.suite}>
-              Explore the apps <ArrowUpRight size={16} />
+              <LocalizedText>Explore the apps</LocalizedText> <ArrowUpRight size={16} />
             </CTA>
           </Reveal>
           <div className="mac-main">
             <div className="mac-kicker">
               <span>
                 <Command size={13} />
-                BUILT FOR THE WAY I WORK
+                <LocalizedText>BUILT FOR THE WAY I WORK</LocalizedText>
               </span>
-              <span className="mac-platform"><Apple size={17} aria-hidden="true" /> macOS productivity apps</span>
-              <span className="annotation">go on. pick an app</span>
+              <span className="mac-platform"><Apple size={17} aria-hidden="true" /> <LocalizedText>macOS productivity apps</LocalizedText></span>
+              <span className="annotation"><LocalizedText>go on. pick an app</LocalizedText></span>
             </div>
             <svg className="mac-picker-arrow" viewBox="0 0 1000 585" fill="none" aria-hidden="true">
               <path d="M995 8C990 180 885 420 510 570" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
@@ -851,11 +851,11 @@ function MacApps({ onOpen }) {
                 <div className="laptop-display">
                   <div className="mac-menubar">
                     <Command size={9} />
-                    <b>{app.name}</b>
-                    <span>File</span>
-                    <span>View</span>
-                    <span>Window</span>
-                    <span className="mac-menu-right">Thu 9:41 AM</span>
+                    <b><LocalizedText>{app.name}</LocalizedText></b>
+                    <span><LocalizedText>File</LocalizedText></span>
+                    <span><LocalizedText>View</LocalizedText></span>
+                    <span><LocalizedText>Window</LocalizedText></span>
+                    <span className="mac-menu-right"><LocalizedText>Thu 9:41 AM</LocalizedText></span>
                   </div>
                   <div className="mac-desktop">
                     <div className="desktop-glow" />
@@ -876,7 +876,7 @@ function MacApps({ onOpen }) {
                             <i />
                             <i />
                           </span>
-                          <span>{app.name}</span>
+                          <span><LocalizedText>{app.name}</LocalizedText></span>
                           <span />
                         </div>
                         <MacDemo active={active} image={app.image ? `${A}${app.image}` : null} name={app.name} />
@@ -897,7 +897,7 @@ function MacApps({ onOpen }) {
                     </div>
                   </div>
                 </div>
-                <div className="laptop-chin">MacBook Pro</div>
+                <div className="laptop-chin"><LocalizedText>MacBook Pro</LocalizedText></div>
               </motion.div>
               <div className="laptop-base">
                 <div className="laptop-notch" />
@@ -907,7 +907,7 @@ function MacApps({ onOpen }) {
             <div
               className="app-selector"
               role="group"
-              aria-label="Select a Mac app preview"
+              aria-label={localizedText("Select a Mac app preview")}
             >
               {apps.map((a, i) => (
                 <button
@@ -917,10 +917,10 @@ function MacApps({ onOpen }) {
                   onClick={() => setActive(i)}
                 >
                   <img src={`${A}${a.icon}`} alt="" width="64" height="64" loading="lazy" decoding="async" />
-                  <strong>{a.name}</strong>
-                  <small>{a.sub}</small>
+                  <strong><LocalizedText>{a.name}</LocalizedText></strong>
+                  <small><LocalizedText>{a.sub}</LocalizedText></small>
                   {i === 2 ? (
-                    <span className="experimental-tag">EXPERIMENTAL</span>
+                    <span className="experimental-tag"><LocalizedText>EXPERIMENTAL</LocalizedText></span>
                   ) : null}
                 </button>
               ))}
@@ -929,23 +929,23 @@ function MacApps({ onOpen }) {
         </div>
         <div className="app-caption" aria-live="polite">
           <div>
-            <span className="tiny-label">{app.tag}</span>
-            <h3>{app.name}</h3>
+            <span className="tiny-label"><LocalizedText>{app.tag}</LocalizedText></span>
+            <h3><LocalizedText>{app.name}</LocalizedText></h3>
           </div>
           <p>
             {app.description}
-            <small>{app.note}</small>
-            {app.id === "ivoz" && <small>Retested shortcut and microphone-permission behavior across repeated launches.</small>}
+            <small><LocalizedText>{app.note}</LocalizedText></small>
+            {app.id === "ivoz" && <small><LocalizedText>Retested shortcut and microphone-permission behavior across repeated launches.</LocalizedText></small>}
           </p>
           <div className="app-links">
             <BuildNotesLink project="mac" onOpen={() => onOpen("mac")}>
-              Engineering notes <ArrowUpRight size={14} />
+              <LocalizedText>Engineering notes</LocalizedText> <ArrowUpRight size={14} />
             </BuildNotesLink>
             <External
               href={`https://github.com/hikaribrandan3-code/${app.repo}`}
             >
               <Github size={14} />
-              Source
+              <LocalizedText>Source</LocalizedText>
             </External>
           </div>
         </div>
@@ -1044,30 +1044,30 @@ function Process({ onOpen }) {
       <div className="wrap">
         <div className="process-header">
           <Reveal>
-            <Label n="05">HOW I WORK</Label>
+            <Label n="05"><LocalizedText>HOW I WORK</LocalizedText></Label>
             <h2>
-              AI IS MY LEVERAGE.
+              <LocalizedText>AI IS MY LEVERAGE.</LocalizedText>
               <br />
-              NOT MY SUBSTITUTE
+              <LocalizedText>NOT MY SUBSTITUTE</LocalizedText>
               <br />
-              FOR THINKING.
+              <LocalizedText>FOR THINKING.</LocalizedText>
             </h2>
           </Reveal>
           <p>
             I use AI to work faster, explore more ideas, and get to working
             products.{" "}
             <strong>
-              The interesting part is what happens after the prompt.
+              <LocalizedText>The interesting part is what happens after the prompt.</LocalizedText>
             </strong>
           </p>
           <div className="process-side annotation">
-            AI makes producing code cheap.
+            <LocalizedText>AI makes producing code cheap.</LocalizedText>
             <br />
-            Knowing what to build, recognizing
+            <LocalizedText>Knowing what to build, recognizing</LocalizedText>
             <br />
-            when it’s wrong, and turning it into
+            <LocalizedText>when it’s wrong, and turning it into</LocalizedText>
             <br />
-            something useful isn’t.
+            <LocalizedText>something useful isn’t.</LocalizedText>
           </div>
         </div>
         <div className="process-track">
@@ -1088,7 +1088,7 @@ function Process({ onOpen }) {
               >
                 <Icon size={25} />
               </span>
-              <span>{name}</span>
+              <span><LocalizedText>{name}</LocalizedText></span>
               {i !== 8 ? <ArrowRight className="step-arrow" size={15} /> : null}
               <small>0{i + 1}</small>
             </motion.button>
@@ -1100,7 +1100,7 @@ function Process({ onOpen }) {
             <p>{steps[active].text}</p>
           </div>
           <span className="annotation prompt-note">
-            The prompt isn’t the product.
+            <LocalizedText>The prompt isn’t the product.</LocalizedText>
             <svg viewBox="0 0 220 12" aria-hidden="true">
               <path
                 d="M3 7Q110 0 217 8"
@@ -1111,34 +1111,34 @@ function Process({ onOpen }) {
             </svg>
           </span>
           <CTA notesProject="engineering" onClick={() => onOpen("engineering")}>
-            My engineering notes <ArrowUpRight size={16} />
+            <LocalizedText>My engineering notes</LocalizedText> <ArrowUpRight size={16} />
           </CTA>
         </div>
-        <div className="debug-receipts" aria-label="Real examples of how I debug">
+        <div className="debug-receipts" aria-label={localizedText("Real examples of how I debug")}>
           <div className="debug-intro">
-            <span className="debug-eyebrow">REAL EXAMPLES</span>
-            <h3>HOW I <span>DEBUG.</span></h3>
-            <p>I don’t guess where it broke.<br />I reproduce, inspect, trace,<br />find the cause and fix it.</p>
-            <div className="debug-tools" aria-label="Debugging tools">
+            <span className="debug-eyebrow"><LocalizedText>REAL EXAMPLES</LocalizedText></span>
+            <h3><LocalizedText>HOW I</LocalizedText> <span><LocalizedText>DEBUG.</LocalizedText></span></h3>
+            <p><LocalizedText>I don’t guess where it broke.</LocalizedText><br /><LocalizedText>I reproduce, inspect, trace,</LocalizedText><br /><LocalizedText>find the cause and fix it.</LocalizedText></p>
+            <div className="debug-tools" aria-label={localizedText("Debugging tools")}>
               {debugTools.map(([Icon, name]) => (
-                <span key={name}><Icon size={14} aria-hidden="true" />{name}</span>
+                <span key={name}><Icon size={14} aria-hidden="true" /><LocalizedText>{name}</LocalizedText></span>
               ))}
             </div>
           </div>
           {debugExamples.map((example, index) => (
             <article className="debug-card" key={example.product}>
-              <div className="debug-card-label"><b>0{index + 1}</b><span>{example.product}</span></div>
+              <div className="debug-card-label"><b>0{index + 1}</b><span><LocalizedText>{example.product}</LocalizedText></span></div>
               {example.image ? (
                 <div className="debug-card-visual">
                   <img src={example.image} alt={example.alt} loading="lazy" decoding="async" />
                 </div>
               ) : (
-                <div className="debug-flow" aria-label="Callback URL, console, Edge Function logs, RLS or data access, retest">
+                <div className="debug-flow" aria-label={localizedText("Callback URL, console, Edge Function logs, RLS or data access, retest")}>
                   {example.flow.map((step, i) => <span key={step}>{step}{i < example.flow.length - 1 && <ArrowRight size={11} aria-hidden="true" />}</span>)}
                 </div>
               )}
-              <h4>{example.title}</h4>
-              <p>{example.copy}</p>
+              <h4><LocalizedText>{example.title}</LocalizedText></h4>
+              <p><LocalizedText>{example.copy}</LocalizedText></p>
             </article>
           ))}
         </div>
@@ -1155,56 +1155,56 @@ function AutoBarber() {
       <div className="wrap business-grid">
         <Reveal>
           <Label n="06" badge="Past business" subdued>
-            THE AUTO BARBER
+            <LocalizedText>THE AUTO BARBER</LocalizedText>
           </Label>
           <h2>
-            BEFORE I BUILT SOFTWARE,
-            <br />I BUILT A BUSINESS.
+            <LocalizedText>BEFORE I BUILT SOFTWARE,</LocalizedText>
+            <br /><LocalizedText>I BUILT A BUSINESS.</LocalizedText>
           </h2>
           <p>
-            The Auto Barber — Seattle-area
+            <LocalizedText>The Auto Barber — Seattle-area</LocalizedText>
             <br />
-            automotive restyling.
+            <LocalizedText>automotive restyling.</LocalizedText>
           </p>
           <div className="business-facts">
             <span>
               <CheckCircle2 />
-              Six-figure revenue
+              <LocalizedText>Six-figure revenue</LocalizedText>
             </span>
             <span>
               <CheckCircle2 />
-              165+ Google reviews
+              <LocalizedText>165+ Google reviews</LocalizedText>
             </span>
             <span>
               <CheckCircle2 />
-              Real customers. Real problems. Real solutions.
+              <LocalizedText>Real customers. Real problems. Real solutions.</LocalizedText>
             </span>
           </div>
           <CTA href={googleReviewsUrl}>
-            See all Google reviews <ArrowUpRight size={16} />
+            <LocalizedText>See all Google reviews</LocalizedText> <ArrowUpRight size={16} />
           </CTA>
           <External href="https://hikari-brandan.vercel.app/projects/the-auto-barber" className="business-story-note">
-            Read the Auto Barber story <ArrowUpRight size={13} />
+            <LocalizedText>Read the Auto Barber story</LocalizedText> <ArrowUpRight size={13} />
           </External>
         </Reveal>
         <div className="business-visual">
           <img
             src={`${A}autobarber-logo.png`}
             width="92" height="92"
-            alt="The Auto Barber logo"
+            alt={localizedText("The Auto Barber logo")}
             loading="lazy" decoding="async"
           />
           <span className="annotation">
-            same builder.
+            <LocalizedText>same builder.</LocalizedText>
             <br />
-            different tools.
+            <LocalizedText>different tools.</LocalizedText>
           </span>
         </div>
         <Reveal className="business-proof">
           <div className="google-mark"><GoogleMark size={27} /></div>
           <span className="review-stars">★★★★★</span>
           <div className="review-card" aria-live="polite">
-            <span className="review-aggregate">4.9 / 165 GOOGLE REVIEWS</span>
+            <span className="review-aggregate"><LocalizedText>4.9 / 165 GOOGLE REVIEWS</LocalizedText></span>
             <blockquote>“{reviews[review].quote}{reviews[review].excerpt ? "…" : ""}”</blockquote>
             <External href={reviews[review].href} className="review-author">
               {reviews[review].name} <ArrowUpRight size={12} />
@@ -1222,7 +1222,7 @@ function AutoBarber() {
             ))}
           </div>
           <External href={googleReviewsUrl}>
-            Read all 165 Google reviews <ArrowUpRight size={15} />
+            <LocalizedText>Read all 165 Google reviews</LocalizedText> <ArrowUpRight size={15} />
           </External>
         </Reveal>
         <ReviewWall />
@@ -1254,11 +1254,11 @@ function Stack() {
     <section className="stack-section light">
       <div className="wrap stack-layout">
         <div>
-          <Label n="07">THE TOOLBOX</Label>
+          <Label n="07"><LocalizedText>THE TOOLBOX</LocalizedText></Label>
           <h3>
-            Tools I work with
+            <LocalizedText>Tools I work with</LocalizedText>
             <br />
-            <span>to build, ship and learn.</span>
+            <span><LocalizedText>to build, ship and learn.</LocalizedText></span>
           </h3>
           <div className="tool-cubes" aria-hidden="true">
             <i />
@@ -1283,9 +1283,9 @@ function Stack() {
                   ][tools.indexOf(t)]
                 }
               </div>
-              <span>{t.label}</span>
+              <span><LocalizedText>{t.label}</LocalizedText></span>
               {t.items.map((item) => (
-                <p key={item}>{item}</p>
+                <p key={item}><LocalizedText>{item}</LocalizedText></p>
               ))}
             </div>
           ))}
@@ -1300,21 +1300,21 @@ function Contact() {
       <section className="opportunity-section light">
         <div className="wrap opportunity-grid">
           <div>
-            <Label n="08">WHAT I’M LOOKING FOR</Label>
+            <Label n="08"><LocalizedText>WHAT I’M LOOKING FOR</LocalizedText></Label>
             <h2>
-              A SMALL TEAM.
+              <LocalizedText>A SMALL TEAM.</LocalizedText>
               <br />
-              REAL PROBLEMS.
+              <LocalizedText>REAL PROBLEMS.</LocalizedText>
               <br />
-              <span>ROOM TO GROW.</span>
+              <span><LocalizedText>ROOM TO GROW.</LocalizedText></span>
             </h2>
           </div>
           <div className="opportunity-copy">
             <div className="ideas-bulb" aria-hidden="true">
               <span className="annotation">
-                IDEAS
+                <LocalizedText>IDEAS</LocalizedText>
                 <br />
-                IN PROGRESS.
+                <LocalizedText>IN PROGRESS.</LocalizedText>
                 <Doodle />
               </span>
               <span className="bulb-glow" />
@@ -1327,46 +1327,44 @@ function Contact() {
               />
             </div>
             <h3>
-              Product-minded. Customer-tested.
+              <LocalizedText>Product-minded. Customer-tested.</LocalizedText>
               <br />
-              Still becoming a better engineer.
+              <LocalizedText>Still becoming a better engineer.</LocalizedText>
             </h3>
             <p>
-              I’m looking for a small, ambitious team where I can work close to
-              the product and customers, build quickly, learn from stronger
-              engineers, and take ownership of real problems.
+              <LocalizedText>I’m looking for a small, ambitious team where I can work close to the product and customers, build quickly, learn from stronger engineers, and take ownership of real problems.</LocalizedText>
             </p>
             <div className="role-tags">
               <span>
-                <Database size={15} /> Product development
+                <Database size={15} /> <LocalizedText>Product development</LocalizedText>
               </span>
               <span>
-                <UsersRound size={15} /> Junior full-stack
+                <UsersRound size={15} /> <LocalizedText>Junior full-stack</LocalizedText>
               </span>
               <span>
-                <Sparkles size={15} /> AI implementation
+                <Sparkles size={15} /> <LocalizedText>AI implementation</LocalizedText>
               </span>
               <span>
-                <Wrench size={15} /> Technical product support
+                <Wrench size={15} /> <LocalizedText>Technical product support</LocalizedText>
               </span>
             </div>
             <div className="opportunity-facts">
               <span>
                 <Globe2 />
                 <span>
-                  Fully remote<small>Worldwide</small>
+                  <LocalizedText>Fully remote</LocalizedText><small><LocalizedText>Worldwide</LocalizedText></small>
                 </span>
               </span>
               <span>
                 <Volume2 />
                 <span>
-                  Native English & Spanish<small>Communication</small>
+                  <LocalizedText>Native English &amp; Spanish</LocalizedText><small><LocalizedText>Communication</LocalizedText></small>
                 </span>
               </span>
               <span>
                 <Lightbulb />
                 <span>
-                  Open to learn & grow<small>New challenges</small>
+                  <LocalizedText>Open to learn &amp; grow</LocalizedText><small><LocalizedText>New challenges</LocalizedText></small>
                 </span>
               </span>
             </div>
@@ -1379,42 +1377,42 @@ function Contact() {
           <div className="contact-orbit" aria-hidden="true" />
           <div className="wrap contact-inner">
             <div className="contact-intro">
-              <Label n="09">LET’S TALK</Label>
-              <div className="annotation">you’ve seen the receipts.</div>
+              <Label n="09"><LocalizedText>LET’S TALK</LocalizedText></Label>
+              <div className="annotation"><LocalizedText>you’ve seen the receipts.</LocalizedText></div>
               <h2>
-                LET’S BUILD
+                <LocalizedText>LET’S BUILD</LocalizedText>
                 <br />
-                <span>SOMETHING.</span>
+                <span><LocalizedText>SOMETHING.</LocalizedText></span>
                 <ArrowUpRight />
               </h2>
               <p>
-                I don’t need to be the smartest engineer in the room.
-                <br />I want to be in a room where I keep becoming a better one.
+                <LocalizedText>I don’t need to be the smartest engineer in the room.</LocalizedText>
+                <br /><LocalizedText>I want to be in a room where I keep becoming a better one.</LocalizedText>
               </p>
             </div>
             <div className="contact-links">
               <External href={links.email} className="contact-primary">
                 <Mail />
                 <span>
-                  Let’s start a conversation
-                  <small>hikaristudioai@gmail.com</small>
+                  <LocalizedText>Let’s start a conversation</LocalizedText>
+                  <small><LocalizedText>hikaristudioai@gmail.com</LocalizedText></small>
                 </span>
                 <ArrowUpRight />
               </External>
               <div className="contact-social">
                 <External href={links.linkedin}>
                   <Linkedin />
-                  LinkedIn
+                  <LocalizedText>LinkedIn</LocalizedText>
                   <ArrowUpRight />
                 </External>
                 <External href={links.github}>
                   <Github />
-                  GitHub
+                  <LocalizedText>GitHub</LocalizedText>
                   <ArrowUpRight />
                 </External>
                 <External href="/Hikari_Brandan_Resume.pdf">
                   <FileText />
-                  Résumé
+                  <LocalizedText>Résumé</LocalizedText>
                   <ArrowUpRight />
                 </External>
               </div>
@@ -1422,7 +1420,7 @@ function Contact() {
                 href="https://wa.me/543513668122"
                 className="mobile-whatsapp"
               >
-                <WhatsAppIcon size={18} /> WhatsApp <ArrowUpRight size={13} />
+                <WhatsAppIcon size={18} /> <LocalizedText>WhatsApp</LocalizedText> <ArrowUpRight size={13} />
               </External>
               <LanguageFlags />
               <a className="phone-link" href="tel:+543513668122">
@@ -1432,13 +1430,13 @@ function Contact() {
           </div>
           <footer className="wrap">
             <a href="#home" className="brand footer-brand">
-              Hikari Brandan
+              <LocalizedText>Hikari Brandan</LocalizedText>
               <Crown />
             </a>
             <FooterQuote />
             <span>© {new Date().getFullYear()} HIKARI BRANDAN</span>
             <a href="#home">
-              Back to top <ArrowUpRight size={14} />
+              <LocalizedText>Back to top</LocalizedText> <ArrowUpRight size={14} />
             </a>
           </footer>
         </section>
@@ -1495,16 +1493,16 @@ function App() {
     return () => observer.disconnect();
   }, [isMobile]);
   if (isMobile) return <>
-    <a className="skip-link" href="#projects">Skip to projects</a>
-    <Suspense fallback={<div role="status" style={{ padding:32, color:"#f7f6f1", minHeight:"100vh" }}>Opening the portfolio…</div>}>
+    <a className="skip-link" href="#projects"><LocalizedText>Skip to projects</LocalizedText></a>
+    <Suspense fallback={<div role="status" style={{ padding:32, color:"#f7f6f1", minHeight:"100vh" }}><LocalizedText>Opening the portfolio…</LocalizedText></div>}>
       <MobilePortfolio onOpen={setProject} />
     </Suspense>
-    {project && <Suspense fallback={<div className="drawer-loading" role="status">Opening the story…</div>}><ProjectDrawer project={project} onClose={() => setProject(null)} /></Suspense>}
+    {project && <Suspense fallback={<div className="drawer-loading" role="status"><LocalizedText>Opening the story…</LocalizedText></div>}><ProjectDrawer project={project} onClose={() => setProject(null)} /></Suspense>}
   </>;
   return (
     <>
       <a className="skip-link" href="#projects">
-        Skip to projects
+        <LocalizedText>Skip to projects</LocalizedText>
       </a>
       <motion.div
         className="scroll-progress"
@@ -1513,30 +1511,30 @@ function App() {
       <DesktopNavigation />
       <header className="site-header">
         <div className="wrap nav-inner">
-          <a className="brand" href="#home" aria-label="Hikari Brandan, back to home">
-            Hikari Brandan
+          <a className="brand" href="#home" aria-label={localizedText("Hikari Brandan, back to home")}>
+            <LocalizedText>Hikari Brandan</LocalizedText>
             <Crown />
           </a>
-          <nav aria-label="Main navigation">
+          <nav aria-label={localizedText("Main navigation")}>
             <a className={active === "home" ? "active" : ""} href="#home">
-              Home
+              <LocalizedText>Home</LocalizedText>
             </a>
             <a
               className={active === "projects" ? "active" : ""}
               href="#projects"
             >
-              Projects
+              <LocalizedText>Projects</LocalizedText>
             </a>
             <a className={active === "about" ? "active" : ""} href="#about">
-              About
+              <LocalizedText>About</LocalizedText>
             </a>
-            <a href={projectPaths.ugcServices}>UGC</a>
+            <a href={projectPaths.ugcServices}><LocalizedText>UGC</LocalizedText></a>
             <External href="/Hikari_Brandan_Resume.pdf">
-              Résumé <ArrowUpRight size={12} />
+              <LocalizedText>Résumé</LocalizedText> <ArrowUpRight size={12} />
             </External>
           </nav>
           <CTA href="#contact">
-            Let’s talk <ArrowUpRight size={15} />
+            <LocalizedText>Let’s talk</LocalizedText> <ArrowUpRight size={15} />
           </CTA>
         </div>
       </header>
@@ -1548,6 +1546,7 @@ function App() {
         <MacApps onOpen={setProject} />
         <Process onOpen={setProject} />
         <AutoBarber onOpen={setProject} />
+        <MontajCreatorSection />
         <ContentDistribution />
         <Stack />
         <Contact />
@@ -1556,7 +1555,7 @@ function App() {
         <Suspense
           fallback={
             <div className="drawer-loading" role="status">
-              Opening the story…
+              <LocalizedText>Opening the story…</LocalizedText>
             </div>
           }
         >

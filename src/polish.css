@@ -819,6 +819,21 @@ html[data-motion="off"] .review-track-group[aria-hidden="true"] {
   gap: 5px;
   white-space: nowrap;
 }
+.language-flags > button {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  white-space:nowrap;
+  padding:3px 5px;
+  border:0;
+  border-radius:7px;
+  color:inherit;
+  background:transparent;
+  font:inherit;
+  cursor:pointer;
+}
+.language-flags > button[aria-pressed="true"] { background:#ffffff22; }
+.language-flags > button:focus-visible { outline:2px solid var(--yellow); outline-offset:2px; }
 .country-flag {
   width: 21px;
   height: 14px;

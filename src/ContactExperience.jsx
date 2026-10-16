@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText } from "./i18n";
 import { useRef, useState } from "react";
 import {
   ArrowRight,
@@ -49,7 +50,7 @@ export function GlobeJourney() {
         src="/assets/journey-globe.webp"
         width="1000"
         height="1000"
-        alt="Earth with North and South America facing forward"
+        alt={localizedText("Earth with North and South America facing forward")}
         loading="lazy"
       />
       <svg className="journey-clouds" viewBox="0 0 100 100" aria-hidden="true">
@@ -118,14 +119,14 @@ export function GlobeJourney() {
       </svg>
       <div className="journey-pin seattle-pin">
         <MapPin size={27} fill="white" />
-        <span>SEATTLE, WA</span>
+        <span><LocalizedText>SEATTLE, WA</LocalizedText></span>
       </div>
       <div className="journey-pin cordoba-pin">
         <MapPin size={27} fill="white" />
-        <span>CÓRDOBA, AR</span>
+        <span><LocalizedText>CÓRDOBA, AR</LocalizedText></span>
       </div>
       <div className="journey-annotation raised-note">
-        Raised here.
+        <LocalizedText>Raised here.</LocalizedText>
         <svg viewBox="0 0 60 40" aria-hidden="true">
           <path d="M5 4q3 25 38 26m-7-7 9 7-11 3" />
         </svg>
@@ -134,14 +135,14 @@ export function GlobeJourney() {
         <svg viewBox="0 0 60 40" aria-hidden="true">
           <path d="M42 34Q13 33 12 10m-6 7 6-9 6 8" />
         </svg>
-        Building from here.
+        <LocalizedText>Building from here.</LocalizedText>
       </div>
       <button
         className="route-replay"
         onClick={() => setFlight((f) => f + 1)}
-        aria-label="Replay the flight from Seattle to Córdoba"
+        aria-label={localizedText("Replay the flight from Seattle to Córdoba")}
       >
-        <Plane size={13} /> Seattle → Córdoba
+        <Plane size={13} /> <LocalizedText>Seattle → Córdoba</LocalizedText>
       </button>
     </div>
   );
@@ -159,7 +160,7 @@ function Postage() {
       <div className="mountain-stamp">
         <div>
           <span>
-            HIKARI <b>2026</b>
+            <LocalizedText>HIKARI</LocalizedText> <b>2026</b>
           </span>
           <svg viewBox="0 0 120 100">
             <defs>
@@ -178,7 +179,7 @@ function Postage() {
             />
             <path fill="#a7c9d7" d="m50 100 13-24 8 24Z" />
           </svg>
-          <small>BUILD · LEARN · SHIP</small>
+          <small><LocalizedText>BUILD · LEARN · SHIP</LocalizedText></small>
         </div>
       </div>
     </div>
@@ -228,17 +229,17 @@ function PostcardForm() {
   }
   return (
     <form className={`postcard-form send-${status}`} onSubmit={submit} aria-busy={pending}>
-      <label className="contact-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
+      <label className="contact-honeypot" aria-hidden="true"><LocalizedText>Website</LocalizedText><input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
       <div className="postcard-header">
-        <span className="tiny-label">SEND A MESSAGE</span>
+        <span className="tiny-label"><LocalizedText>SEND A MESSAGE</LocalizedText></span>
         <h3>
-          Let’s start
-          <br />a conversation.
+          <LocalizedText>Let’s start</LocalizedText>
+          <br /><LocalizedText>a conversation.</LocalizedText>
         </h3>
         <p>
-          Tell me a bit about what you have in mind
+          <LocalizedText>Tell me a bit about what you have in mind</LocalizedText>
           <br />
-          and I’ll get back to you soon.
+          <LocalizedText>and I’ll get back to you soon.</LocalizedText>
         </p>
         <Postage />
       </div>
@@ -246,14 +247,14 @@ function PostcardForm() {
         <label className="postcard-field">
           <UserRound size={19} />
           <span>
-            Your name
+            <LocalizedText>Your name</LocalizedText>
             <input
               name="name"
               autoComplete="name"
               required
               disabled={pending}
               maxLength={80}
-              placeholder="Alex Johnson"
+              placeholder={localizedText("Alex Johnson")}
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -265,7 +266,7 @@ function PostcardForm() {
         <label className="postcard-field">
           <Mail size={19} />
           <span>
-            Your email
+            <LocalizedText>Your email</LocalizedText>
             <input
               name="email"
               type="email"
@@ -273,7 +274,7 @@ function PostcardForm() {
               required
               disabled={pending}
               maxLength={254}
-              placeholder="alex@company.com"
+              placeholder={localizedText("alex@company.com")}
               value={address}
               onChange={(e) => {
                 setAddress(e.target.value);
@@ -284,7 +285,7 @@ function PostcardForm() {
         </label>
       </div>
       <fieldset className="postcard-topics">
-        <legend>What’s this about?</legend>
+        <legend><LocalizedText>What’s this about?</LocalizedText></legend>
         <div>
           {topics.map(([Icon, label]) => (
             <label key={label} className={topic === label ? "is-selected" : ""}>
@@ -300,7 +301,7 @@ function PostcardForm() {
                 }}
               />
               <Icon size={17} />
-              <span>{label}</span>
+              <span><LocalizedText>{label}</LocalizedText></span>
             </label>
           ))}
         </div>
@@ -308,7 +309,7 @@ function PostcardForm() {
       <label className="postcard-message">
         <FileText size={19} />
         <span>
-          Your message
+          <LocalizedText>Your message</LocalizedText>
           <textarea
             name="message"
             rows={4}
@@ -316,7 +317,7 @@ function PostcardForm() {
             disabled={pending}
             minLength={10}
             maxLength={500}
-            placeholder="Tell me about the project, role, or idea…"
+            placeholder={localizedText("Tell me about the project, role, or idea…")}
             value={message}
             onChange={(e) => {
               setMessage(e.target.value);
@@ -332,17 +333,17 @@ function PostcardForm() {
       </button>
       <div className="postcard-delivery">
         <span>
-          <i /> I usually reply within 1–2 days.
+          <i /> <LocalizedText>I usually reply within 1–2 days.</LocalizedText>
         </span>
         <a href={whatsappDraft} target="_blank" rel="noopener noreferrer">
-          <WhatsAppIcon size={17} /> WhatsApp <ArrowUpRight size={12} />
+          <WhatsAppIcon size={17} /> <LocalizedText>WhatsApp</LocalizedText> <ArrowUpRight size={12} />
         </a>
       </div>
       {status === "sent" && <div className="message-sent" role="status">
         <span className="sent-aircraft" aria-hidden="true"><Send size={27} /></span>
-        <Check size={17} /><div><strong>On its way to Hikari.</strong><p>Thanks for reaching out. I’ll get back to you soon.</p><button type="button" onClick={() => { setMessage(""); edited(); }}>Send another message</button></div>
+        <Check size={17} /><div><strong><LocalizedText>On its way to Hikari.</LocalizedText></strong><p><LocalizedText>Thanks for reaching out. I’ll get back to you soon.</LocalizedText></p><button type="button" onClick={() => { setMessage(""); edited(); }}><LocalizedText>Send another message</LocalizedText></button></div>
       </div>}
-      {status === "error" && <p className="contact-error" role="alert">{error} <a href={mailto}>Email Hikari</a></p>}
+      {status === "error" && <p className="contact-error" role="alert">{error} <a href={mailto}><LocalizedText>Email Hikari</LocalizedText></a></p>}
 
     </form>
   );
@@ -352,33 +353,31 @@ export default function ContactExperience() {
   return (
     <section
       className="closing-section desktop-closing"
-      aria-label="Let’s talk"
+      aria-label={localizedText("Let’s talk")}
     >
       <div className="closing-panel wrap">
         <header className="closing-header">
           <span>
-            09 <i>/</i> LET’S TALK
+            09 <i>/</i> <LocalizedText>LET’S TALK</LocalizedText>
           </span>
           <a href="#home">
-            Back to top <ArrowUpRight size={14} />
+            <LocalizedText>Back to top</LocalizedText> <ArrowUpRight size={14} />
           </a>
         </header>
         <div className="closing-content">
           <div className="closing-intro">
             <span className="open-badge">
-              <i /> Open to opportunities
+              <i /> <LocalizedText>Open to opportunities</LocalizedText>
             </span>
             <h2>
-              Let’s build
+              <LocalizedText>Let’s build</LocalizedText>
               <br />
-              something
+              <LocalizedText>something</LocalizedText>
               <br />
-              <em>meaningful.</em>
+              <em><LocalizedText>meaningful.</LocalizedText></em>
             </h2>
             <p>
-              I’m always open to new opportunities, collaborations and
-              interesting problems to solve. Whether it’s a product, a role, or
-              just an idea — let’s talk.
+              <LocalizedText>I’m always open to new opportunities, collaborations and interesting problems to solve. Whether it’s a product, a role, or just an idea — let’s talk.</LocalizedText>
             </p>
             <div className="closing-facts">
               <div>
@@ -386,8 +385,8 @@ export default function ContactExperience() {
                   <Globe2 />
                 </span>
                 <span>
-                  <strong>Fully remote</strong>
-                  <small>Worldwide</small>
+                  <strong><LocalizedText>Fully remote</LocalizedText></strong>
+                  <small><LocalizedText>Worldwide</LocalizedText></small>
                 </span>
               </div>
               <div>
@@ -395,7 +394,7 @@ export default function ContactExperience() {
                   <MessageSquare />
                 </span>
                 <span>
-                  <strong>Native languages</strong>
+                  <strong><LocalizedText>Native languages</LocalizedText></strong>
                   <LanguageFlags />
                 </span>
               </div>
@@ -404,8 +403,8 @@ export default function ContactExperience() {
                   <Sun />
                 </span>
                 <span>
-                  <strong>Open to</strong>
-                  <small>Opportunities</small>
+                  <strong><LocalizedText>Open to</LocalizedText></strong>
+                  <small><LocalizedText>Opportunities</LocalizedText></small>
                 </span>
               </div>
             </div>
@@ -415,8 +414,8 @@ export default function ContactExperience() {
         </div>
         <footer className="closing-footer">
           <div className="closing-signature">
-            <a href="#home">Hikari Brandan</a>
-            <small>SEATTLE ROOTS. ARGENTINA BASE.</small>
+            <a href="#home"><LocalizedText>Hikari Brandan</LocalizedText></a>
+            <small><LocalizedText>SEATTLE ROOTS. ARGENTINA BASE.</LocalizedText></small>
           </div>
           <FooterQuote />
           <div className="closing-actions">
@@ -438,16 +437,16 @@ export default function ContactExperience() {
               href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Message Hikari on WhatsApp"
-              title="WhatsApp"
+              aria-label={localizedText("Message Hikari on WhatsApp")}
+              title={localizedText("WhatsApp")}
             >
               <WhatsAppIcon />
             </a>
           </div>
           <div className="closing-copyright">
-            © 2026 HIKARI BRANDAN
+            <LocalizedText>© 2026 HIKARI BRANDAN</LocalizedText>
             <br />
-            BUILT TO SOLVE REAL PROBLEMS.
+            <LocalizedText>BUILT TO SOLVE REAL PROBLEMS.</LocalizedText>
           </div>
         </footer>
         <div className="closing-bottom">

@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText } from "./i18n";
 import { ArrowUpRight } from "lucide-react";
 
 import { barberReviews } from "./reviewData";
@@ -5,10 +6,10 @@ import GoogleMark from "./GoogleMark";
 
 export default function ReviewWall() {
   return (
-    <div className="review-wall" aria-label="Sourced customer reviews">
+    <div className="review-wall" aria-label={localizedText("Sourced customer reviews")}>
       <div className="review-wall-caption">
-        <span>REAL CUSTOMERS. REAL WORDS.</span>
-        <small>Selected customer excerpts · 165 reviews on Google</small>
+        <span><LocalizedText>REAL CUSTOMERS. REAL WORDS.</LocalizedText></span>
+        <small><LocalizedText>Selected customer excerpts · 165 reviews on Google</LocalizedText></small>
       </div>
       <div className="review-track">
         <div className="review-track-inner">
@@ -28,13 +29,13 @@ export default function ReviewWall() {
                     rel="noopener noreferrer"
                     tabIndex={copy ? -1 : undefined}
                   >
-                    <strong>{r.name}</strong><small>Google review</small>
+                    <strong><LocalizedText>{r.name}</LocalizedText></strong><small><LocalizedText>Google review</LocalizedText></small>
                     </a>
                     <GoogleMark size={20} />
                   </header>
                   {r.rating && <span className="google-review-stars" aria-label={`${r.rating} out of 5 stars`}>★★★★★</span>}
                   <blockquote>“{r.quote}{r.excerpt ? "…" : ""}”</blockquote>
-                  <a className="google-review-read" href={r.href} target="_blank" rel="noopener noreferrer" tabIndex={copy ? -1 : undefined}>Read on Google <ArrowUpRight size={12} /></a>
+                  <a className="google-review-read" href={r.href} target="_blank" rel="noopener noreferrer" tabIndex={copy ? -1 : undefined}><LocalizedText>Read on Google</LocalizedText> <ArrowUpRight size={12} /></a>
                 </article>
               ))}
             </div>

@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText } from "./i18n";
 import { useEffect, useRef, useState } from "react";
 import { Camera, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useMotionPreference } from "./motion-preferences";
@@ -54,25 +55,25 @@ export default function UgcCameraPreview({ demoUrl }) {
       <span className="location-tag" aria-label={`${moment.locationLabel || moment.location} location tag`}><MapPin size={14} aria-hidden="true" />{moment.locationLabel || moment.location}</span>
       <span className="viewfinder corner-tl" /><span className="viewfinder corner-tr" />
       <span className="viewfinder corner-bl" /><span className="viewfinder corner-br" />
-      <div className="camera-caption">YOUR MOMENT.<br /><strong>YOUR BRAND GOES WITH IT.</strong></div>
+      <div className="camera-caption"><LocalizedText>YOUR MOMENT.</LocalizedText><br /><strong><LocalizedText>YOUR BRAND GOES WITH IT.</LocalizedText></strong></div>
       {captured > 0 && <span key={captured} className="ugc-capture-flash" aria-hidden="true" />}
       <div className="ugc-photo-pagination">
-        <button onClick={() => change(index - 1)} aria-label="Previous UGC photo"><ChevronLeft size={12} /></button>
+        <button onClick={() => change(index - 1)} aria-label={localizedText("Previous UGC photo")}><ChevronLeft size={12} /></button>
         <span>{index + 1} / {moments.length}</span>
-        <button onClick={() => change(index + 1)} aria-label="Next UGC photo"><ChevronRight size={12} /></button>
+        <button onClick={() => change(index + 1)} aria-label={localizedText("Next UGC photo")}><ChevronRight size={12} /></button>
       </div>
     </div>
     <div className="camera-controls">
-      <div className="ugc-mode-tabs" aria-label="Choose a UGC Camera product">
-        {["Tap & Snap", "Scan & Snap"].map((mode, i) => <button key={mode} aria-pressed={moment.mode === mode} onClick={() => change(i * 3)}>{mode}</button>)}
+      <div className="ugc-mode-tabs" aria-label={localizedText("Choose a UGC Camera product")}>
+        {["Tap & Snap", "Scan & Snap"].map((mode, i) => <button key={mode} aria-pressed={moment.mode === mode} onClick={() => change(i * 3)}><LocalizedText>{mode}</LocalizedText></button>)}
       </div>
       <div className="capture-row">
         <span className="thumbnail"><img src={`/assets/${moment.image}`} alt="" width="32" height="32" loading="lazy" decoding="async" /></span>
-        <button className="shutter" onClick={() => { setCaptured((c) => c + 1); setPaused(true); }} aria-label="Preview a branded photo capture"><span /></button>
-        <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="camera-demo-icon" aria-label="Open the real UGC Camera demo"><Camera size={21} /></a>
+        <button className="shutter" onClick={() => { setCaptured((c) => c + 1); setPaused(true); }} aria-label={localizedText("Preview a branded photo capture")}><span /></button>
+        <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="camera-demo-icon" aria-label={localizedText("Open the real UGC Camera demo")}><Camera size={21} /></a>
       </div>
       <div className="capture-feedback" aria-live="polite">{captured ? `Captured with ${moment.location}.` : isDesktop ? "Your brand stays with the photo." : "The location tag stays with the photo."}</div>
     </div>
-    <span className="sr-only">Illustrative businesses from the UGC Camera product carousels.</span>
+    <span className="sr-only"><LocalizedText>Illustrative businesses from the UGC Camera product carousels.</LocalizedText></span>
   </div>;
 }

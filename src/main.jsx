@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import MotionPreferenceProvider from "./MotionPreferenceProvider";
 import PortfolioRoot from "./PortfolioRoot";
+import { LanguageProvider } from "./i18n";
 import "./styles.css";
 import "./polish.css";
 // Keep the prerendered desktop visible while its existing deferred bundle loads.
@@ -11,8 +12,10 @@ const Portfolio = window.matchMedia("(max-width: 767px)").matches
   : (await import("./App")).default;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MotionPreferenceProvider>
-      <Portfolio />
-    </MotionPreferenceProvider>
+    <LanguageProvider>
+      <MotionPreferenceProvider>
+        <Portfolio />
+      </MotionPreferenceProvider>
+    </LanguageProvider>
   </React.StrictMode>,
 );

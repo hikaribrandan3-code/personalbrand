@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText } from "./i18n";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -74,16 +75,16 @@ function VoiceDemo() {
   const busy = listening || step === "requesting";
   const problem = ["denied", "unsupported", "unavailable"].includes(step);
   return <div className={`voice-demo demo-${step}`}>
-    <div className="demo-summary"><img src="/assets/ivoz-icon.png" alt="" /><span><strong>Talk. It types.</strong><small>iVoz · local dictation</small></span></div>
-    <div className="voice-demo-flow"><span className={listening ? "flow-active" : ""}><Mic size={13} /> Live microphone</span><ArrowRight size={11} /><span className={step === "inserted" ? "flow-active" : ""}>Example insertion</span></div>
+    <div className="demo-summary"><img src="/assets/ivoz-icon.png" alt="" /><span><strong><LocalizedText>Talk. It types.</LocalizedText></strong><small><LocalizedText>iVoz · local dictation</LocalizedText></small></span></div>
+    <div className="voice-demo-flow"><span className={listening ? "flow-active" : ""}><Mic size={13} /> <LocalizedText>Live microphone</LocalizedText></span><ArrowRight size={11} /><span className={step === "inserted" ? "flow-active" : ""}><LocalizedText>Example insertion</LocalizedText></span></div>
     <div className="voice-input">
       <div className="demo-wave live-wave" aria-hidden="true">{Array.from({ length: 19 }, (_, i) => <i key={i} style={{ height: `${4 + level * (12 + ((i * 7) % 23))}px` }} />)}</div>
       <span role="status">{listening ? "Listening to your microphone…" : step === "requesting" ? "Allow microphone access to begin." : step === "denied" ? "Microphone permission was declined." : problem ? "Microphone unavailable in this browser." : "Say a few words. Watch the signal."}</span>
     </div>
-    <div className="demo-document"><span><FileText size={12} /> A note for the team</span><p>{step === "inserted" ? "Let’s build something useful." : "Your words land right here."}<i className="demo-caret" aria-hidden="true" /></p>{step === "inserted" && <small><Check size={11} /> Example text · native iVoz transcribes locally</small>}</div>
+    <div className="demo-document"><span><FileText size={12} /> <LocalizedText>A note for the team</LocalizedText></span><p>{step === "inserted" ? "Let’s build something useful." : "Your words land right here."}<i className="demo-caret" aria-hidden="true" /></p>{step === "inserted" && <small><Check size={11} /> <LocalizedText>Example text · native iVoz transcribes locally</LocalizedText></small>}</div>
     <button className="demo-button" disabled={step === "requesting"} onClick={listening ? finish : listen}><Mic size={13} />{listening ? "Stop & preview insertion" : step === "requesting" ? "Waiting for microphone" : "Try your microphone"}</button>
-    {problem && <button className="sample-fallback" onClick={finish}>See the example without a microphone</button>}
-    <small className="simulation-note">Live mic check · example text. Audio stays in this tab.</small>
+    {problem && <button className="sample-fallback" onClick={finish}><LocalizedText>See the example without a microphone</LocalizedText></button>}
+    <small className="simulation-note"><LocalizedText>Live mic check · example text. Audio stays in this tab.</LocalizedText></small>
     <span className="sr-only" role="status">{step === "inserted" ? "Example insertion complete. Let’s build something useful." : busy ? "Microphone demo in progress." : ""}</span>
   </div>;
 }
@@ -95,8 +96,8 @@ function OrganizeDemo() {
       <div className="demo-summary">
         <Folder />
         <span>
-          <strong>A little less chaos.</strong>
-          <small>iOrganize · review before acting</small>
+          <strong><LocalizedText>A little less chaos.</LocalizedText></strong>
+          <small><LocalizedText>iOrganize · review before acting</LocalizedText></small>
         </span>
       </div>
       <div className="demo-file-list">
@@ -126,7 +127,7 @@ function OrganizeDemo() {
         <ArrowRight size={12} />
       </button>
       <small className="simulation-note">
-        Sample files · your Mac stays yours
+        <LocalizedText>Sample files · your Mac stays yours</LocalizedText>
       </small>
     </div>
   );
@@ -139,14 +140,14 @@ function BridgeDemo() {
       <div className="demo-summary">
         <Monitor />
         <span>
-          <strong>Another screen.</strong>
-          <small>Screen Bridge · local network</small>
+          <strong><LocalizedText>Another screen.</LocalizedText></strong>
+          <small><LocalizedText>Screen Bridge · local network</LocalizedText></small>
         </span>
       </div>
       <div className={`bridge-demo ${connected ? "is-connected" : ""}`}>
         <span>
           <Monitor size={45} />
-          <small>Mac</small>
+          <small><LocalizedText>Mac</LocalizedText></small>
         </span>
         <i />
         <span>
@@ -164,7 +165,7 @@ function BridgeDemo() {
         <ArrowRight size={12} />
       </button>
       <small className="simulation-note">
-        Simulated connection · experimental app
+        <LocalizedText>Simulated connection · experimental app</LocalizedText>
       </small>
     </div>
   );
@@ -177,8 +178,8 @@ function StatsDemo() {
       <div className="demo-summary">
         <Activity />
         <span>
-          <strong>Know your Mac.</strong>
-          <small>iStats · useful signal</small>
+          <strong><LocalizedText>Know your Mac.</LocalizedText></strong>
+          <small><LocalizedText>iStats · useful signal</LocalizedText></small>
         </span>
       </div>
       <div className="stats-tabs">
@@ -213,7 +214,7 @@ function StatsDemo() {
         <span>{metric} · sample reading</span>
       </div>
       <small className="simulation-note">
-        Illustrative data · no access to your device
+        <LocalizedText>Illustrative data · no access to your device</LocalizedText>
       </small>
     </div>
   );
@@ -226,22 +227,22 @@ function BrainDemo() {
       <div className="demo-summary">
         <Sparkles />
         <span>
-          <strong>A little room to think.</strong>
-          <small>iBrain · local Ollama / optional cloud</small>
+          <strong><LocalizedText>A little room to think.</LocalizedText></strong>
+          <small><LocalizedText>iBrain · local Ollama / optional cloud</LocalizedText></small>
         </span>
       </div>
       <div className="sample-chat">
-        <p className="chat-user">Help me break an idea into smaller steps.</p>
+        <p className="chat-user"><LocalizedText>Help me break an idea into smaller steps.</LocalizedText></p>
         {response ? (
           <p className="chat-response">
-            Start with one problem.
+            <LocalizedText>Start with one problem.</LocalizedText>
             <br />
-            Build the smallest useful version.
+            <LocalizedText>Build the smallest useful version.</LocalizedText>
             <br />
-            Test it. Learn. Build again.
+            <LocalizedText>Test it. Learn. Build again.</LocalizedText>
           </p>
         ) : (
-          <p className="chat-placeholder">Your model. Your conversation.</p>
+          <p className="chat-placeholder"><LocalizedText>Your model. Your conversation.</LocalizedText></p>
         )}
       </div>
       <button className="demo-button" onClick={() => setResponse(!response)}>
@@ -249,7 +250,7 @@ function BrainDemo() {
         {response ? "Reset conversation" : "See a sample conversation"}
       </button>
       <small className="simulation-note">
-        Scripted preview · no AI request
+        <LocalizedText>Scripted preview · no AI request</LocalizedText>
       </small>
     </div>
   );
@@ -274,7 +275,7 @@ function PreviewTransition({ image, name, children }) {
     {showDemo && children}
     {image && <div className="mac-original-preview" aria-hidden={showDemo}>
       <img src={image} alt={`Actual ${name} application interface`} loading="lazy" decoding="async" />
-      <button disabled={showDemo} tabIndex={showDemo ? -1 : undefined} onClick={() => setShowDemo(true)}>Actual app → try the preview <ArrowRight size={11} /></button>
+      <button disabled={showDemo} tabIndex={showDemo ? -1 : undefined} onClick={() => setShowDemo(true)}><LocalizedText>Actual app → try the preview</LocalizedText> <ArrowRight size={11} /></button>
     </div>}
   </div>;
 }

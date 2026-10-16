@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText } from "./i18n";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -5,9 +6,9 @@ export default function ProductDNA({ onOpen }) {
   const [branch, setBranch] = useState("ugc");
   return (
     <div className="product-dna">
-      <span className="tiny-label">PRODUCT DNA</span>
+      <span className="tiny-label"><LocalizedText>PRODUCT DNA</LocalizedText></span>
       <button className="dna-origin" onClick={() => onOpen("foodspot")}>
-        FOODSPOT MOBILE <ArrowUpRight size={12} />
+        <LocalizedText>FOODSPOT MOBILE</LocalizedText> <ArrowUpRight size={12} />
       </button>
       <svg viewBox="0 0 280 50" aria-hidden="true">
         <path
@@ -24,13 +25,13 @@ export default function ProductDNA({ onOpen }) {
           aria-pressed={branch === "ugc"}
           onClick={() => setBranch("ugc")}
         >
-          UGC CAMERA
+          <LocalizedText>UGC CAMERA</LocalizedText>
         </button>
         <button
           aria-pressed={branch === "menutap"}
           onClick={() => setBranch("menutap")}
         >
-          MENUTAP
+          <LocalizedText>MENUTAP</LocalizedText>
         </button>
       </div>
       <p role="status">
@@ -38,7 +39,7 @@ export default function ProductDNA({ onOpen }) {
           ? "The post-purchase photo moment became a focused camera."
           : "Menus, games and restaurant UX found a simpler way in."}
       </p>
-      <small>BUILD · LEARN · NARROW · REUSE · BUILD AGAIN</small>
+      <small><LocalizedText>BUILD · LEARN · NARROW · REUSE · BUILD AGAIN</LocalizedText></small>
     </div>
   );
 }

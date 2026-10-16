@@ -31,6 +31,21 @@
       }
     },
     {
+      "src": "^/(es|pt-br)/(ugc-for-ai-startups|projects/(?:ugc-camera|menutap|foodspot-mobile|macos-app-suite|the-auto-barber)|build-notes)(?:/|\\.html)$",
+      "status": 308,
+      "headers": {
+        "Location": "/$1/$2"
+      }
+    },
+    {
+      "src": "^/(es|pt-br)/?$",
+      "dest": "/$1/index.html"
+    },
+    {
+      "src": "^/(es|pt-br)/(ugc-for-ai-startups|projects/(?:ugc-camera|menutap|foodspot-mobile|macos-app-suite|the-auto-barber)|build-notes)$",
+      "dest": "/$1/$2.html"
+    },
+    {
       "src": "^/$",
       "dest": "/index.html"
     },

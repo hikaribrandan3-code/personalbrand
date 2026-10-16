@@ -1,3 +1,4 @@
+import { LanguageSwitcher, LocalizedText, localizedHref, localizedText, useLanguage } from "./i18n";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
@@ -5,6 +6,7 @@ import { useMotionPreference } from "./motion-preferences";
 
 export default function DesktopNavigation() {
   const reduced = useMotionPreference();
+  const { locale } = useLanguage();
   const [state, setState] = useState({ compact: false, hidden: false, active: "home", project: null, total: 0 });
   const previous = useRef("");
   useEffect(() => {
@@ -52,20 +54,23 @@ export default function DesktopNavigation() {
   }, []);
   const duration = reduced ? 0 : .35;
   return <header className={`desktop-navigation ${state.compact ? "is-compact" : ""} ${state.hidden ? "is-hidden" : ""}`} inert={state.hidden ? true : undefined} aria-hidden={state.hidden || undefined}>
-    <a className="desktop-signature" href="#home" aria-label="Hikari Brandan, back to home">
-      <span className="desktop-signature-full">Hikari Brandan</span><span className="desktop-signature-short" aria-hidden="true">HB</span>
+    <a className="desktop-signature" href="#home" aria-label={localizedText("Hikari Brandan, back to home")}>
+      <span className="desktop-signature-full"><LocalizedText>Hikari Brandan</LocalizedText></span><span className="desktop-signature-short" aria-hidden="true"><LocalizedText>HB</LocalizedText></span>
     </a>
-    <nav aria-label="Desktop main navigation">
-      {[ ["home", "Home"], ["projects", "Projects"], ["about", "About"] ].map(([id, name]) => <a href={`#${id}`} key={id} className={state.active === id ? "selected" : ""} aria-current={state.active === id ? "location" : undefined}>
+    <nav aria-label={localizedText("Desktop main navigation")}>
+      {[ ["home", "Home"], ["projects", "Projects"] ].map(([id, name]) => <a href={`#${id}`} key={id} className={state.active === id ? "selected" : ""} aria-current={state.active === id ? "location" : undefined}>
         {state.active === id && <motion.span className="desktop-active-pill" layoutId="desktop-navigation-pill" transition={{ duration, ease: [.22, 1, .36, 1] }} />}
-        <span className="desktop-link-label">{name}</span>
+        <span className="desktop-link-label"><LocalizedText>{name}</LocalizedText></span>
         {id === "projects" && state.project !== null && <span className="desktop-project-counter" aria-label={`Project ${state.project + 1} of ${state.total}`}>
           <span aria-hidden="true">·</span><span className="desktop-counter-mask"><AnimatePresence mode="popLayout" initial={false}><motion.span key={state.project} initial={{ y: reduced ? 0 : 10, opacity: reduced ? 1 : 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: reduced ? 0 : -10, opacity: 0 }} transition={{ duration: reduced ? 0 : .18 }}>{String(state.project + 1).padStart(2, "0")}</motion.span></AnimatePresence></span><span>/{String(state.total).padStart(2, "0")}</span>
         </span>}
       </a>)}
-      <a href="/ugc-for-ai-startups.html" aria-label="UGC videos for AI and software startups">UGC</a>
-      <a href="/Hikari_Brandan_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé <ArrowUpRight size={13} /></a>
+      <a href={localizedHref("/ugc-for-ai-startups", locale)} aria-label={localizedText("UGC videos for AI and software startups")}><LocalizedText>UGC</LocalizedText></a>
+      <a href="/Hikari_Brandan_Resume.pdf" target="_blank" rel="noopener noreferrer"><LocalizedText>Résumé</LocalizedText> <ArrowUpRight size={13} /></a>
     </nav>
-    <a className="desktop-contact" href="#contact">Let’s talk <ArrowUpRight size={16} /></a>
+    <div className="desktop-navigation-actions">
+      <LanguageSwitcher />
+      <a className="desktop-contact" href="#contact"><LocalizedText>Let’s talk</LocalizedText> <ArrowUpRight size={16} /></a>
+    </div>
   </header>;
 }

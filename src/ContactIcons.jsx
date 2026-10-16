@@ -1,3 +1,4 @@
+import { LocalizedText, localizedText, useLanguage } from "./i18n";
 export function WhatsAppIcon({ size = 22 }) {
   return (
     <svg
@@ -24,12 +25,12 @@ export function WhatsAppIcon({ size = 22 }) {
 
 function Flag({ country }) {
   const us = country === "us";
+  const brazil = country === "br";
   return (
     <svg
       className="country-flag"
       viewBox="0 0 30 20"
-      role="img"
-      aria-label={us ? "United States flag" : "Argentina flag"}
+      aria-hidden="true"
     >
       <rect width="30" height="20" rx="2" fill="white" />
       {us ? (
@@ -54,6 +55,13 @@ function Flag({ country }) {
             />
           ))}
         </>
+      ) : brazil ? (
+        <>
+          <rect width="30" height="20" rx="2" fill="#168344" />
+          <path d="m15 2.2 11.5 7.8L15 17.8 3.5 10 15 2.2Z" fill="#f7d447" />
+          <circle cx="15" cy="10" r="4.1" fill="#2456a6" />
+          <path d="M11.5 8.8c2.4-.8 4.8-.3 7 1" fill="none" stroke="white" strokeWidth=".55" />
+        </>
       ) : (
         <>
           <path d="M0 0h30v6.67H0zM0 13.33h30V20H0z" fill="#79bde8" />
@@ -74,14 +82,17 @@ function Flag({ country }) {
 }
 
 export function LanguageFlags() {
+  const { locale, changeLanguage } = useLanguage();
+  const options = [
+    { code: "en", country: "us", label: "English" },
+    { code: "es", country: "ar", label: "Español" },
+    { code: "pt-BR", country: "br", label: "Português" },
+  ];
   return (
     <span className="language-flags">
-      <span>
-        <Flag country="us" /> English
-      </span>
-      <span>
-        <Flag country="ar" /> Español
-      </span>
+      {options.map(({ code, country, label }) => <button key={code} type="button" aria-label={localizedText(label)} aria-pressed={locale === code} onClick={() => changeLanguage(code)}>
+        <Flag country={country} /> <LocalizedText>{label}</LocalizedText>
+      </button>)}
     </span>
   );
 }

@@ -1,6 +1,7 @@
+import { LocalizedText, localizedText } from "./i18n";
 export function FooterQuote() {
   return <blockquote className="footer-quote">
-    <p>“I can do all things through Christ which strengtheneth me.”</p>
-    <cite>Philippians 4:13 · KJV</cite>
+    <p><LocalizedText>“I can do all things through Christ which strengtheneth me.”</LocalizedText></p>
+    <cite><LocalizedText>Philippians 4:13 · KJV</LocalizedText></cite>
   </blockquote>;
 }
