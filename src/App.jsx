@@ -69,7 +69,6 @@ import CameraHandoff from "./CameraHandoff";
 import ReviewWall from "./ReviewWall";
 import GoogleMark from "./GoogleMark";
 import ContentDistribution from "./ContentDistribution";
-import MontajCreatorSection from "./MontajCreatorSection";
 import { barberReviews, googleReviewsUrl } from "./reviewData";
 const ProjectDrawer = lazy(() => import("./ProjectDrawer"));
 const MobilePortfolio = lazy(() => import("./MobilePortfolio"));
@@ -1546,7 +1545,6 @@ function App() {
         <MacApps onOpen={setProject} />
         <Process onOpen={setProject} />
         <AutoBarber onOpen={setProject} />
-        <MontajCreatorSection />
         <ContentDistribution />
         <Stack />
         <Contact />
