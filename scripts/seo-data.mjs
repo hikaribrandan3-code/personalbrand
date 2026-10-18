@@ -1,5 +1,5 @@
 import { projectPaths } from '../src/projectPaths.js';
-export const origin = 'https://hikari-brandan.vercel.app';
+export const origin = 'https://personalbrand-one-nu.vercel.app';
 export const identity = {
   name: 'Hikari Brandan', jobTitle: 'AI Product Developer',
   description: 'AI Product Developer and product builder raised in Seattle and based in Córdoba, Argentina. Available remotely; native English and Spanish.',

@@ -1182,7 +1182,7 @@ function AutoBarber() {
           <CTA href={googleReviewsUrl}>
             <LocalizedText>See all Google reviews</LocalizedText> <ArrowUpRight size={16} />
           </CTA>
-          <External href="https://hikari-brandan.vercel.app/projects/the-auto-barber" className="business-story-note">
+          <External href="https://personalbrand-one-nu.vercel.app/projects/the-auto-barber" className="business-story-note">
             <LocalizedText>Read the Auto Barber story</LocalizedText> <ArrowUpRight size={13} />
           </External>
         </Reveal>
