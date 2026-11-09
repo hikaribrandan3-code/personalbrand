@@ -65,6 +65,7 @@ export default function DesktopNavigation() {
           <span aria-hidden="true">·</span><span className="desktop-counter-mask"><AnimatePresence mode="popLayout" initial={false}><motion.span key={state.project} initial={{ y: reduced ? 0 : 10, opacity: reduced ? 1 : 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: reduced ? 0 : -10, opacity: 0 }} transition={{ duration: reduced ? 0 : .18 }}>{String(state.project + 1).padStart(2, "0")}</motion.span></AnimatePresence></span><span>/{String(state.total).padStart(2, "0")}</span>
         </span>}
       </a>)}
+      <a href="#video-production">AI + 3D</a>
       <a href={localizedHref("/ugc-for-ai-startups", locale)} aria-label={localizedText("UGC videos for AI and software startups")}><LocalizedText>UGC</LocalizedText></a>
       <a href="/Hikari_Brandan_Resume.pdf" target="_blank" rel="noopener noreferrer"><LocalizedText>Résumé</LocalizedText> <ArrowUpRight size={13} /></a>
     </nav>

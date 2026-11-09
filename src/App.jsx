@@ -1,3 +1,4 @@
+import EngineeringVideo from "./EngineeringVideo";
 import { LocalizedText, localizedHref, localizedText, useLanguage } from "./i18n";
 import { useMotionPreference } from "./motion-preferences";
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
@@ -1543,6 +1544,7 @@ function App() {
         <MenuTap onOpen={setProject} />
         <FoodSpot onOpen={setProject} />
         <MacApps onOpen={setProject} />
+        <EngineeringVideo />
         <Process onOpen={setProject} />
         <AutoBarber onOpen={setProject} />
         <ContentDistribution />
